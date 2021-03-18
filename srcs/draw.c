@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 10:31:23 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/18 12:06:07 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/18 12:12:56 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void    ft_texture_draw(t_all *all, int x, int y)
 		all->tex.texy = (int)all->tex.texpos &
 			(all->texture[all->tex.texdir].height - 1);
 		all->tex.texpos += all->tex.step;
+		
 		if (y < all->win.y && x < all->win.x)
 			all->data.addr[y * all->data.line_length / 4 + x] =
 				all->texture[all->tex.texdir].addr[all->tex.texy *
