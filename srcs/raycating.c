@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:09:32 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/12 14:31:27 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/18 09:58:37 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ int     ft_ray(t_all *all)
     mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_free_mlx, all);   //whut
     mlx_hook(all->data.mlx_win, 2, 1L <<0, ft_press_key, all);
     mlx_loop_hook(all->data.mlx_ptr, ft_raycast, all);
-
-
-    
+    mlx_hook(all->data.mlx_win, 3, 1L << 1, ft_release_key, all);
+    mlx_loop(all->data.mlx_ptr);    
     return (0);
 }

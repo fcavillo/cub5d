@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:45:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/16 09:11:22 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:04:46 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void    ft_parse(char *mapname, t_all *all)
     if (all->map.x == 0 || all->map.y == 0 || all->err == 2)
         ft_error(all, "Missing parameter in .cub\n");
     else
-        ft_map_parsing(mapname, all);
+        ft_map_parsing(mapname, all); 
 }
 
 int     ft_start(char *str, t_all *all)

@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:03:46 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/16 09:35:21 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:03:55 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void    ft_ray_init_2(t_all *all)
     all->ray.hit = 0;
     all->ray.perpwalldist = 0;
     all->ray.camerax = 2 * all->ray.x / (double)all->win.x - 1;
-    all->ray.raydirx = all->ray.raydirx / all->ray.planx * all->ray.camerax;
-    all->ray.raydiry = all->ray.raydiry / all->ray.plany * all->ray.camerax;
-    all->ray.mapx = all->ray.posx;
-    all->ray.mapy  = all->ray.posy;
+    all->ray.raydirx = all->ray.dirx / all->ray.planx * all->ray.camerax;
+    all->ray.raydiry = all->ray.diry / all->ray.plany * all->ray.camerax;
+    all->ray.mapx = (int)all->ray.posx;
+    all->ray.mapy  = (int)all->ray.posy;
     all->ray.movespeed = 0.1;
     all->ray.rotspeed = 0.033 * 1.8;
     ft_ray_init_3(all);    
@@ -74,6 +74,8 @@ void    ft_ray_init_2(t_all *all)
 
 void    ft_ray_init(t_all *all)
 {
+	if (!(all->spr.zbuffer = (double *)malloc(sizeof(double) * all->win.x)))
+		exit(0);
     all->ray.dirx = 0;
     all->ray.diry = 0;
     all->ray.planx = 0;

@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/26 13:13:58 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/12 13:46:49 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:40:45 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,16 @@ int		ft_free_mlx(t_all *all)
 
 void    free_all_2(t_all *all)
 {
-	int i;
-	
-	i = 0;
-/*	if (all->map.cub)
-			while (i < all->map.spr_nb)
-			{
-				free(all->sprite[i]);
-				i++;
-			}*/
+	if (all->spr.order)
+		free(all->spr.order);
+	if (all->spr.dist)
+		free(all->spr.dist);
+	if (all->spr.zbuffer)
+		free(all->spr.zbuffer);
 	if (all->sprite)
 		free(all->sprite);
-	
+
+	ft_free_mlx(all);
 }
 
 void	free_all(t_all *all)

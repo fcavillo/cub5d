@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 14:32:11 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/16 14:14:06 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/18 10:57:28 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,18 @@ void    ft_step_sidedist(t_all *all)
     ft_increment_ray(all);
 }
 
+void    ft_change_img(t_all *all)
+{
+    void    *temp;
+    
+    temp = all->data.img;
+    all->data.img = all->data.img2;
+    all->data.img2 = temp;
+    temp = all->data.addr;
+    all->data.addr = all->data.addr2;
+    all->data.addr2 = temp;
+}
+
 int     ft_raycast(t_all *all)
 {
     all->ray.x = 0;
@@ -91,11 +103,12 @@ int     ft_raycast(t_all *all)
         all->spr.zbuffer[all->ray.x] = all->ray.perpwalldist;
         all->ray.x++;
     }
- //   ft_spr(all); A FAIREEEEE
+    ft_spr(all);
     mlx_put_image_to_window(all->data.mlx_ptr, all->data.mlx_win, all->data.img,
         0, 0);
-    ft
-
-    
+    ft_go_f_b(all);
+    ft_go_l_r(all);
+    ft_rotate_l_r(all);
+    ft_change_img(all);
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 11:20:11 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/16 12:08:23 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/18 11:06:59 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ typedef struct  s_all
     int     err2;
     t_map   map;
     t_win   win;
-    t_tex   tex;
+    t_tex   tex; //=t
 	t_sprite	*sprite;
     t_ray       ray;
     t_data      data;
@@ -217,6 +217,13 @@ void    ft_ray_init_2(t_all *all);
 void    ft_step_sidedist(t_all *all);
 void    ft_column_color(t_all *all);
 void	ft_init_tex(t_all *all);
+void    ft_go_f_b(t_all *all);
+void    ft_go_l_r(t_all *all);
+void    ft_rotate_l_r(t_all *all);
+int     ft_release_key(int key, t_all *all);
+void	ft_spr(t_all *all);
+
+
 
 
 
