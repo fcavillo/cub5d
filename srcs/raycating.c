@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:09:32 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/18 09:58:37 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/19 13:27:03 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    ft_set_textures(t_all *all)
                     ft_error(all, "Invalid North texture\n");
     if (!(all->texture[1].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->tex.s, &(all->texture[1].width),
-					&(all->texture[21].height))))
+					&(all->texture[1].height))))
                     ft_error(all, "Invalid South texture\n");
     if (!(all->texture[2].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->tex.e, &(all->texture[2].width),
