@@ -1,87 +1,87 @@
 #include "../includes/cub3d.h"
 
-void	ft_forward_back(t_recup *recup)
+void	ft_forward_back(t_all *all)
 {
-	if (recup->data.forward == 1)
+	if (all->data.forward == 1)
 	{
-		if (recup->map[(int)(recup->ray.posx + (recup->ray.dirx * recup->
-						ray.movespeed * 2))][(int)recup->ray.posy] == '0')
-			recup->ray.posx += recup->ray.dirx * recup->ray.movespeed;
-		if (recup->map[(int)(recup->ray.posx)][(int)(recup->ray.posy +
-					(recup->ray.diry * recup->ray.movespeed * 2))] == '0')
-			recup->ray.posy += recup->ray.diry * recup->ray.movespeed;
+		if (all->map[(int)(all->ray.posx + (all->ray.dirx * all->
+						ray.movespeed * 2))][(int)all->ray.posy] == '0')
+			all->ray.posx += all->ray.dirx * all->ray.movespeed;
+		if (all->map[(int)(all->ray.posx)][(int)(all->ray.posy +
+					(all->ray.diry * all->ray.movespeed * 2))] == '0')
+			all->ray.posy += all->ray.diry * all->ray.movespeed;
 	}
-	if (recup->data.back == 1)
+	if (all->data.back == 1)
 	{
-		if (recup->map[(int)(recup->ray.posx - (recup->ray.dirx * recup->
-						ray.movespeed * 2))][(int)(recup->ray.posy)] == '0')
-			recup->ray.posx -= recup->ray.dirx * recup->ray.movespeed;
-		if (recup->map[(int)(recup->ray.posx)][(int)(recup->ray.posy -
-					(recup->ray.diry * recup->ray.movespeed * 2))] == '0')
-			recup->ray.posy -= recup->ray.diry * recup->ray.movespeed;
+		if (all->map[(int)(all->ray.posx - (all->ray.dirx * all->
+						ray.movespeed * 2))][(int)(all->ray.posy)] == '0')
+			all->ray.posx -= all->ray.dirx * all->ray.movespeed;
+		if (all->map[(int)(all->ray.posx)][(int)(all->ray.posy -
+					(all->ray.diry * all->ray.movespeed * 2))] == '0')
+			all->ray.posy -= all->ray.diry * all->ray.movespeed;
 	}
 }
 
-void	ft_left_right(t_recup *recup)
+void	ft_left_right(t_all *all)
 {
-	if (recup->data.right == 1)
+	if (all->data.right == 1)
 	{
-		if (recup->map[(int)(recup->ray.posx + recup->ray.diry *
-					(recup->ray.movespeed * 2))][(int)recup->ray.posy] == '0')
-			recup->ray.posx += recup->ray.diry * recup->ray.movespeed;
-		if (recup->map[(int)recup->ray.posx][(int)(recup->ray.posy -
-					recup->ray.dirx *
-					(recup->ray.movespeed * 2))] == '0')
-			recup->ray.posy -= recup->ray.dirx * recup->ray.movespeed;
+		if (all->map[(int)(all->ray.posx + all->ray.diry *
+					(all->ray.movespeed * 2))][(int)all->ray.posy] == '0')
+			all->ray.posx += all->ray.diry * all->ray.movespeed;
+		if (all->map[(int)all->ray.posx][(int)(all->ray.posy -
+					all->ray.dirx *
+					(all->ray.movespeed * 2))] == '0')
+			all->ray.posy -= all->ray.dirx * all->ray.movespeed;
 	}
-	if (recup->data.left == 1)
+	if (all->data.left == 1)
 	{
-		if (recup->map[(int)(recup->ray.posx - recup->ray.diry *
-					(recup->ray.movespeed * 2))][(int)recup->ray.posy] == '0')
-			recup->ray.posx -= recup->ray.diry * recup->ray.movespeed;
-		if (recup->map[(int)recup->ray.posx][(int)(recup->ray.posy +
-					recup->ray.dirx *
-					(recup->ray.movespeed * 2))] == '0')
-			recup->ray.posy += recup->ray.dirx * recup->ray.movespeed;
+		if (all->map[(int)(all->ray.posx - all->ray.diry *
+					(all->ray.movespeed * 2))][(int)all->ray.posy] == '0')
+			all->ray.posx -= all->ray.diry * all->ray.movespeed;
+		if (all->map[(int)all->ray.posx][(int)(all->ray.posy +
+					all->ray.dirx *
+					(all->ray.movespeed * 2))] == '0')
+			all->ray.posy += all->ray.dirx * all->ray.movespeed;
 	}
 }
 
-void	ft_rotate_right_left(t_recup *recup)
+void	ft_rotate_right_left(t_all *all)
 {
 	double oldplanx;
 	double olddirx;
 
-	oldplanx = recup->ray.planx;
-	olddirx = recup->ray.dirx;
-	if (recup->data.rotate_right == 1)
+	oldplanx = all->ray.planx;
+	olddirx = all->ray.dirx;
+	if (all->data.rotate_right == 1)
 	{
-		recup->ray.dirx = recup->ray.dirx * cos(-recup->ray.rotspeed / 2) -
-			recup->ray.diry * sin(-recup->ray.rotspeed / 2);
-		recup->ray.diry = olddirx * sin(-recup->ray.rotspeed / 2) +
-			recup->ray.diry * cos(-recup->ray.rotspeed / 2);
-		recup->ray.planx = recup->ray.planx * cos(-recup->ray.rotspeed / 2)
-			- recup->ray.plany * sin(-recup->ray.rotspeed / 2);
-		recup->ray.plany = oldplanx * sin(-recup->ray.rotspeed / 2) +
-			recup->ray.plany * cos(-recup->ray.rotspeed / 2);
+		all->ray.dirx = all->ray.dirx * cos(-all->ray.rotspeed / 2) -
+			all->ray.diry * sin(-all->ray.rotspeed / 2);
+		all->ray.diry = olddirx * sin(-all->ray.rotspeed / 2) +
+			all->ray.diry * cos(-all->ray.rotspeed / 2);
+		all->ray.planx = all->ray.planx * cos(-all->ray.rotspeed / 2)
+			- all->ray.plany * sin(-all->ray.rotspeed / 2);
+		all->ray.plany = oldplanx * sin(-all->ray.rotspeed / 2) +
+			all->ray.plany * cos(-all->ray.rotspeed / 2);
 	}
-	ft_rotate_left(recup, olddirx);
+	ft_rotate_left(all, olddirx);
 }
 
-void	ft_rotate_left(t_recup *recup, double olddirx)
+void	ft_rotate_left(t_all *all, double olddirx)
 {
 	double oldplanex;
 
-	if (recup->data.rotate_left == 1)
+	if (all->data.rotate_left == 1)
 	{
-		olddirx = recup->ray.dirx;
-		oldplanex = recup->ray.planx;
-		recup->ray.dirx = recup->ray.dirx * cos(recup->ray.rotspeed / 2) -
-			recup->ray.diry * sin(recup->ray.rotspeed / 2);
-		recup->ray.diry = olddirx * sin(recup->ray.rotspeed / 2) + recup->
-			ray.diry * cos(recup->ray.rotspeed / 2);
-		recup->ray.planx = recup->ray.planx * cos(recup->ray.rotspeed / 2) -
-			recup->ray.plany * sin(recup->ray.rotspeed / 2);
-		recup->ray.plany = oldplanex * sin(recup->ray.rotspeed / 2) +
-			recup->ray.plany * cos(recup->ray.rotspeed / 2);
+		olddirx = all->ray.dirx;
+		oldplanex = all->ray.planx;
+		all->ray.dirx = all->ray.dirx * cos(all->ray.rotspeed / 2) -
+			all->ray.diry * sin(all->ray.rotspeed / 2);
+		all->ray.diry = olddirx * sin(all->ray.rotspeed / 2) + all->
+			ray.diry * cos(all->ray.rotspeed / 2);
+		all->ray.planx = all->ray.planx * cos(all->ray.rotspeed / 2) -
+			all->ray.plany * sin(all->ray.rotspeed / 2);
+		all->ray.plany = oldplanex * sin(all->ray.rotspeed / 2) +
+			all->ray.plany * cos(all->ray.rotspeed / 2);
 	}
 }

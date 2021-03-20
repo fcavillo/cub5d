@@ -1,83 +1,83 @@
 #include "../includes/cub3d.h"
 
-void	ft_stepsidedist(t_recup *recup)
+void	ft_stepsidedist(t_all *all)
 {
-	if (recup->ray.raydirx < 0)
+	if (all->ray.raydirx < 0)
 	{
-		recup->ray.stepx = -1;
-		recup->ray.sidedistx = (recup->ray.posx - recup->ray.mapx) \
-							* recup->ray.deltadistx;
+		all->ray.stepx = -1;
+		all->ray.sidedistx = (all->ray.posx - all->ray.mapx) \
+							* all->ray.deltadistx;
 	}
 	else
 	{
-		recup->ray.stepx = 1;
-		recup->ray.sidedistx = (recup->ray.mapx + 1.0 - recup->ray.posx) \
-							* recup->ray.deltadistx;
+		all->ray.stepx = 1;
+		all->ray.sidedistx = (all->ray.mapx + 1.0 - all->ray.posx) \
+							* all->ray.deltadistx;
 	}
-	if (recup->ray.raydiry < 0)
+	if (all->ray.raydiry < 0)
 	{
-		recup->ray.stepy = -1;
-		recup->ray.sidedisty = (recup->ray.posy - recup->ray.mapy) \
-							* recup->ray.deltadisty;
+		all->ray.stepy = -1;
+		all->ray.sidedisty = (all->ray.posy - all->ray.mapy) \
+							* all->ray.deltadisty;
 	}
 	else
 	{
-		recup->ray.stepy = 1;
-		recup->ray.sidedisty = (recup->ray.mapy + 1.0 - recup->ray.posy) \
-							* recup->ray.deltadisty;
+		all->ray.stepy = 1;
+		all->ray.sidedisty = (all->ray.mapy + 1.0 - all->ray.posy) \
+							* all->ray.deltadisty;
 	}
-	ft_incrementray(recup);
+	ft_incrementray(all);
 }
 
-void	ft_incrementray(t_recup *recup)
+void	ft_incrementray(t_all *all)
 {
-	while (recup->ray.hit == 0)
+	while (all->ray.hit == 0)
 	{
-		if (recup->ray.sidedistx < recup->ray.sidedisty)
+		if (all->ray.sidedistx < all->ray.sidedisty)
 		{
-			recup->ray.sidedistx += recup->ray.deltadistx;
-			recup->ray.mapx += recup->ray.stepx;
-			recup->ray.side = 0;
+			all->ray.sidedistx += all->ray.deltadistx;
+			all->ray.mapx += all->ray.stepx;
+			all->ray.side = 0;
 		}
 		else
 		{
-			recup->ray.sidedisty += recup->ray.deltadisty;
-			recup->ray.mapy += recup->ray.stepy;
-			recup->ray.side = 1;
+			all->ray.sidedisty += all->ray.deltadisty;
+			all->ray.mapy += all->ray.stepy;
+			all->ray.side = 1;
 		}
-		if (recup->map[recup->ray.mapx][recup->ray.mapy] == '1')
-			recup->ray.hit = 1;
+		if (all->map[all->ray.mapx][all->ray.mapy] == '1')
+			all->ray.hit = 1;
 	}
-	ft_drawstartend(recup);
+	ft_drawstartend(all);
 }
 
-void	ft_drawstartend(t_recup *recup)
+void	ft_drawstartend(t_all *all)
 {
-	if (recup->ray.side == 0)
-		recup->ray.perpwalldist = ((double)recup->ray.mapx - \
-				recup->ray.posx + (1 - (double)recup->ray.
-				stepx) / 2) / recup->ray.raydirx;
+	if (all->ray.side == 0)
+		all->ray.perpwalldist = ((double)all->ray.mapx - \
+				all->ray.posx + (1 - (double)all->ray.
+				stepx) / 2) / all->ray.raydirx;
 	else
-		recup->ray.perpwalldist = ((double)recup->ray.mapy - \
-				recup->ray.posy + (1 - (double)recup->ray.
-				stepy) / 2) / recup->ray.raydiry;
-	recup->ray.lineheight = (int)(recup->ry / recup->ray.perpwalldist);
-	recup->ray.drawstart = -recup->ray.lineheight / 2 + recup->ry / 2;
-	if (recup->ray.drawstart < 0)
-		recup->ray.drawstart = 0;
-	recup->ray.drawend = recup->ray.lineheight / 2 + recup->ry / 2;
-	if (recup->ray.drawend >= recup->ry || recup->ray.drawend < 0)
-		recup->ray.drawend = recup->ry - 1;
+		all->ray.perpwalldist = ((double)all->ray.mapy - \
+				all->ray.posy + (1 - (double)all->ray.
+				stepy) / 2) / all->ray.raydiry;
+	all->ray.lineheight = (int)(all->ry / all->ray.perpwalldist);
+	all->ray.drawstart = -all->ray.lineheight / 2 + all->ry / 2;
+	if (all->ray.drawstart < 0)
+		all->ray.drawstart = 0;
+	all->ray.drawend = all->ray.lineheight / 2 + all->ry / 2;
+	if (all->ray.drawend >= all->ry || all->ray.drawend < 0)
+		all->ray.drawend = all->ry - 1;
 }
 
-void	ft_swap(t_recup *recup)
+void	ft_swap(t_all *all)
 {
 	void *tmp;
 
-	tmp = recup->data.img;
-	recup->data.img = recup->data.img2;
-	recup->data.img2 = tmp;
-	tmp = recup->data.addr;
-	recup->data.addr = recup->data.addr2;
-	recup->data.addr2 = tmp;
+	tmp = all->data.img;
+	all->data.img = all->data.img2;
+	all->data.img2 = tmp;
+	tmp = all->data.addr;
+	all->data.addr = all->data.addr2;
+	all->data.addr2 = tmp;
 }

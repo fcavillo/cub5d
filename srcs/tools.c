@@ -33,15 +33,15 @@ int		ft_charinstr(char *str, char c)
 	return (0);
 }
 
-int		ft_depart(char c, t_recup *recup, int i, int j)
+int		ft_depart(char c, t_all *all, int i, int j)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		if (recup->depart != 'x')
-			recup->multijoueurs = 1;
-		recup->depart = c;
-		recup->dx = i;
-		recup->dy = j;
+		if (all->depart != 'x')
+			all->multijoueurs = 1;
+		all->depart = c;
+		all->dx = i;
+		all->dy = j;
 		return (1);
 	}
 	return (0);
@@ -61,27 +61,27 @@ int		ft_murs_util(char *str)
 	return (0);
 }
 
-void	ft_initialisation(t_recup *recup)
+void	ft_initialisation(t_all *all)
 {
-	recup->no = NULL;
-	recup->so = NULL;
-	recup->we = NULL;
-	recup->ea = NULL;
-	recup->sp = NULL;
-	recup->f = -1;
-	recup->c = -1;
-	recup->rx = 0;
-	recup->ry = 0;
-	recup->nblines = 0;
-	recup->sizeline = 0;
-	recup->map = NULL;
-	recup->dx = 0;
-	recup->dy = 0;
-	recup->multijoueurs = 0;
-	recup->lignevide = 0;
-	recup->insidemap = 0;
-	recup->count = 0;
-	recup->sum = 0;
-	recup->wrongcharmap = 0;
-	ft_init_more(recup);
+	all->no = NULL;
+	all->so = NULL;
+	all->we = NULL;
+	all->ea = NULL;
+	all->sp = NULL;
+	all->f = -1;
+	all->c = -1;
+	all->rx = 0;
+	all->ry = 0;
+	all->nblines = 0;
+	all->sizeline = 0;
+	all->map = NULL;
+	all->dx = 0;
+	all->dy = 0;
+	all->multijoueurs = 0;
+	all->lignevide = 0;
+	all->insidemap = 0;
+	all->count = 0;
+	all->sum = 0;
+	all->wrongcharmap = 0;
+	ft_init_more(all);
 }

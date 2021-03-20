@@ -1,135 +1,135 @@
 #include "../includes/cub3d.h"
 
-int		ft_atoi2(const char *str, t_recup *recup)
+int		ft_atoi2(const char *str, t_all *all)
 {
 	int		sum;
 
 	sum = 0;
 	if (str[1] != ' ' || ft_charinstr((char *)str, ',') == 1)
-		recup->erreur = 2;
-	while (str[recup->i] == ' ' || str[recup->i] == '\t'
-			|| str[recup->i] == ',' || str[recup->i] == '\n'
-			|| str[recup->i] == '\r' || str[recup->i] == '\v'
-			|| str[recup->i] == '\f')
-		recup->i++;
-	if (str[recup->i] == '-' || str[recup->i] == '+')
-		recup->erreur = 2;
-	while (str[recup->i] >= '0' && str[recup->i] <= '9')
+		all->erreur = 2;
+	while (str[all->i] == ' ' || str[all->i] == '\t'
+			|| str[all->i] == ',' || str[all->i] == '\n'
+			|| str[all->i] == '\r' || str[all->i] == '\v'
+			|| str[all->i] == '\f')
+		all->i++;
+	if (str[all->i] == '-' || str[all->i] == '+')
+		all->erreur = 2;
+	while (str[all->i] >= '0' && str[all->i] <= '9')
 	{
 		if (sum > 21474636)
 			break ;
-		sum = (sum * 10) + (str[recup->i] - 48);
-		recup->i++;
+		sum = (sum * 10) + (str[all->i] - 48);
+		all->i++;
 	}
-	while (str[recup->i] >= '0' && str[recup->i] <= '9')
-		recup->i++;
+	while (str[all->i] >= '0' && str[all->i] <= '9')
+		all->i++;
 	return (sum);
 }
 
-int		ft_atoi3(const char *str, t_recup *recup)
+int		ft_atoi3(const char *str, t_all *all)
 {
 	int		verify;
 
 	verify = 0;
 	if (str[1] != ' ')
-		recup->erreur = 2;
-	ft_atoi3_check(str, recup);
-	while (str[recup->i] == ' ' || str[recup->i] == '\t' || str[recup->i]
-			== ',' || str[recup->i] == '\n' || str[recup->i] == '\r'
-			|| str[recup->i] == '\v' || str[recup->i] == '\f')
+		all->erreur = 2;
+	ft_atoi3_check(str, all);
+	while (str[all->i] == ' ' || str[all->i] == '\t' || str[all->i]
+			== ',' || str[all->i] == '\n' || str[all->i] == '\r'
+			|| str[all->i] == '\v' || str[all->i] == '\f')
 	{
-		recup->i++;
+		all->i++;
 		verify = 0;
-		if (str[recup->i] >= '0' && str[recup->i] <= '9')
-			recup->indicateur2++;
-		while (str[recup->i] >= '0' && str[recup->i] <= '9')
+		if (str[all->i] >= '0' && str[all->i] <= '9')
+			all->indicateur2++;
+		while (str[all->i] >= '0' && str[all->i] <= '9')
 		{
-			verify = (verify * 10) + str[recup->i] - 48;
-			recup->sum = (recup->sum * 10) + (str[recup->i] - 48);
-			recup->i++;
+			verify = (verify * 10) + str[all->i] - 48;
+			all->sum = (all->sum * 10) + (str[all->i] - 48);
+			all->i++;
 		}
 		if (verify > 255 || verify < 0)
-			recup->erreur = 2;
+			all->erreur = 2;
 	}
-	return (recup->sum);
+	return (all->sum);
 }
 
-int		ft_path_texture(char *str, char **texture, t_recup *recup, int j)
+int		ft_path_texture(char *str, char **texture, t_all *all, int j)
 {
-	recup->count2 = 0;
+	all->count2 = 0;
 	if (*texture != NULL)
 	{
-		recup->erreur = 2;
+		all->erreur = 2;
 		return (0);
 	}
 	if (ft_charinstr(str, '.') == 0 || ft_charinstr(str, '/') == 0
 			|| ft_strlen2(str) <= 2)
-		recup->erreur = 2;
+		all->erreur = 2;
 	while (str[j] != '.')
 	{
 		if (str[j] != ' ' && str[j] != '.')
-			recup->erreur = 2;
+			all->erreur = 2;
 		j++;
 	}
 	if (!(*texture = (char *)(malloc(sizeof(char) * (ft_strlen2(str) + 1)))))
-		recup->erreur = 2;
+		all->erreur = 2;
 	while (str[j] != '\0')
 	{
-		(*texture)[recup->count2] = str[j];
-		recup->count2++;
+		(*texture)[all->count2] = str[j];
+		all->count2++;
 		j++;
 	}
-	(*texture)[recup->count2] = '\0';
+	(*texture)[all->count2] = '\0';
 	return (0);
 }
 
-void	ft_texture(char *str, t_recup *recup)
+void	ft_texture(char *str, t_all *all)
 {
 	int			i;
 	static int	j = 0;
 
 	i = 0;
 	if (str[i] == 'S' && str[i + 1] == 'O')
-		ft_path_texture(str, &recup->no, recup, 2);
+		ft_path_texture(str, &all->no, all, 2);
 	else if (str[i] == 'N' && str[i + 1] == 'O')
-		ft_path_texture(str, &recup->so, recup, 2);
+		ft_path_texture(str, &all->so, all, 2);
 	else if (str[i] == 'E' && str[i + 1] == 'A')
-		ft_path_texture(str, &recup->we, recup, 2);
+		ft_path_texture(str, &all->we, all, 2);
 	else if (str[i] == 'W' && str[i + 1] == 'E')
-		ft_path_texture(str, &recup->ea, recup, 2);
+		ft_path_texture(str, &all->ea, all, 2);
 	else if (str[i] == 'S' && str[i + 1] != 'O')
-		ft_path_texture(str, &recup->sp, recup, 1);
+		ft_path_texture(str, &all->sp, all, 1);
 	else if (str[0] != 'N' && str[0] != 'S' && str[0] != 'W' && str[0] != 'E'
 			&& str[0] != 'R' && str[0] != 'F' && str[0] != 'C'
 			&& str[0] > 65 && str[0] < 122)
-		recup->erreur = 2;
+		all->erreur = 2;
 	j++;
 }
 
-void	ft_color_resolution(char **str, t_recup *recup)
+void	ft_color_resolution(char **str, t_all *all)
 {
 	int			i;
 
 	i = 0;
-	recup->i = 1;
-	if (recup->sizeline > 0 && (recup->no == NULL || recup->so == NULL ||
-				recup->we == NULL || recup->ea == NULL || recup->sp == NULL))
-		recup->erreur = 2;
-	if ((recup->no != NULL || recup->so != NULL || recup->we != NULL ||
-				recup->ea != NULL || recup->sp != NULL) && (recup->rx == 0
-				|| recup->ry == 0))
-		recup->erreur = 2;
+	all->i = 1;
+	if (all->sizeline > 0 && (all->no == NULL || all->so == NULL ||
+				all->we == NULL || all->ea == NULL || all->sp == NULL))
+		all->erreur = 2;
+	if ((all->no != NULL || all->so != NULL || all->we != NULL ||
+				all->ea != NULL || all->sp != NULL) && (all->rx == 0
+				|| all->ry == 0))
+		all->erreur = 2;
 	if (*str[i] == 'R')
 	{
-		if (recup->rx != 0 && recup->ry != 0)
-			recup->erreur = 2;
-		recup->rx = ft_atoi2(*str, recup);
-		recup->ry = ft_atoi2(*str, recup);
-		if (ft_atoi2(*str, recup) > 0 || recup->rx == 0 || recup->ry == 0)
-			recup->erreur = 2;
+		if (all->rx != 0 && all->ry != 0)
+			all->erreur = 2;
+		all->rx = ft_atoi2(*str, all);
+		all->ry = ft_atoi2(*str, all);
+		if (ft_atoi2(*str, all) > 0 || all->rx == 0 || all->ry == 0)
+			all->erreur = 2;
 	}
 	else if (*str[i] == 'F')
-		recup->f = ft_atoi3(*str, recup);
+		all->f = ft_atoi3(*str, all);
 	else if (*str[i] == 'C')
-		recup->c = ft_atoi3(*str, recup);
+		all->c = ft_atoi3(*str, all);
 }

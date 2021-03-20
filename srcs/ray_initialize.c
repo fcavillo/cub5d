@@ -1,98 +1,98 @@
 #include "../includes/cub3d.h"
 
-void	ft_initialisation2(t_recup *recup)
+void	ft_initialisation2(t_all *all)
 {
-	if (!(recup->s.zbuffer = (double *)malloc(sizeof(double) * recup->rx)))
+	if (!(all->s.zbuffer = (double *)malloc(sizeof(double) * all->rx)))
 		exit(0);
-	recup->data.forward = 0;
-	recup->data.back = 0;
-	recup->data.left = 0;
-	recup->data.right = 0;
-	recup->data.rotate_right = 0;
-	recup->data.rotate_left = 0;
-	recup->ray.posx = (double)recup->dx + 0.5;
-	recup->ray.posy = (double)recup->dy + 0.5;
-	recup->ray.dirx = 0;
-	recup->ray.diry = 0;
-	recup->ray.planx = 0;
-	recup->ray.plany = 0;
-	ft_init_dir(recup);
+	all->data.forward = 0;
+	all->data.back = 0;
+	all->data.left = 0;
+	all->data.right = 0;
+	all->data.rotate_right = 0;
+	all->data.rotate_left = 0;
+	all->ray.posx = (double)all->dx + 0.5;
+	all->ray.posy = (double)all->dy + 0.5;
+	all->ray.dirx = 0;
+	all->ray.diry = 0;
+	all->ray.planx = 0;
+	all->ray.plany = 0;
+	ft_init_dir(all);
 }
 
-void	ft_initialisation3(t_recup *recup)
+void	ft_initialisation3(t_all *all)
 {
-	recup->ray.hit = 0;
-	recup->ray.perpwalldist = 0;
-	recup->ray.camerax = 2 * recup->ray.x / (double)recup->rx - 1;
-	recup->ray.raydirx = recup->ray.dirx + recup->ray.planx * \
-						recup->ray.camerax;
-	recup->ray.raydiry = recup->ray.diry + recup->ray.plany * \
-						recup->ray.camerax;
-	recup->ray.mapx = (int)recup->ray.posx;
-	recup->ray.mapy = (int)recup->ray.posy;
-	recup->ray.movespeed = 0.1;
-	recup->ray.rotspeed = 0.033 * 1.8;
-	ft_init_more3(recup);
+	all->ray.hit = 0;
+	all->ray.perpwalldist = 0;
+	all->ray.camerax = 2 * all->ray.x / (double)all->rx - 1;
+	all->ray.raydirx = all->ray.dirx + all->ray.planx * \
+						all->ray.camerax;
+	all->ray.raydiry = all->ray.diry + all->ray.plany * \
+						all->ray.camerax;
+	all->ray.mapx = (int)all->ray.posx;
+	all->ray.mapy = (int)all->ray.posy;
+	all->ray.movespeed = 0.1;
+	all->ray.rotspeed = 0.033 * 1.8;
+	ft_init_more3(all);
 }
 
-void	ft_init_texture(t_recup *recup)
+void	ft_init_texture(t_all *all)
 {
-	if (recup->ray.side == 0 && recup->ray.raydirx < 0)
-		recup->t.texdir = 0;
-	if (recup->ray.side == 0 && recup->ray.raydirx >= 0)
-		recup->t.texdir = 1;
-	if (recup->ray.side == 1 && recup->ray.raydiry < 0)
-		recup->t.texdir = 2;
-	if (recup->ray.side == 1 && recup->ray.raydiry >= 0)
-		recup->t.texdir = 3;
-	if (recup->ray.side == 0)
-		recup->t.wallx = recup->ray.posy + recup->ray.perpwalldist \
-						* recup->ray.raydiry;
+	if (all->ray.side == 0 && all->ray.raydirx < 0)
+		all->t.texdir = 0;
+	if (all->ray.side == 0 && all->ray.raydirx >= 0)
+		all->t.texdir = 1;
+	if (all->ray.side == 1 && all->ray.raydiry < 0)
+		all->t.texdir = 2;
+	if (all->ray.side == 1 && all->ray.raydiry >= 0)
+		all->t.texdir = 3;
+	if (all->ray.side == 0)
+		all->t.wallx = all->ray.posy + all->ray.perpwalldist \
+						* all->ray.raydiry;
 	else
-		recup->t.wallx = recup->ray.posx + recup->ray.perpwalldist \
-						* recup->ray.raydirx;
-	recup->t.wallx -= floor((recup->t.wallx));
+		all->t.wallx = all->ray.posx + all->ray.perpwalldist \
+						* all->ray.raydirx;
+	all->t.wallx -= floor((all->t.wallx));
 }
 
-void	ft_init_sprite(t_recup *recup)
+void	ft_init_sprite(t_all *all)
 {
 	int i;
 	int j;
 
 	i = -1;
-	recup->s.nbspr = 0;
-	ft_verify_errors(recup);
-	while (++i < recup->nblines)
+	all->s.nbspr = 0;
+	ft_verify_errors(all);
+	while (++i < all->nblines)
 	{
 		j = -1;
-		while (++j < recup->sizeline)
+		while (++j < all->sizeline)
 		{
-			if (recup->map[i][j] == '2')
-				recup->s.nbspr += 1;
+			if (all->map[i][j] == '2')
+				all->s.nbspr += 1;
 		}
 	}
-	if (!(recup->sxy = (t_sprxy *)malloc(sizeof(t_sprxy) * recup->s.nbspr)))
-		ft_error(recup, "Malloc sxy*");
-	if (!(recup->s.order = (int *)malloc(sizeof(int) * recup->s.nbspr)))
-		ft_error(recup, "Malloc s.order*");
-	if (!(recup->s.dist = (double *)malloc(sizeof(double) * recup->s.nbspr)))
-		ft_error(recup, "Malloc s.dist*");
-	ft_init_sprite2(recup, 0, 0, 0);
-	ft_mlx(recup);
+	if (!(all->sxy = (t_sprxy *)malloc(sizeof(t_sprxy) * all->s.nbspr)))
+		ft_error(all, "Malloc sxy*");
+	if (!(all->s.order = (int *)malloc(sizeof(int) * all->s.nbspr)))
+		ft_error(all, "Malloc s.order*");
+	if (!(all->s.dist = (double *)malloc(sizeof(double) * all->s.nbspr)))
+		ft_error(all, "Malloc s.dist*");
+	ft_init_sprite2(all, 0, 0, 0);
+	ft_mlx(all);
 }
 
-void	ft_init_sprite2(t_recup *recup, int i, int j, int v)
+void	ft_init_sprite2(t_all *all, int i, int j, int v)
 {
 	i = i - 1;
-	while (++i < recup->nblines)
+	while (++i < all->nblines)
 	{
 		j = -1;
-		while (++j < recup->sizeline)
+		while (++j < all->sizeline)
 		{
-			if (recup->map[i][j] == '2')
+			if (all->map[i][j] == '2')
 			{
-				recup->sxy[v].x = (double)i + 0.5;
-				recup->sxy[v].y = (double)j + 0.5;
+				all->sxy[v].x = (double)i + 0.5;
+				all->sxy[v].y = (double)j + 0.5;
 				v++;
 			}
 		}

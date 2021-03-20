@@ -1,60 +1,60 @@
 #include "../includes/cub3d.h"
 
-int		ft_murs(t_recup *recup)
+int		ft_murs(t_all *all)
 {
 	int i;
 
 	i = 0;
-	while (i < recup->nblines)
+	while (i < all->nblines)
 	{
-		if (recup->map[i][0] != '1')
+		if (all->map[i][0] != '1')
 			return (1);
 		i++;
 	}
 	i = 0;
-	while (i < recup->nblines)
+	while (i < all->nblines)
 	{
-		if (recup->map[i][recup->sizeline - 1] != '1')
+		if (all->map[i][all->sizeline - 1] != '1')
 			return (1);
 		i++;
 	}
-	if (ft_murs_util(recup->map[0]) == 1)
+	if (ft_murs_util(all->map[0]) == 1)
 		return (1);
-	if (ft_murs_util(recup->map[recup->nblines - 1]) == 1)
+	if (ft_murs_util(all->map[all->nblines - 1]) == 1)
 		return (1);
 	return (0);
 }
 
-int		ft_copy_map(char *str, t_recup *recup)
+int		ft_copy_map(char *str, t_all *all)
 {
 	static int	i = 0;
 	int			j;
 
 	j = 0;
-	recup->map[i] = NULL;
-	if (!(recup->map[i] = malloc(sizeof(char) * recup->sizeline + 1)))
+	all->map[i] = NULL;
+	if (!(all->map[i] = malloc(sizeof(char) * all->sizeline + 1)))
 		return (0);
 	while (str[j] != '\0')
 	{
-		if (ft_depart(str[j], recup, i, j) == 1)
-			recup->map[i][j] = '0';
+		if (ft_depart(str[j], all, i, j) == 1)
+			all->map[i][j] = '0';
 		else if (str[j] == ' ')
-			recup->map[i][j] = '1';
+			all->map[i][j] = '1';
 		else
-			recup->map[i][j] = str[j];
+			all->map[i][j] = str[j];
 		j++;
 	}
-	while (j <= (recup->sizeline - 1))
+	while (j <= (all->sizeline - 1))
 	{
-		recup->map[i][j] = '1';
+		all->map[i][j] = '1';
 		j++;
 	}
-	recup->map[i][j] = '\0';
+	all->map[i][j] = '\0';
 	i++;
 	return (0);
 }
 
-int		ft_is_map(char *str, t_recup *recup)
+int		ft_is_map(char *str, t_all *all)
 {
 	int i;
 
@@ -70,8 +70,8 @@ int		ft_is_map(char *str, t_recup *recup)
 					&& str[i] != 'E' && str[i] != 'W' && str[i] != '\n'
 					&& str[i] != '\t')
 			{
-				if (recup->insidemap == 1)
-					recup->wrongcharmap = 2;
+				if (all->insidemap == 1)
+					all->wrongcharmap = 2;
 				return (0);
 			}
 			i++;
@@ -81,23 +81,23 @@ int		ft_is_map(char *str, t_recup *recup)
 	return (0);
 }
 
-void	ft_map(char *str, t_recup *recup)
+void	ft_map(char *str, t_all *all)
 {
 	int			i;
 	static int	snblines = 0;
 	static int	ssizeline = 0;
 
 	i = 0;
-	if (ft_is_map(str, recup) == 1)
+	if (ft_is_map(str, all) == 1)
 	{
-		if (recup->f == -1 || recup->c == -1 || recup->no == NULL ||
-				recup->so == NULL || recup->we == NULL ||
-				recup->ea == NULL || recup->sp == NULL)
-			recup->erreur = 2;
+		if (all->f == -1 || all->c == -1 || all->no == NULL ||
+				all->so == NULL || all->we == NULL ||
+				all->ea == NULL || all->sp == NULL)
+			all->erreur = 2;
 		if ((i = ft_strlen(str)) > ssizeline)
 			ssizeline = i;
 		snblines = snblines + 1;
 	}
-	recup->nblines = snblines;
-	recup->sizeline = ssizeline;
+	all->nblines = snblines;
+	all->sizeline = ssizeline;
 }

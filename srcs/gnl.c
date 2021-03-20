@@ -57,9 +57,9 @@ int		ft_eof(int ret, char **buff, char **line)
 	return (0);
 }
 
-int		ft_free_buff(char **buff, t_recup *recup)
+int		ft_free_buff(char **buff, t_all *all)
 {
-	if (recup->erreur == 2 && *buff)
+	if (all->erreur == 2 && *buff)
 	{
 		free(*buff);
 		return (1);
@@ -67,12 +67,12 @@ int		ft_free_buff(char **buff, t_recup *recup)
 	return (0);
 }
 
-int		get_next_line(int fd, char **line, t_recup *recup)
+int		get_next_line(int fd, char **line, t_all *all)
 {
 	static char	*buff = NULL;
 	int			ret;
 
-	if (ft_free_buff(&buff, recup) == 1)
+	if (ft_free_buff(&buff, all) == 1)
 		return (0);
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);

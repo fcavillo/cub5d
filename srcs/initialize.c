@@ -1,65 +1,65 @@
 #include "../includes/cub3d.h"
 
-void	ft_init_more(t_recup *recup)
+void	ft_init_more(t_all *all)
 {
-	recup->depart = 'x';
-	recup->indicateur2 = 0;
-	recup->indicateur3 = 0;
-	recup->data.img = NULL;
-	recup->texture[0].img = NULL;
-	recup->texture[1].img = NULL;
-	recup->texture[2].img = NULL;
-	recup->texture[3].img = NULL;
-	recup->texture[4].img = NULL;
-	recup->data.mlx_win = NULL;
-	recup->map = NULL;
-	recup->s.order = NULL;
-	recup->s.dist = NULL;
-	recup->s.zbuffer = NULL;
-	recup->sxy = NULL;
+	all->depart = 'x';
+	all->indicateur2 = 0;
+	all->indicateur3 = 0;
+	all->data.img = NULL;
+	all->texture[0].img = NULL;
+	all->texture[1].img = NULL;
+	all->texture[2].img = NULL;
+	all->texture[3].img = NULL;
+	all->texture[4].img = NULL;
+	all->data.mlx_win = NULL;
+	all->map = NULL;
+	all->s.order = NULL;
+	all->s.dist = NULL;
+	all->s.zbuffer = NULL;
+	all->sxy = NULL;
 }
 
-void	ft_init_dir(t_recup *recup)
+void	ft_init_dir(t_all *all)
 {
-	if (recup->depart == 'N')
-		recup->ray.dirx = -1;
-	if (recup->depart == 'S')
-		recup->ray.dirx = 1;
-	if (recup->depart == 'E')
-		recup->ray.diry = 1;
-	if (recup->depart == 'W')
-		recup->ray.diry = -1;
-	if (recup->depart == 'N')
-		recup->ray.plany = 0.66;
-	if (recup->depart == 'S')
-		recup->ray.plany = -0.66;
-	if (recup->depart == 'E')
-		recup->ray.planx = 0.66;
-	if (recup->depart == 'W')
-		recup->ray.planx = -0.66;
+	if (all->depart == 'N')
+		all->ray.dirx = -1;
+	if (all->depart == 'S')
+		all->ray.dirx = 1;
+	if (all->depart == 'E')
+		all->ray.diry = 1;
+	if (all->depart == 'W')
+		all->ray.diry = -1;
+	if (all->depart == 'N')
+		all->ray.plany = 0.66;
+	if (all->depart == 'S')
+		all->ray.plany = -0.66;
+	if (all->depart == 'E')
+		all->ray.planx = 0.66;
+	if (all->depart == 'W')
+		all->ray.planx = -0.66;
 }
 
-void	ft_init_more3(t_recup *recup)
+void	ft_init_more3(t_all *all)
 {
-	if (recup->ray.raydiry == 0)
-		recup->ray.deltadistx = 0;
-	else if (recup->ray.raydirx == 0)
-		recup->ray.deltadistx = 1;
+	if (all->ray.raydiry == 0)
+		all->ray.deltadistx = 0;
+	else if (all->ray.raydirx == 0)
+		all->ray.deltadistx = 1;
 	else
-		recup->ray.deltadistx = sqrt(1 + (recup->ray.raydiry
-			* recup->ray.raydiry) / (recup->ray.raydirx *
-			recup->ray.raydirx));
-	if (recup->ray.raydirx == 0)
-		recup->ray.deltadisty = 0;
-	else if (recup->ray.raydiry == 0)
-		recup->ray.deltadisty = 1;
+		all->ray.deltadistx = sqrt(1 + (all->ray.raydiry
+			* all->ray.raydiry) / (all->ray.raydirx *
+			all->ray.raydirx));
+	if (all->ray.raydirx == 0)
+		all->ray.deltadisty = 0;
+	else if (all->ray.raydiry == 0)
+		all->ray.deltadisty = 1;
 	else
-		recup->ray.deltadisty = sqrt(1 + (recup->ray.raydirx *
-			recup->ray.raydirx) / (recup->ray.raydiry *
-			recup->ray.raydiry));
+		all->ray.deltadisty = sqrt(1 + (all->ray.raydirx *
+			all->ray.raydirx) / (all->ray.raydiry *
+			all->ray.raydiry));
 }
 
-void	ft_atoi3_check(const char *str, t_recup *recup)
+void	ft_atoi3_check(const char *str, t_all *all)
 {
 	int i;
 	int j;
@@ -82,9 +82,9 @@ void	ft_atoi3_check(const char *str, t_recup *recup)
 		i++;
 	}
 	if (j != 2)
-		recup->erreur = 2;
+		all->erreur = 2;
 	if (ft_nb_virgule(str) != 2)
-		recup->erreur = 2;
+		all->erreur = 2;
 }
 
 int		ft_lignevide(char *str)

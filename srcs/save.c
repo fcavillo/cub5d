@@ -1,11 +1,11 @@
 #include "../includes/cub3d.h"
 
-void	ft_header(t_recup *recup, int fd)
+void	ft_header(t_all *all, int fd)
 {
 	int	tmp;
 
 	write(fd, "BM", 2);
-	tmp = 14 + 40 + 4 * recup->rx * recup->ry;
+	tmp = 14 + 40 + 4 * all->rx * all->ry;
 	write(fd, &tmp, 4);
 	tmp = 0;
 	write(fd, &tmp, 2);
@@ -14,11 +14,11 @@ void	ft_header(t_recup *recup, int fd)
 	write(fd, &tmp, 4);
 	tmp = 40;
 	write(fd, &tmp, 4);
-	write(fd, &recup->rx, 4);
-	write(fd, &recup->ry, 4);
+	write(fd, &all->rx, 4);
+	write(fd, &all->ry, 4);
 	tmp = 1;
 	write(fd, &tmp, 2);
-	write(fd, &recup->data.bits_per_pixel, 2);
+	write(fd, &all->data.bits_per_pixel, 2);
 	tmp = 0;
 	write(fd, &tmp, 4);
 	write(fd, &tmp, 4);
@@ -28,29 +28,29 @@ void	ft_header(t_recup *recup, int fd)
 	write(fd, &tmp, 4);
 }
 
-void	ft_save(t_recup *recup)
+void	ft_save(t_all *all)
 {
 	int	fd;
 	int	x;
 	int	y;
 
-	y = recup->ry;
+	y = all->ry;
 	if ((fd = open("./image.bmp", O_CREAT | O_RDWR)) == -1)
-		ft_error(recup, "Impossible de creer .bmp\n");
-	ft_header(recup, fd);
+		ft_error(all, "Impossible de creer .bmp\n");
+	ft_header(all, fd);
 	while (y >= 0)
 	{
 		x = 0;
-		while (x < recup->rx)
+		while (x < all->rx)
 		{
-			write(fd, &recup->data.addr[y * recup->data.line_length / 4 + x],
+			write(fd, &all->data.addr[y * all->data.line_length / 4 + x],
 				4);
 			x++;
 		}
 		y--;
 	}
 	system("chmod 777 image.bmp");
-	ft_error(recup, "Non jrigole --save ok\n");
+	ft_error(all, "Non jrigole --save ok\n");
 }
 
 int		ft_check_save(char *str)

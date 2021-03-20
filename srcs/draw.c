@@ -1,85 +1,85 @@
 #include "../includes/cub3d.h"
 
-int		ft_key_press(int keycode, t_recup *recup) 
+int		ft_key_press(int keycode, t_all *all) 
 {
 	if (keycode == FORWARD_W_Z)
-		recup->data.forward = 1;
+		all->data.forward = 1;
 	else if (keycode == BACK_S_S)
-		recup->data.back = 1;
+		all->data.back = 1;
 	else if (keycode == LEFT_A_Q)
-		recup->data.left = 1;
+		all->data.left = 1;
 	else if (keycode == RIGHT_D_D)
-		recup->data.right = 1;
+		all->data.right = 1;
 	else if (keycode == ROTATE_LEFT)
-		recup->data.rotate_left = 1;
+		all->data.rotate_left = 1;
 	else if (keycode == ROTATE_RIGHT)
-		recup->data.rotate_right = 1;
+		all->data.rotate_right = 1;
 	else if (keycode == 65307)
-		ft_error(recup, "Non jrigole\n");
+		ft_error(all, "Non jrigole\n");
 	return (1);
 }
 
-int		ft_key_release(int keycode, t_recup *recup)
+int		ft_key_release(int keycode, t_all *all)
 {
 	if (keycode == FORWARD_W_Z)
-		recup->data.forward = 0;
+		all->data.forward = 0;
 	else if (keycode == BACK_S_S)
-		recup->data.back = 0;
+		all->data.back = 0;
 	else if (keycode == LEFT_A_Q)
-		recup->data.left = 0;
+		all->data.left = 0;
 	else if (keycode == RIGHT_D_D)
-		recup->data.right = 0;
+		all->data.right = 0;
 	else if (keycode == ROTATE_LEFT)
-		recup->data.rotate_left = 0;
+		all->data.rotate_left = 0;
 	else if (keycode == ROTATE_RIGHT)
-		recup->data.rotate_right = 0;
+		all->data.rotate_right = 0;
 	return (1);
 }
 
-int		ft_color_column(t_recup *recup)
+int		ft_color_column(t_all *all)
 {
 	int j;
 	int i;
 
 	j = -1;
-	recup->ray.drawend = recup->ry - recup->ray.drawstart;
-	i = recup->ray.drawend;
-	while (++j < recup->ray.drawstart)
-		recup->data.addr[j * recup->data.line_length / 4 +
-			recup->ray.x] = recup->c;
-	if (j <= recup->ray.drawend)
-		ft_draw_texture(recup, recup->ray.x, j);
+	all->ray.drawend = all->ry - all->ray.drawstart;
+	i = all->ray.drawend;
+	while (++j < all->ray.drawstart)
+		all->data.addr[j * all->data.line_length / 4 +
+			all->ray.x] = all->c;
+	if (j <= all->ray.drawend)
+		ft_draw_texture(all, all->ray.x, j);
 	j = i;
-	while (++j < recup->ry)
-		recup->data.addr[j * recup->data.line_length / 4 +
-			recup->ray.x] = recup->f;
+	while (++j < all->ry)
+		all->data.addr[j * all->data.line_length / 4 +
+			all->ray.x] = all->f;
 	return (0);
 }
 
-void	ft_draw_texture(t_recup *recup, int x, int y)
+void	ft_draw_texture(t_all *all, int x, int y)
 {
-	y = recup->ray.drawstart - 1;
-	ft_init_texture(recup);
-	recup->t.step = 1.0 * recup->texture[0].height / recup->ray.lineheight;
-	recup->t.texx = (int)(recup->t.wallx * (double)recup->texture
-			[recup->t.texdir].width);
-	if (recup->ray.side == 0 && recup->ray.raydirx > 0)
-		recup->t.texx = recup->texture[recup->t.texdir].width -
-			recup->t.texx - 1;
-	if (recup->ray.side == 1 && recup->ray.raydiry < 0)
-		recup->t.texx = recup->texture[recup->t.texdir].width -
-			recup->t.texx - 1;
-	recup->t.texpos = (recup->ray.drawstart - recup->ry / 2 +
-			recup->ray.lineheight / 2) * recup->t.step;
-	while (++y <= recup->ray.drawend)
+	y = all->ray.drawstart - 1;
+	ft_init_texture(all);
+	all->t.step = 1.0 * all->texture[0].height / all->ray.lineheight;
+	all->t.texx = (int)(all->t.wallx * (double)all->texture
+			[all->t.texdir].width);
+	if (all->ray.side == 0 && all->ray.raydirx > 0)
+		all->t.texx = all->texture[all->t.texdir].width -
+			all->t.texx - 1;
+	if (all->ray.side == 1 && all->ray.raydiry < 0)
+		all->t.texx = all->texture[all->t.texdir].width -
+			all->t.texx - 1;
+	all->t.texpos = (all->ray.drawstart - all->ry / 2 +
+			all->ray.lineheight / 2) * all->t.step;
+	while (++y <= all->ray.drawend)
 	{
-		recup->t.texy = (int)recup->t.texpos &
-			(recup->texture[recup->t.texdir].height - 1);
-		recup->t.texpos += recup->t.step;
-		if (y < recup->ry && x < recup->rx)
-			recup->data.addr[y * recup->data.line_length / 4 + x] =
-				recup->texture[recup->t.texdir].addr[recup->t.texy *
-					recup->texture[recup->t.texdir].line_length /
-					4 + recup->t.texx];
+		all->t.texy = (int)all->t.texpos &
+			(all->texture[all->t.texdir].height - 1);
+		all->t.texpos += all->t.step;
+		if (y < all->ry && x < all->rx)
+			all->data.addr[y * all->data.line_length / 4 + x] =
+				all->texture[all->t.texdir].addr[all->t.texy *
+					all->texture[all->t.texdir].line_length /
+					4 + all->t.texx];
 	}
 }

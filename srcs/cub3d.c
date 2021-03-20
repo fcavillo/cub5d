@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-int		ft_parsing_map(char *fichier, t_recup *recup)
+int		ft_parsing_map(char *fichier, t_all *all)
 {
 	int			fd;
 	int			ret;
@@ -9,27 +9,27 @@ int		ft_parsing_map(char *fichier, t_recup *recup)
 	ret = 1;
 	str = NULL;
 	fd = open(fichier, O_RDONLY);
-	if (!(recup->map = malloc(sizeof(char*) * recup->nblines)))
+	if (!(all->map = malloc(sizeof(char*) * all->nblines)))
 		return (0);
 	while (ret != 0)
 	{
-		ret = get_next_line(fd, &str, recup);
-		if (recup->insidemap == 1 && ft_lignevide(str) == 0 &&
-				recup->count < recup->nblines)
-			recup->lignevide = 1;
-		if ((recup->insidemap = ft_is_map(str, recup)) == 1)
+		ret = get_next_line(fd, &str, all);
+		if (all->insidemap == 1 && ft_lignevide(str) == 0 &&
+				all->count < all->nblines)
+			all->lignevide = 1;
+		if ((all->insidemap = ft_is_map(str, all)) == 1)
 		{
-			recup->count++;
-			ft_copy_map(str, recup);
+			all->count++;
+			ft_copy_map(str, all);
 		}
 		free(str);
 	}
 	close(fd);
-	ft_init_sprite(recup);
+	ft_init_sprite(all);
 	return (0);
 }
 
-void	ft_parsing(char *fichier, t_recup *recup)
+void	ft_parsing(char *fichier, t_all *all)
 {
 	int			fd;
 	int			ret;
@@ -38,27 +38,27 @@ void	ft_parsing(char *fichier, t_recup *recup)
 	ret = 1;
 	str = NULL;
 	if ((fd = open(fichier, O_DIRECTORY)) != -1)
-		ft_error(recup, "Invalide : is a directory\n");
+		ft_error(all, "Invalide : is a directory\n");
 	if ((fd = open(fichier, O_RDONLY)) == -1)
-		ft_error(recup, "Fichier .cub invalide\n");
-	recup->erreur = 0;
+		ft_error(all, "Fichier .cub invalide\n");
+	all->erreur = 0;
 	while (ret != 0)
 	{
-		ret = get_next_line(fd, &str, recup);
-		if (recup->erreur == 2)
-			ft_error(recup, "La partie parsing detecte une erreur\n");
-		ft_color_resolution(&str, recup);
-		ft_texture(str, recup);
-		ft_map(str, recup);
+		ret = get_next_line(fd, &str, all);
+		if (all->erreur == 2)
+			ft_error(all, "La partie parsing detecte une erreur\n");
+		ft_color_resolution(&str, all);
+		ft_texture(str, all);
+		ft_map(str, all);
 		free(str);
 	}
 	close(fd);
-	if (recup->sizeline == 0 || recup->nblines == 0)
-		ft_error(recup, "Map absente\n");
-	ft_parsing_map(fichier, recup);
+	if (all->sizeline == 0 || all->nblines == 0)
+		ft_error(all, "Map absente\n");
+	ft_parsing_map(fichier, all);
 }
 
-int		ft_cub(char *str, t_recup *recup)
+int		ft_cub(char *str, t_all *all)
 {
 	int			i;
 
@@ -70,28 +70,28 @@ int		ft_cub(char *str, t_recup *recup)
 		i--;
 		if (i == 0)
 		{
-			ft_error(recup, "Nom de la map invalide\n");
+			ft_error(all, "Nom de la map invalide\n");
 			return (0);
 		}
 	}
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
-		ft_parsing(str, recup);
+		ft_parsing(str, all);
 	else
-		ft_error(recup, "Nom de la map invalide\n");
+		ft_error(all, "Nom de la map invalide\n");
 	return (0);
 }
 
 int		main(int argc, char **argv)
 {
-	t_recup recup;
+	t_all all;
 
-	recup.save = 0;
-	ft_initialisation(&recup);
+	all.save = 0;
+	ft_initialisation(&all);
 	if (argc == 2 || (argc == 3 && ft_check_save(argv[2]) == 1))
 	{
 		if (argc == 3)
-			recup.save = 1;
-		ft_cub(argv[1], &recup);
+			all.save = 1;
+		ft_cub(argv[1], &all);
 	}
 	else
 		write(1, "Error\nArguments invalides\n", 30);
