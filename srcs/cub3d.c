@@ -1,105 +1,98 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/25 09:45:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/18 10:04:46 by fcavillo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "../includes/cub3d.h"
 
-# include "../includes/cub3d.h" 
-
-void     ft_line(t_all *all, char *line)
+int		ft_parsing_map(char *fichier, t_recup *recup)
 {
-    int     i;
-    
-    i = 0;
-    ft_skipspace(line, &i);
-    if (line[i] == 'R' && line[i + 1] == ' ')
-        ft_res(all, line, &i);
-    else if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-        all->err = ft_texture(all, &all->tex.n, line, &i);
-    else if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-        all->err = ft_texture(all, &all->tex.s, line, &i);
-    else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-        all->err = ft_texture(all, &all->tex.w, line, &i);
-    else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-        all->err = ft_texture(all, &all->tex.e, line, &i);
-    else if (line[i] == 'S' && line[i + 1] == ' ')
-        all->err = ft_texture(all, &all->tex.spr, line, &i);
-    else if (line[i] == 'F' && line[i + 1] == ' ')
-        ft_colors(all, &all->tex.f, line, &i);
-    else if (line[i] == 'C' && line[i + 1] == ' ')
-        ft_colors(all, &all->tex.c, line, &i);
+	int			fd;
+	int			ret;
+	char		*str;
+
+	ret = 1;
+	str = NULL;
+	fd = open(fichier, O_RDONLY);
+	if (!(recup->map = malloc(sizeof(char*) * recup->nblines)))
+		return (0);
+	while (ret != 0)
+	{
+		ret = get_next_line(fd, &str, recup);
+		if (recup->insidemap == 1 && ft_lignevide(str) == 0 &&
+				recup->count < recup->nblines)
+			recup->lignevide = 1;
+		if ((recup->insidemap = ft_is_map(str, recup)) == 1)
+		{
+			recup->count++;
+			ft_copy_map(str, recup);
+		}
+		free(str);
+	}
+	close(fd);
+	ft_init_sprite(recup);
+	return (0);
 }
 
-
-
-void    ft_parse(char *mapname, t_all *all)
+void	ft_parsing(char *fichier, t_recup *recup)
 {
-    int fd;
-    int ret;
-    char *line;
-    
-    ret = 1;
-    line = NULL;
-    if ((fd = open(mapname, O_DIRECTORY)) != -1)
-        return (ft_error(all, "Argv2 is a directory\n"));
-    else if ((fd = open(mapname, O_RDONLY)) == -1)
-        return (ft_error(all, "Invalid .cub file\n"));
-    all->err = 0;
-    while (ret != 0 && all->err != 2)
-    {
-        ret = get_next_line(fd, &line, all);
-        if (all->err == 2)
-            ft_error(all, "Parsing error\n");
-        ft_line(all, line); 
-        ft_map(line, all);
-        free(line); 
-    }
-    close(fd);
-    if (all->map.x == 0 || all->map.y == 0 || all->err == 2)
-        ft_error(all, "Missing parameter in .cub\n");
-    else
-        ft_map_parsing(mapname, all); 
+	int			fd;
+	int			ret;
+	char		*str;
+
+	ret = 1;
+	str = NULL;
+	if ((fd = open(fichier, O_DIRECTORY)) != -1)
+		ft_error(recup, "Invalide : is a directory\n");
+	if ((fd = open(fichier, O_RDONLY)) == -1)
+		ft_error(recup, "Fichier .cub invalide\n");
+	recup->erreur = 0;
+	while (ret != 0)
+	{
+		ret = get_next_line(fd, &str, recup);
+		if (recup->erreur == 2)
+			ft_error(recup, "La partie parsing detecte une erreur\n");
+		ft_color_resolution(&str, recup);
+		ft_texture(str, recup);
+		ft_map(str, recup);
+		free(str);
+	}
+	close(fd);
+	if (recup->sizeline == 0 || recup->nblines == 0)
+		ft_error(recup, "Map absente\n");
+	ft_parsing_map(fichier, recup);
 }
 
-int     ft_start(char *str, t_all *all)
+int		ft_cub(char *str, t_recup *recup)
 {
-    int i;
-    
-    i = 0;
-    while (str[i])
-        i++;
-    if (i > 4 && str[i - 1] == 'b' && str[i - 2] == 'u' && str[i - 3] == 'c'
-        && str[i - 4] == '.')
-        ft_parse(str, all); 
-    else
-        ft_error(all, "Invalid Map Name\n");
-    return (0);
-    }
+	int			i;
 
-int     main(int ac, char **av)
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	while (str[i] != '.')
+	{
+		i--;
+		if (i == 0)
+		{
+			ft_error(recup, "Nom de la map invalide\n");
+			return (0);
+		}
+	}
+	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
+		ft_parsing(str, recup);
+	else
+		ft_error(recup, "Nom de la map invalide\n");
+	return (0);
+}
+
+int		main(int argc, char **argv)
 {
-    t_all all;
+	t_recup recup;
 
-    all.save = 0;
-    ft_init(&all);
-    if (ac == 2 || (ac == 3 && ft_check_save(av[2]) == 1))
-    {
-        if (ac == 3)
-            all.save = 1;
-        ft_start(av[1], &all);
-    }
-    else
-        printf("%sError\nInvalid Args\n", RED);\
-    printf("%sTESTING\n", GRN);
-    test(&all);
-    printf("%sTHE TESTING HAS BEEN TESTED\n", GRN);
-    free_all(&all);
-    printf("%sThe End\n", YEL);
-    return(0);
+	recup.save = 0;
+	ft_initialisation(&recup);
+	if (argc == 2 || (argc == 3 && ft_check_save(argv[2]) == 1))
+	{
+		if (argc == 3)
+			recup.save = 1;
+		ft_cub(argv[1], &recup);
+	}
+	else
+		write(1, "Error\nArguments invalides\n", 30);
 }
