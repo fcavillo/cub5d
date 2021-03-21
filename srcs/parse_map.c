@@ -36,7 +36,7 @@ int		ft_copy_map(char *str, t_all *all)
 		return (0);
 	while (str[j] != '\0')
 	{
-		if (ft_depart(str[j], all, i, j) == 1)
+		if (ft_start_pos(str[j], all, i, j) == 1)
 			all->map[i][j] = '0';
 		else if (str[j] == ' ')
 			all->map[i][j] = '1';

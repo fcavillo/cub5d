@@ -2,7 +2,7 @@
 
 void	ft_init_more(t_all *all)
 {
-	all->depart = 'x';
+	all->start_pos = 'x';
 	all->indicateur2 = 0;
 	all->indicateur3 = 0;
 	all->data.img = NULL;
@@ -21,21 +21,21 @@ void	ft_init_more(t_all *all)
 
 void	ft_init_dir(t_all *all)
 {
-	if (all->depart == 'N')
+	if (all->start_pos == 'N')
 		all->ray.dirx = -1;
-	if (all->depart == 'S')
+	if (all->start_pos == 'S')
 		all->ray.dirx = 1;
-	if (all->depart == 'E')
+	if (all->start_pos == 'E')
 		all->ray.diry = 1;
-	if (all->depart == 'W')
+	if (all->start_pos == 'W')
 		all->ray.diry = -1;
-	if (all->depart == 'N')
+	if (all->start_pos == 'N')
 		all->ray.plany = 0.66;
-	if (all->depart == 'S')
+	if (all->start_pos == 'S')
 		all->ray.plany = -0.66;
-	if (all->depart == 'E')
+	if (all->start_pos == 'E')
 		all->ray.planx = 0.66;
-	if (all->depart == 'W')
+	if (all->start_pos == 'W')
 		all->ray.planx = -0.66;
 }
 

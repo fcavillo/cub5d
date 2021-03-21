@@ -3,17 +3,17 @@
 void	ft_verify_errors(t_all *all)
 {
 	if (ft_murs(all) == 1)
-		ft_error(all, "Map non entouree de 1\n");
-	if (all->depart == 'x')
-		ft_error(all, "Pas de joueur\n");
+		ft_error(all, 1, "Map non entouree de 1\n");
+	if (all->start_pos == 'x')
+		ft_error(all, 1, "Pas de joueur\n");
 	if (all->indicateur2 != 6)
-		ft_error(all, "Mauvaises donnees F ou C\n");
+		ft_error(all, 1, "Mauvaises donnees F ou C\n");
 	if (all->multijoueurs == 1)
-		ft_error(all, "Plus d'un joueur\n");
+		ft_error(all, 1, "Plus d'un joueur\n");
 	if (all->lignevide == 1)
-		ft_error(all, "Ligne vide dans la map\n");
+		ft_error(all, 1, "Ligne vide dans la map\n");
 	if (all->wrongcharmap == 2)
-		ft_error(all, "Caractere incorrect dans la map\n");
+		ft_error(all, 1, "Caractere incorrect dans la map\n");
 }
 
 void	ft_error2(t_all *all)
@@ -31,13 +31,14 @@ void	ft_error2(t_all *all)
 	ft_exit(all);
 }
 
-void	ft_error(t_all *all, char *str)
+void	ft_error(t_all *all, int i, char *str)
 {
-	int i;
+	int j;
 
-	i = -1;
+	j = -1;
 	all->indicateur3 = 1;
-	write(1, "Error\n", 6);
+	if(i == 1)
+		printf("ERROR\n");
 	write(1, str, ft_strlen(str));
 	if (all->no)
 		free(all->no);
@@ -51,8 +52,8 @@ void	ft_error(t_all *all, char *str)
 		free(all->sp);
 	if (all->map)
 	{
-		while (++i < all->nblines)
-			free(all->map[i]);
+		while (++j < all->nblines)
+			free(all->map[j]);
 	}
 	ft_error2(all);
 }
@@ -60,7 +61,7 @@ void	ft_error(t_all *all, char *str)
 int		ft_exit(t_all *all)
 {
 	if (all->indicateur3 == 0)
-		ft_error(all, "Non jrigole\n");
+		ft_error(all, 0, "Quitting properly\n");
 	if (all->data.img)
 		mlx_destroy_image(all->data.mlx_ptr, all->data.img);
 	if (all->texture[0].img)

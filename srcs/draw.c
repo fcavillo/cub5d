@@ -15,7 +15,7 @@ int		ft_key_press(int keycode, t_all *all)
 	else if (keycode == ROTATE_RIGHT)
 		all->data.rotate_right = 1;
 	else if (keycode == 65307)
-		ft_error(all, "Non jrigole\n");
+		ft_error(all, 0, "Quitting properly\n");
 	return (1);
 }
 

@@ -72,11 +72,11 @@ void	ft_init_sprite(t_all *all)
 		}
 	}
 	if (!(all->sxy = (t_sprxy *)malloc(sizeof(t_sprxy) * all->s.nbspr)))
-		ft_error(all, "Malloc sxy*");
+		ft_error(all, 1, "Malloc sxy*");
 	if (!(all->s.order = (int *)malloc(sizeof(int) * all->s.nbspr)))
-		ft_error(all, "Malloc s.order*");
+		ft_error(all, 1, "Malloc s.order*");
 	if (!(all->s.dist = (double *)malloc(sizeof(double) * all->s.nbspr)))
-		ft_error(all, "Malloc s.dist*");
+		ft_error(all, 1, "Malloc s.dist*");
 	ft_init_sprite2(all, 0, 0, 0);
 	ft_mlx(all);
 }

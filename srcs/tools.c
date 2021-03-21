@@ -33,13 +33,13 @@ int		ft_charinstr(char *str, char c)
 	return (0);
 }
 
-int		ft_depart(char c, t_all *all, int i, int j)
+int		ft_start_pos(char c, t_all *all, int i, int j)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		if (all->depart != 'x')
+		if (all->start_pos != 'x')
 			all->multijoueurs = 1;
-		all->depart = c;
+		all->start_pos = c;
 		all->dx = i;
 		all->dy = j;
 		return (1);
