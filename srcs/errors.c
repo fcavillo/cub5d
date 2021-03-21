@@ -3,17 +3,17 @@
 void	ft_verify_errors(t_all *all)
 {
 	if (ft_murs(all) == 1)
-		ft_error(all, 1, "Map non entouree de 1\n");
+		ft_error(all, 1, "Map should be surrounded by 1\n");
 	if (all->start_pos == 'x')
-		ft_error(all, 1, "Pas de joueur\n");
+		ft_error(all, 1, "No spawn point\n");
 	if (all->indicateur2 != 6)
-		ft_error(all, 1, "Mauvaises donnees F ou C\n");
+		ft_error(all, 1, "Wrong C or F color\n");
 	if (all->multijoueurs == 1)
-		ft_error(all, 1, "Plus d'un joueur\n");
+		ft_error(all, 1, "Too many spawn points\n");
 	if (all->lignevide == 1)
-		ft_error(all, 1, "Ligne vide dans la map\n");
+		ft_error(all, 1, "Empty line inside the Map\n");
 	if (all->wrongcharmap == 2)
-		ft_error(all, 1, "Caractere incorrect dans la map\n");
+		ft_error(all, 1, "Incorrect char in Map\n");
 }
 
 void	ft_error2(t_all *all)
@@ -38,8 +38,8 @@ void	ft_error(t_all *all, int i, char *str)
 	j = -1;
 	all->indicateur3 = 1;
 	if(i == 1)
-		printf("ERROR\n");
-	write(1, str, ft_strlen(str));
+		printf("%sERROR\n", RED);
+	printf("%s\n", str);
 	if (all->no)
 		free(all->no);
 	if (all->so)

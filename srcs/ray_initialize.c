@@ -38,20 +38,20 @@ void	ft_initialisation3(t_all *all)
 void	ft_init_texture(t_all *all)
 {
 	if (all->ray.side == 0 && all->ray.raydirx < 0)
-		all->t.texdir = 0;
+		all->tex.texdir = 0;
 	if (all->ray.side == 0 && all->ray.raydirx >= 0)
-		all->t.texdir = 1;
+		all->tex.texdir = 1;
 	if (all->ray.side == 1 && all->ray.raydiry < 0)
-		all->t.texdir = 2;
+		all->tex.texdir = 2;
 	if (all->ray.side == 1 && all->ray.raydiry >= 0)
-		all->t.texdir = 3;
+		all->tex.texdir = 3;
 	if (all->ray.side == 0)
-		all->t.wallx = all->ray.posy + all->ray.perpwalldist \
+		all->tex.wallx = all->ray.posy + all->ray.perpwalldist \
 						* all->ray.raydiry;
 	else
-		all->t.wallx = all->ray.posx + all->ray.perpwalldist \
+		all->tex.wallx = all->ray.posx + all->ray.perpwalldist \
 						* all->ray.raydirx;
-	all->t.wallx -= floor((all->t.wallx));
+	all->tex.wallx -= floor((all->tex.wallx));
 }
 
 void	ft_init_sprite(t_all *all)
@@ -71,12 +71,12 @@ void	ft_init_sprite(t_all *all)
 				all->s.nbspr += 1;
 		}
 	}
-	if (!(all->sxy = (t_sprxy *)malloc(sizeof(t_sprxy) * all->s.nbspr)))
-		ft_error(all, 1, "Malloc sxy*");
+	if (!(all->sxy = (t_spr_coo *)malloc(sizeof(t_spr_coo) * all->s.nbspr)))
+		ft_error(all, 1, "Failing to malloc the Sprite coordinates*");
 	if (!(all->s.order = (int *)malloc(sizeof(int) * all->s.nbspr)))
-		ft_error(all, 1, "Malloc s.order*");
+		ft_error(all, 1, "Failing to malloc Sprite orders");
 	if (!(all->s.dist = (double *)malloc(sizeof(double) * all->s.nbspr)))
-		ft_error(all, 1, "Malloc s.dist*");
+		ft_error(all, 1, "Failing to malloc Sprite distance*");
 	ft_init_sprite2(all, 0, 0, 0);
 	ft_mlx(all);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:45:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/18 10:04:46 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:17:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void    ft_parse(char *mapname, t_all *all)
     ret = 1;
     line = NULL;
     if ((fd = open(mapname, O_DIRECTORY)) != -1)
-        return (ft_error(all, "Argv2 is a directory\n"));
+        return (ft_error(all, "Argument is a directory\n"));
     else if ((fd = open(mapname, O_RDONLY)) == -1)
         return (ft_error(all, "Invalid .cub file\n"));
     all->err = 0;

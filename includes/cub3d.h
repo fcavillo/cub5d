@@ -1,29 +1,34 @@
 #ifndef _CUB3D_H
 # define _CUB3D_H
 
-# include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
+# include <stdlib.h>
 # include <string.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <mlx.h>
 # include <math.h>
-# include "../minilibx-linux/mlx.h"
 
-# define ROTATE_LEFT	65361
-# define ROTATE_RIGHT	65363
-# define FORWARD_W_Z	119
-# define BACK_S_S		115
-# define RIGHT_D_D		100
-# define LEFT_A_Q		97
-# define BUFFER_SIZE	4096
+#define RED "\x1B[31m"
+#define GRN  "\x1B[32m"
+#define YEL  "\x1B[33m"
+#define BLU  "\x1B[34m"
+#define MAG  "\x1B[35m"
+#define BUFFER_SIZE	4096
+#define KEY_ESCAPE 65307
+#define KEY_ROTATE_LEFT 65361
+#define KEY_ROTATE_RIGHT 65363
+#define KEY_FORWARD 119
+#define KEY_BACK 115
+#define KEY_RIGHT 100
+#define KEY_LEFT 97
 
-typedef struct		s_sprxy
+typedef struct		s_spr_coo
 {
 	double			x;
 	double			y;
-}					t_sprxy;
+}					t_spr_coo;
 
 typedef struct		s_sprite
 {
@@ -144,14 +149,14 @@ typedef struct		s_all
 	t_data			texture[5];
 	t_data			data;
 	t_ray			ray;
-	t_texture		t;
+	t_texture		tex;
 	t_sprite		s;
-	t_sprxy			*sxy;
+	t_spr_coo			*sxy;
 }					t_all;
 
 int					ft_cub(char *str, t_all *all);
-void				ft_parsing(char *fichier, t_all *all);
-int					ft_parsing_map(char *fichier, t_all *all);
+void				ft_parsing(char *filename, t_all *all);
+int					ft_parsing_map(char *filename, t_all *all);
 void				ft_imprime_map(t_all *all);
 int					ft_strlen2(char *str);
 int					ft_charinstr(char *str, char c);
@@ -171,8 +176,8 @@ int					ft_copy_map(char *str, t_all *all);
 void				ft_init_sprite(t_all *all);
 int					ft_raycasting(t_all *all);
 int					ft_mlx(t_all *all);
-int					ft_key_press(int keycode, t_all *all);
-int					ft_key_release(int keycode, t_all *all);
+int					ft_key_press(int key, t_all *all);
+int					ft_key_release(int key, t_all *all);
 int					ft_color_column(t_all *all);
 void				ft_draw_texture(t_all *all, int x, int y);
 void				ft_initialisation2(t_all *all);

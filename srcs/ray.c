@@ -24,23 +24,23 @@ void	ft_get_texture(t_all *all)
 	if (!(all->texture[0].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->no, &(all->texture[0].width),
 					&(all->texture[0].height))))
-		ft_error(all, 1, "Texture SO\n");
+		ft_error(all, 1, "Invalid SO Texture\n");
 	if (!(all->texture[1].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->so, &(all->texture[1].width),
 					&(all->texture[1].height))))
-		ft_error(all, 1, "Texture NO\n");
+		ft_error(all, 1, "Invalid NO Texture\n");
 	if (!(all->texture[2].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->we, &(all->texture[2].width),
 					&(all->texture[2].height))))
-		ft_error(all, 1, "Texture EA\n");
+		ft_error(all, 1, "Invalid EA Texture\n");
 	if (!(all->texture[3].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->ea, &(all->texture[3].width),
 					&(all->texture[3].height))))
-		ft_error(all, 1, "Texture WE\n");
+		ft_error(all, 1, "Invalid WE Texture\n");
 	if (!(all->texture[4].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->sp, &(all->texture[4].width),
 					&(all->texture[4].height))))
-		ft_error(all, 1, "Texture S\n");
+		ft_error(all, 1, "Invalid SO\n");
 	ft_get_texture_adress(all);
 }
 
@@ -55,7 +55,7 @@ int		ft_raycasting(t_all *all)
 		all->s.zbuffer[all->ray.x] = all->ray.perpwalldist;
 		all->ray.x++;
 	}
-	ft_sprite(all);
+	//ft_sprite(all);
 	if (all->save == 1)
 		ft_save(all);
 	mlx_put_image_to_window(all->data.mlx_ptr, all->data.mlx_win,
@@ -71,7 +71,7 @@ int		ft_mlx(t_all *all)
 {
 	ft_initialisation2(all);
 	if (!(all->data.mlx_ptr = mlx_init()))
-		ft_error(all, 1, "Mlx init impossible\n");
+		ft_error(all, 1, "Mlx initialization impossible\n");
 	mlx_get_screen_size(all->data.mlx_ptr, &all->screenx, &all->screeny);
 	all->rx = (all->rx > all->screenx) ? all->screenx : all->rx;
 	all->ry = (all->ry > all->screeny) ? all->screeny : all->ry;

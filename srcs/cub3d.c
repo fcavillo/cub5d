@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-int		ft_parsing_map(char *fichier, t_all *all)
+int		ft_parsing_map(char *filename, t_all *all)
 {
 	int			fd;
 	int			ret;
@@ -8,7 +8,7 @@ int		ft_parsing_map(char *fichier, t_all *all)
 
 	ret = 1;
 	str = NULL;
-	fd = open(fichier, O_RDONLY);
+	fd = open(filename, O_RDONLY);
 	if (!(all->map = malloc(sizeof(char*) * all->nblines)))
 		return (0);
 	while (ret != 0)
@@ -29,7 +29,7 @@ int		ft_parsing_map(char *fichier, t_all *all)
 	return (0);
 }
 
-void	ft_parsing(char *fichier, t_all *all)
+void	ft_parsing(char *filename, t_all *all)
 {
 	int			fd;
 	int			ret;
@@ -37,16 +37,16 @@ void	ft_parsing(char *fichier, t_all *all)
 
 	ret = 1;
 	str = NULL;
-	if ((fd = open(fichier, O_DIRECTORY)) != -1)
-		ft_error(all, 1, "Invalide : is a directory\n");
-	if ((fd = open(fichier, O_RDONLY)) == -1)
-		ft_error(all, 1, "Fichier .cub invalide\n");
+	if ((fd = open(filename, O_DIRECTORY)) != -1)
+		ft_error(all, 1, "Argument is a directory\n");
+	if ((fd = open(filename, O_RDONLY)) == -1)
+		ft_error(all, 1, "Invalid .cub file\n");
 	all->erreur = 0;
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str, all);
 		if (all->erreur == 2)
-			ft_error(all, 1, "La partie parsing detecte une erreur\n");
+			ft_error(all, 1, "Parsing error\n");
 		ft_color_resolution(&str, all);
 		ft_texture(str, all);
 		ft_map(str, all);
@@ -54,8 +54,8 @@ void	ft_parsing(char *fichier, t_all *all)
 	}
 	close(fd);
 	if (all->sizeline == 0 || all->nblines == 0)
-		ft_error(all, 1, "Map absente\n");
-	ft_parsing_map(fichier, all);
+		ft_error(all, 1, "No Map\n");
+	ft_parsing_map(filename, all);
 }
 
 int		ft_cub(char *str, t_all *all)
@@ -70,14 +70,14 @@ int		ft_cub(char *str, t_all *all)
 		i--;
 		if (i == 0)
 		{
-			ft_error(all, 1, "Nom de la map invalide\n");
+			ft_error(all, 1, "Invalid Map Name\n");
 			return (0);
 		}
 	}
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
 		ft_parsing(str, all);
 	else
-		ft_error(all, 1, "Nom de la map invalide\n");
+		ft_error(all, 1, "Invalid Map Name\n");
 	return (0);
 }
 
@@ -94,5 +94,5 @@ int		main(int argc, char **argv)
 		ft_cub(argv[1], &all);
 	}
 	else
-		write(1, "Error\nArguments invalides\n", 30);
+		printf("%sERROR\nInvalid Arguments.\n", RED);
 }

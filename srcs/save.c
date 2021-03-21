@@ -36,7 +36,7 @@ void	ft_save(t_all *all)
 
 	y = all->ry;
 	if ((fd = open("./image.bmp", O_CREAT | O_RDWR)) == -1)
-		ft_error(all, 1, "Impossible de creer .bmp\n");
+		ft_error(all, 1, "Failing to create .bmp\n");
 	ft_header(all, fd);
 	while (y >= 0)
 	{
