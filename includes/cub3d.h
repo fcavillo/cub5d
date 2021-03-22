@@ -135,7 +135,7 @@ typedef struct		s_all
 	int				dy;
 	int				indicateur;
 	int				indicateur2;
-	int				indicateur3;
+	int				errored; //passed through errors ?
 	int				save;
 	int				screenx;
 	int				screeny;
@@ -192,7 +192,7 @@ void				ft_forward_back(t_all *all);
 void				ft_left_right(t_all *all);
 void				ft_rotate_right_left(t_all *all);
 void				ft_error(t_all *all, int i, char *str);
-int					ft_exit(t_all *all);
+int					ft_free_mlx(t_all *all);
 void				ft_verify_errors(t_all *all);
 void				ft_header(t_all *all, int fd);
 void				ft_save(t_all *all);

@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 11:05:28 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 12:14:35 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_init2(t_all *all)
 {
 	all->start_pos = 'x';
 	all->indicateur2 = 0;
-	all->indicateur3 = 0;
+	all->errored = 0;
 	all->data.img = NULL;
 	all->texture[0].img = NULL;
 	all->texture[1].img = NULL;

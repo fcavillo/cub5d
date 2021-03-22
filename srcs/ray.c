@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 10:14:21 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 12:17:59 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		ft_mlx(t_all *all)
 	all->data.img2 = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr2 = (int *)mlx_get_data_addr(all->data.img2, &all->
 			data.bits_per_pixel, &all->data.line_length, &all->data.endian);
-	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_exit, all);
+	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_free_mlx, all);
 	mlx_hook(all->data.mlx_win, 2, 1L << 0, ft_press_key, all);
 	mlx_loop_hook(all->data.mlx_ptr, ft_raycasting, all);
 	mlx_hook(all->data.mlx_win, 3, 1L << 1, ft_release_key, all);

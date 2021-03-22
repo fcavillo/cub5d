@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:37 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 09:10:38 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 12:17:47 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_error2(t_all *all)
 		free(all->sxy);
 	if (all->s.zbuffer)
 		free(all->s.zbuffer);
-	ft_exit(all);
+	ft_free_mlx(all);
 }
 
 void	ft_error(t_all *all, int i, char *str)
@@ -48,7 +48,7 @@ void	ft_error(t_all *all, int i, char *str)
 	int j;
 
 	j = -1;
-	all->indicateur3 = 1;
+	all->errored = 1;
 	if(i == 1)
 		printf("%sERROR\n", RED);
 	printf("%s\n", str);
@@ -70,9 +70,9 @@ void	ft_error(t_all *all, int i, char *str)
 	ft_error2(all);
 }
 
-int		ft_exit(t_all *all)
+int		ft_free_mlx(t_all *all)
 {
-	if (all->indicateur3 == 0)
+	if (all->errored == 0)
 		ft_error(all, 0, "Quitting properly\n");
 	if (all->data.img)
 		mlx_destroy_image(all->data.mlx_ptr, all->data.img);

@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 11:17:58 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 12:26:46 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,24 @@ void	ft_parse(char *filename, t_all *all)
 	int			ret;
 	char		*line;
 
-	ret = 1;
 	line = NULL;
+	ret = 1;
 	if ((fd = open(filename, O_DIRECTORY)) != -1)
 		ft_error(all, 1, "Argument is a directory\n");
 	if ((fd = open(filename, O_RDONLY)) == -1)
 		ft_error(all, 1, "Invalid .cub file\n");
 	all->err = 0;
-	while (ret != 0)
+	while (ret != 0 && all->err != 2)
 	{
 		ret = get_next_line(fd, &line, all);
-		if (all->err == 2)
-			ft_error(all, 1, "Parsing error\n");
 		ft_color_resolution(&line, all);
 		ft_texture(line, all);
 		ft_map(line, all);
 		free(line);
 	}
 	close(fd);
+	if (all->err == 2)
+		ft_error(all, 1, "Parsing error\n");
 	if (all->sizeline == 0 || all->nblines == 0)
 		ft_error(all, 1, "No Map\n");
 	ft_parsing_map(filename, all);
