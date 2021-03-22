@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:10:37 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 09:10:38 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h" 
 
 void	ft_verify_errors(t_all *all)
@@ -8,9 +20,9 @@ void	ft_verify_errors(t_all *all)
 		ft_error(all, 1, "No spawn point\n");
 	if (all->indicateur2 != 6)
 		ft_error(all, 1, "Wrong C or F color\n");
-	if (all->multijoueurs == 1)
+	if (all->spawn_nb == 1)
 		ft_error(all, 1, "Too many spawn points\n");
-	if (all->lignevide == 1)
+	if (all->emptyline == 1)
 		ft_error(all, 1, "Empty line inside the Map\n");
 	if (all->wrongcharmap == 2)
 		ft_error(all, 1, "Incorrect char in Map\n");

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:11:28 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 09:11:29 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_dist_order2(t_all *all)
@@ -50,22 +62,22 @@ void	ft_calculs(t_all *all, int i)
 			all->s.spritex - all->ray.dirx * all->s.spritey);
 	all->s.transformy = all->s.invdet * (-all->ray.plany *
 			all->s.spritex + all->ray.planx * all->s.spritey);
-	all->s.spritescreenx = (int)((all->rx / 2) * (1 + all->s.transformx
+	all->s.spritescreenx = (int)((all->resx / 2) * (1 + all->s.transformx
 				/ all->s.transformy));
-	all->s.spriteheight = abs((int)(all->ry / (all->s.transformy)));
-	all->s.drawstarty = -all->s.spriteheight / 2 + all->ry / 2;
+	all->s.spriteheight = abs((int)(all->resy / (all->s.transformy)));
+	all->s.drawstarty = -all->s.spriteheight / 2 + all->resy / 2;
 	if (all->s.drawstarty < 0)
 		all->s.drawstarty = 0;
-	all->s.drawendy = all->s.spriteheight / 2 + all->ry / 2;
-	if (all->s.drawendy >= all->ry)
-		all->s.drawendy = all->ry;
-	all->s.spritewidth = abs((int)(all->ry / (all->s.transformy)));
+	all->s.drawendy = all->s.spriteheight / 2 + all->resy / 2;
+	if (all->s.drawendy >= all->resy)
+		all->s.drawendy = all->resy;
+	all->s.spritewidth = abs((int)(all->resy / (all->s.transformy)));
 	all->s.drawstartx = -all->s.spritewidth / 2 + all->s.spritescreenx;
 	if (all->s.drawstartx < 0)
 		all->s.drawstartx = 0;
 	all->s.drawendx = all->s.spritewidth / 2 + all->s.spritescreenx;
-	if (all->s.drawendx >= all->rx)
-		all->s.drawendx = all->rx;
+	if (all->s.drawendx >= all->resx)
+		all->s.drawendx = all->resx;
 }
 
 void	ft_draw_spr(t_all *all, int y, int texx, int stripe)
@@ -75,7 +87,7 @@ void	ft_draw_spr(t_all *all, int y, int texx, int stripe)
 
 	while (y < all->s.drawendy)
 	{
-		d = (y) * 256 - all->ry * 128 + all->s.spriteheight * 128;
+		d = (y) * 256 - all->resy * 128 + all->s.spriteheight * 128;
 		texy = ((d * all->texture[4].height) / all->s.spriteheight) / 256;
 		if (all->texture[4].addr[texy * all->texture[4].line_length / 4 +
 				texx] != -16777216)
@@ -106,7 +118,7 @@ void	ft_sprite(t_all *all)
 			texx = (int)(256 * (stripe - (-all->s.spritewidth / 2 +
 							all->s.spritescreenx)) * all->texture[4].width
 					/ all->s.spritewidth) / 256;
-			if (all->s.transformy > 0 && stripe >= 0 && stripe < all->rx
+			if (all->s.transformy > 0 && stripe >= 0 && stripe < all->resx
 					&& all->s.transformy < all->s.zbuffer[stripe])
 			{
 				y = all->s.drawstarty;

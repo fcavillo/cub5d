@@ -6,9 +6,10 @@
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
-# include <stdio.h>
+# include <sys/types.h>
 # include <mlx.h>
 # include <math.h>
+# include <sys/stat.h>
 
 #define RED "\x1B[31m"
 #define GRN  "\x1B[32m"
@@ -116,8 +117,8 @@ typedef struct		s_data
 
 typedef struct		s_all
 {
-	int				rx;
-	int				ry;
+	int				resx;
+	int				resy;
 	int				i;
 	int				f;
 	int				c;
@@ -139,8 +140,8 @@ typedef struct		s_all
 	int				screenx;
 	int				screeny;
 	int				erreur;
-	int				multijoueurs;
-	int				lignevide;
+	int				spawn_nb;
+	int				emptyline;
 	int				insidemap;
 	int				count;
 	int				count2;
@@ -168,7 +169,7 @@ int					ft_atoi3(const char *str, t_all *all);
 void				ft_texture(char *str, t_all *all);
 int					ft_path_texture(char *str, char **texture,
 						t_all *all, int j);
-void				ft_initialisation(t_all *all);
+void				ft_init(t_all *all);
 int					ft_murs(t_all *all);
 int					ft_is_map(char *str, t_all *all);
 void				ft_map(char *str, t_all *all);
@@ -176,10 +177,9 @@ int					ft_copy_map(char *str, t_all *all);
 void				ft_init_sprite(t_all *all);
 int					ft_raycasting(t_all *all);
 int					ft_mlx(t_all *all);
-int					ft_key_press(int key, t_all *all);
-int					ft_key_release(int key, t_all *all);
-int					ft_color_column(t_all *all);
-void				ft_draw_texture(t_all *all, int x, int y);
+int					ft_press_key(int key, t_all *all);
+int					ft_release_key(int key, t_all *all);
+int					ft_column_color(t_all *all);
 void				ft_initialisation2(t_all *all);
 void				ft_initialisation3(t_all *all);
 void				ft_init_texture(t_all *all);
@@ -211,7 +211,7 @@ void				ft_init_dir(t_all *all);
 void				ft_init_more3(t_all *all);
 void				ft_rotate_left(t_all *all, double olddirx);
 void				ft_atoi3_check(const char *str, t_all *all);
-int					ft_lignevide(char *str);
+int					ft_emptyline(char *str);
 int					ft_check_save(char *str);
 int					ft_nb_virgule(const char *str);
 

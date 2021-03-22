@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 10:13:48 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_init_more(t_all *all)
@@ -87,18 +99,27 @@ void	ft_atoi3_check(const char *str, t_all *all)
 		all->erreur = 2;
 }
 
-int		ft_lignevide(char *str)
+void	ft_init(t_all *all)
 {
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != '\t' && str[i] != ' ' && str[i] != '\0' &&
-				str[i] != '\n' && str[i] != '\r' && str[i] != '\v'
-				&& str[i] != '\f')
-			return (1);
-		i++;
-	}
-	return (0);
+	all->no = NULL;
+	all->so = NULL;
+	all->we = NULL;
+	all->ea = NULL;
+	all->sp = NULL;
+	all->f = -1;
+	all->c = -1;
+	all->resx = 0;
+	all->resy = 0;
+	all->nblines = 0;
+	all->sizeline = 0;
+	all->map = NULL;
+	all->dx = 0;
+	all->dy = 0;
+	all->spawn_nb = 0;
+	all->emptyline = 0;
+	all->insidemap = 0;
+	all->count = 0;
+	all->sum = 0;
+	all->wrongcharmap = 0;
+	ft_init_more(all);
 }

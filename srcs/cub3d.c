@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 09:39:26 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int		ft_parsing_map(char *filename, t_all *all)
@@ -14,9 +26,9 @@ int		ft_parsing_map(char *filename, t_all *all)
 	while (ret != 0)
 	{
 		ret = get_next_line(fd, &str, all);
-		if (all->insidemap == 1 && ft_lignevide(str) == 0 &&
+		if (all->insidemap == 1 && ft_emptyline(str) == 0 &&
 				all->count < all->nblines)
-			all->lignevide = 1;
+			all->emptyline = 1;
 		if ((all->insidemap = ft_is_map(str, all)) == 1)
 		{
 			all->count++;
@@ -81,17 +93,17 @@ int		ft_cub(char *str, t_all *all)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int		main(int ac, char **av)
 {
 	t_all all;
 
 	all.save = 0;
-	ft_initialisation(&all);
-	if (argc == 2 || (argc == 3 && ft_check_save(argv[2]) == 1))
+	ft_init(&all);
+	if (ac == 2 || (ac == 3 && ft_check_save(av[2]) == 1))
 	{
-		if (argc == 3)
+		if (ac == 3)
 			all.save = 1;
-		ft_cub(argv[1], &all);
+		ft_cub(av[1], &all);
 	}
 	else
 		printf("%sERROR\nInvalid Arguments.\n", RED);

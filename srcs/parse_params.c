@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_params.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:11:00 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 09:11:01 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int		ft_atoi2(const char *str, t_all *all)
@@ -116,16 +128,16 @@ void	ft_color_resolution(char **str, t_all *all)
 				all->we == NULL || all->ea == NULL || all->sp == NULL))
 		all->erreur = 2;
 	if ((all->no != NULL || all->so != NULL || all->we != NULL ||
-				all->ea != NULL || all->sp != NULL) && (all->rx == 0
-				|| all->ry == 0))
+				all->ea != NULL || all->sp != NULL) && (all->resx == 0
+				|| all->resy == 0))
 		all->erreur = 2;
 	if (*str[i] == 'R')
 	{
-		if (all->rx != 0 && all->ry != 0)
+		if (all->resx != 0 && all->resy != 0)
 			all->erreur = 2;
-		all->rx = ft_atoi2(*str, all);
-		all->ry = ft_atoi2(*str, all);
-		if (ft_atoi2(*str, all) > 0 || all->rx == 0 || all->ry == 0)
+		all->resx = ft_atoi2(*str, all);
+		all->resy = ft_atoi2(*str, all);
+		if (ft_atoi2(*str, all) > 0 || all->resx == 0 || all->resy == 0)
 			all->erreur = 2;
 	}
 	else if (*str[i] == 'F')

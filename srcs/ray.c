@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 10:14:21 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_get_texture_adress(t_all *all)
@@ -47,11 +59,11 @@ void	ft_get_texture(t_all *all)
 int		ft_raycasting(t_all *all)
 {
 	all->ray.x = 0;
-	while (all->ray.x < all->rx)
+	while (all->ray.x < all->resx)
 	{
 		ft_initialisation3(all);
 		ft_stepsidedist(all);
-		ft_color_column(all);
+		ft_column_color(all);
 		all->s.zbuffer[all->ray.x] = all->ray.perpwalldist;
 		all->ray.x++;
 	}
@@ -73,23 +85,23 @@ int		ft_mlx(t_all *all)
 	if (!(all->data.mlx_ptr = mlx_init()))
 		ft_error(all, 1, "Mlx initialization impossible\n");
 	mlx_get_screen_size(all->data.mlx_ptr, &all->screenx, &all->screeny);
-	all->rx = (all->rx > all->screenx) ? all->screenx : all->rx;
-	all->ry = (all->ry > all->screeny) ? all->screeny : all->ry;
+	all->resx = (all->resx > all->screenx) ? all->screenx : all->resx;
+	all->resy = (all->resy > all->screeny) ? all->screeny : all->resy;
 	ft_get_texture(all);
-	all->data.img = mlx_new_image(all->data.mlx_ptr, all->rx, all->ry);
+	all->data.img = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr = (int *)mlx_get_data_addr(all->data.img, &all->data.
 			bits_per_pixel, &all->data.line_length, &all->data.endian);
 	if (all->save == 1)
 		ft_raycasting(all);
-	all->data.mlx_win = mlx_new_window(all->data.mlx_ptr, all->rx,
-			all->ry, "Hello world!");
-	all->data.img2 = mlx_new_image(all->data.mlx_ptr, all->rx, all->ry);
+	all->data.mlx_win = mlx_new_window(all->data.mlx_ptr, all->resx,
+			all->resy, "Hello world!");
+	all->data.img2 = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr2 = (int *)mlx_get_data_addr(all->data.img2, &all->
 			data.bits_per_pixel, &all->data.line_length, &all->data.endian);
 	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_exit, all);
-	mlx_hook(all->data.mlx_win, 2, 1L << 0, ft_key_press, all);
+	mlx_hook(all->data.mlx_win, 2, 1L << 0, ft_press_key, all);
 	mlx_loop_hook(all->data.mlx_ptr, ft_raycasting, all);
-	mlx_hook(all->data.mlx_win, 3, 1L << 1, ft_key_release, all);
+	mlx_hook(all->data.mlx_win, 3, 1L << 1, ft_release_key, all);
 	mlx_loop(all->data.mlx_ptr);
 	return (0);
 }

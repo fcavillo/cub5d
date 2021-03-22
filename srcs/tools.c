@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:11:32 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 09:55:01 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int		ft_strlen2(char *str)
@@ -38,7 +50,7 @@ int		ft_start_pos(char c, t_all *all, int i, int j)
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
 		if (all->start_pos != 'x')
-			all->multijoueurs = 1;
+			all->spawn_nb = 1;
 		all->start_pos = c;
 		all->dx = i;
 		all->dy = j;
@@ -61,27 +73,18 @@ int		ft_murs_util(char *str)
 	return (0);
 }
 
-void	ft_initialisation(t_all *all)
+int		ft_emptyline(char *str)
 {
-	all->no = NULL;
-	all->so = NULL;
-	all->we = NULL;
-	all->ea = NULL;
-	all->sp = NULL;
-	all->f = -1;
-	all->c = -1;
-	all->rx = 0;
-	all->ry = 0;
-	all->nblines = 0;
-	all->sizeline = 0;
-	all->map = NULL;
-	all->dx = 0;
-	all->dy = 0;
-	all->multijoueurs = 0;
-	all->lignevide = 0;
-	all->insidemap = 0;
-	all->count = 0;
-	all->sum = 0;
-	all->wrongcharmap = 0;
-	ft_init_more(all);
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '\t' && str[i] != ' ' && str[i] != '\0' &&
+				str[i] != '\n' && str[i] != '\r' && str[i] != '\v'
+				&& str[i] != '\f')
+			return (1);
+		i++;
+	}
+	return (0);
 }

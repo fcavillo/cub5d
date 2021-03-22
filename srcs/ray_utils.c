@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:11:12 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 09:11:13 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_stepsidedist(t_all *all)
@@ -61,13 +73,13 @@ void	ft_drawstartend(t_all *all)
 		all->ray.perpwalldist = ((double)all->ray.mapy - \
 				all->ray.posy + (1 - (double)all->ray.
 				stepy) / 2) / all->ray.raydiry;
-	all->ray.lineheight = (int)(all->ry / all->ray.perpwalldist);
-	all->ray.drawstart = -all->ray.lineheight / 2 + all->ry / 2;
+	all->ray.lineheight = (int)(all->resy / all->ray.perpwalldist);
+	all->ray.drawstart = -all->ray.lineheight / 2 + all->resy / 2;
 	if (all->ray.drawstart < 0)
 		all->ray.drawstart = 0;
-	all->ray.drawend = all->ray.lineheight / 2 + all->ry / 2;
-	if (all->ray.drawend >= all->ry || all->ray.drawend < 0)
-		all->ray.drawend = all->ry - 1;
+	all->ray.drawend = all->ray.lineheight / 2 + all->resy / 2;
+	if (all->ray.drawend >= all->resy || all->ray.drawend < 0)
+		all->ray.drawend = all->resy - 1;
 }
 
 void	ft_swap(t_all *all)

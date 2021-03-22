@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   save.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:11:24 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 09:11:25 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_header(t_all *all, int fd)
@@ -5,7 +17,7 @@ void	ft_header(t_all *all, int fd)
 	int	tmp;
 
 	write(fd, "BM", 2);
-	tmp = 14 + 40 + 4 * all->rx * all->ry;
+	tmp = 14 + 40 + 4 * all->resx * all->resy;
 	write(fd, &tmp, 4);
 	tmp = 0;
 	write(fd, &tmp, 2);
@@ -14,8 +26,8 @@ void	ft_header(t_all *all, int fd)
 	write(fd, &tmp, 4);
 	tmp = 40;
 	write(fd, &tmp, 4);
-	write(fd, &all->rx, 4);
-	write(fd, &all->ry, 4);
+	write(fd, &all->resx, 4);
+	write(fd, &all->resy, 4);
 	tmp = 1;
 	write(fd, &tmp, 2);
 	write(fd, &all->data.bits_per_pixel, 2);
@@ -34,14 +46,14 @@ void	ft_save(t_all *all)
 	int	x;
 	int	y;
 
-	y = all->ry;
+	y = all->resy;
 	if ((fd = open("./image.bmp", O_CREAT | O_RDWR)) == -1)
 		ft_error(all, 1, "Failing to create .bmp\n");
 	ft_header(all, fd);
 	while (y >= 0)
 	{
 		x = 0;
-		while (x < all->rx)
+		while (x < all->resx)
 		{
 			write(fd, &all->data.addr[y * all->data.line_length / 4 + x],
 				4);

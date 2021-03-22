@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_initialize.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
+/*   Updated: 2021/03/22 10:14:01 by fcavillo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	ft_initialisation2(t_all *all)
 {
-	if (!(all->s.zbuffer = (double *)malloc(sizeof(double) * all->rx)))
+	if (!(all->s.zbuffer = (double *)malloc(sizeof(double) * all->resx)))
 		exit(0);
 	all->data.forward = 0;
 	all->data.back = 0;
@@ -23,7 +35,7 @@ void	ft_initialisation3(t_all *all)
 {
 	all->ray.hit = 0;
 	all->ray.perpwalldist = 0;
-	all->ray.camerax = 2 * all->ray.x / (double)all->rx - 1;
+	all->ray.camerax = 2 * all->ray.x / (double)all->resx - 1;
 	all->ray.raydirx = all->ray.dirx + all->ray.planx * \
 						all->ray.camerax;
 	all->ray.raydiry = all->ray.diry + all->ray.plany * \
