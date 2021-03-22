@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 09:45:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/21 17:17:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/22 11:03:54 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int     ft_start(char *str, t_all *all)
         i++;
     if (i > 4 && str[i - 1] == 'b' && str[i - 2] == 'u' && str[i - 3] == 'c'
         && str[i - 4] == '.')
-        ft_parse(str, all); 
+        ft_parsing(str, all); 
     else
-        ft_error(all, "Invalid Map Name\n");
+        ft_error(all, 1, "Invalid Map Name\n");
     return (0);
     }
 

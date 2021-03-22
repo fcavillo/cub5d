@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:44 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 09:10:45 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:05:23 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		ft_eof(int ret, char **buff, char **line)
 
 int		ft_free_buff(char **buff, t_all *all)
 {
-	if (all->erreur == 2 && *buff)
+	if (all->err == 2 && *buff)
 	{
 		free(*buff);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 09:11:25 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 10:57:44 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,16 @@ void	ft_save(t_all *all)
 	ft_error(all, 0, "Quitting properly after saving bmp\n");
 }
 
-int		ft_check_save(char *str)
+int     ft_check_save(char *str)
 {
-	int	i;
+    int i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	if (str[i - 1] == 'e' && str[i - 2] == 'v' && str[i - 3] == 'a' &&
-		str[i - 4] == 's' && str[i - 5] == '-' && str[i - 6] == '-'
-		&& ft_strlen(str) < 7)
-		return (1);
-	else
-		return (0);
+    i = 0;
+    if (str[0] == '-' && str[1] == '-' && str[2] == 's' && str[3] == 'a'
+        && str[4] == 'v' && str[5] == 'e' && str[6] == '\0'
+        && ft_strlen(str) == 6)
+        return (1);
+    return (0);
 }
 
 int		ft_nb_virgule(const char *str)

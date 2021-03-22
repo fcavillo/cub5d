@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:57 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 09:10:58 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:05:34 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_map(char *str, t_all *all)
 		if (all->f == -1 || all->c == -1 || all->no == NULL ||
 				all->so == NULL || all->we == NULL ||
 				all->ea == NULL || all->sp == NULL)
-			all->erreur = 2;
+			all->err = 2;
 		if ((i = ft_strlen(str)) > ssizeline)
 			ssizeline = i;
 		snblines = snblines + 1;

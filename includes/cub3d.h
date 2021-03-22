@@ -139,7 +139,7 @@ typedef struct		s_all
 	int				save;
 	int				screenx;
 	int				screeny;
-	int				erreur;
+	int				err;
 	int				spawn_nb;
 	int				emptyline;
 	int				insidemap;
@@ -155,8 +155,8 @@ typedef struct		s_all
 	t_spr_coo			*sxy;
 }					t_all;
 
-int					ft_cub(char *str, t_all *all);
-void				ft_parsing(char *filename, t_all *all);
+int					ft_start(char *str, t_all *all);
+void				ft_parse(char *filename, t_all *all);
 int					ft_parsing_map(char *filename, t_all *all);
 void				ft_imprime_map(t_all *all);
 int					ft_strlen2(char *str);
@@ -201,7 +201,7 @@ int					ft_minimap(t_all *all);
 void				my_color_cube(t_data *data, int x, int y, int color);
 void				my_color_perso(t_data *data, int x, int y, int color);
 void				ft_hitpoints(t_all *all);
-void				ft_init_more(t_all *all);
+void				ft_init2(t_all *all);
 int					get_next_line(int fd, char **line, t_all *all);
 int					ft_strlen(char *str);
 char				*ft_strjoin(char *s1, char *s2);

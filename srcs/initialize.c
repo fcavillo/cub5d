@@ -6,13 +6,13 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 10:13:48 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:05:28 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_init_more(t_all *all)
+void	ft_init2(t_all *all)
 {
 	all->start_pos = 'x';
 	all->indicateur2 = 0;
@@ -94,9 +94,9 @@ void	ft_atoi3_check(const char *str, t_all *all)
 		i++;
 	}
 	if (j != 2)
-		all->erreur = 2;
+		all->err = 2;
 	if (ft_nb_virgule(str) != 2)
-		all->erreur = 2;
+		all->err = 2;
 }
 
 void	ft_init(t_all *all)
@@ -121,5 +121,5 @@ void	ft_init(t_all *all)
 	all->count = 0;
 	all->sum = 0;
 	all->wrongcharmap = 0;
-	ft_init_more(all);
+	ft_init2(all);
 }

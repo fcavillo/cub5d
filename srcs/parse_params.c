@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:00 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 09:11:01 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:06:17 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int		ft_atoi2(const char *str, t_all *all)
 
 	sum = 0;
 	if (str[1] != ' ' || ft_charinstr((char *)str, ',') == 1)
-		all->erreur = 2;
+		all->err = 2;
 	while (str[all->i] == ' ' || str[all->i] == '\t'
 			|| str[all->i] == ',' || str[all->i] == '\n'
 			|| str[all->i] == '\r' || str[all->i] == '\v'
 			|| str[all->i] == '\f')
 		all->i++;
 	if (str[all->i] == '-' || str[all->i] == '+')
-		all->erreur = 2;
+		all->err = 2;
 	while (str[all->i] >= '0' && str[all->i] <= '9')
 	{
 		if (sum > 21474636)
@@ -44,7 +44,7 @@ int		ft_atoi3(const char *str, t_all *all)
 
 	verify = 0;
 	if (str[1] != ' ')
-		all->erreur = 2;
+		all->err = 2;
 	ft_atoi3_check(str, all);
 	while (str[all->i] == ' ' || str[all->i] == '\t' || str[all->i]
 			== ',' || str[all->i] == '\n' || str[all->i] == '\r'
@@ -61,7 +61,7 @@ int		ft_atoi3(const char *str, t_all *all)
 			all->i++;
 		}
 		if (verify > 255 || verify < 0)
-			all->erreur = 2;
+			all->err = 2;
 	}
 	return (all->sum);
 }
@@ -71,20 +71,20 @@ int		ft_path_texture(char *str, char **texture, t_all *all, int j)
 	all->count2 = 0;
 	if (*texture != NULL)
 	{
-		all->erreur = 2;
+		all->err = 2;
 		return (0);
 	}
 	if (ft_charinstr(str, '.') == 0 || ft_charinstr(str, '/') == 0
 			|| ft_strlen2(str) <= 2)
-		all->erreur = 2;
+		all->err = 2;
 	while (str[j] != '.')
 	{
 		if (str[j] != ' ' && str[j] != '.')
-			all->erreur = 2;
+			all->err = 2;
 		j++;
 	}
 	if (!(*texture = (char *)(malloc(sizeof(char) * (ft_strlen2(str) + 1)))))
-		all->erreur = 2;
+		all->err = 2;
 	while (str[j] != '\0')
 	{
 		(*texture)[all->count2] = str[j];
@@ -114,7 +114,7 @@ void	ft_texture(char *str, t_all *all)
 	else if (str[0] != 'N' && str[0] != 'S' && str[0] != 'W' && str[0] != 'E'
 			&& str[0] != 'R' && str[0] != 'F' && str[0] != 'C'
 			&& str[0] > 65 && str[0] < 122)
-		all->erreur = 2;
+		all->err = 2;
 	j++;
 }
 
@@ -126,19 +126,19 @@ void	ft_color_resolution(char **str, t_all *all)
 	all->i = 1;
 	if (all->sizeline > 0 && (all->no == NULL || all->so == NULL ||
 				all->we == NULL || all->ea == NULL || all->sp == NULL))
-		all->erreur = 2;
+		all->err = 2;
 	if ((all->no != NULL || all->so != NULL || all->we != NULL ||
 				all->ea != NULL || all->sp != NULL) && (all->resx == 0
 				|| all->resy == 0))
-		all->erreur = 2;
+		all->err = 2;
 	if (*str[i] == 'R')
 	{
 		if (all->resx != 0 && all->resy != 0)
-			all->erreur = 2;
+			all->err = 2;
 		all->resx = ft_atoi2(*str, all);
 		all->resy = ft_atoi2(*str, all);
 		if (ft_atoi2(*str, all) > 0 || all->resx == 0 || all->resy == 0)
-			all->erreur = 2;
+			all->err = 2;
 	}
 	else if (*str[i] == 'F')
 		all->f = ft_atoi3(*str, all);

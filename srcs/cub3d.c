@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 09:39:26 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/22 11:17:58 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,28 @@ int		ft_parsing_map(char *filename, t_all *all)
 	return (0);
 }
 
-void	ft_parsing(char *filename, t_all *all)
+void	ft_parse(char *filename, t_all *all)
 {
 	int			fd;
 	int			ret;
-	char		*str;
+	char		*line;
 
 	ret = 1;
-	str = NULL;
+	line = NULL;
 	if ((fd = open(filename, O_DIRECTORY)) != -1)
 		ft_error(all, 1, "Argument is a directory\n");
 	if ((fd = open(filename, O_RDONLY)) == -1)
 		ft_error(all, 1, "Invalid .cub file\n");
-	all->erreur = 0;
+	all->err = 0;
 	while (ret != 0)
 	{
-		ret = get_next_line(fd, &str, all);
-		if (all->erreur == 2)
+		ret = get_next_line(fd, &line, all);
+		if (all->err == 2)
 			ft_error(all, 1, "Parsing error\n");
-		ft_color_resolution(&str, all);
-		ft_texture(str, all);
-		ft_map(str, all);
-		free(str);
+		ft_color_resolution(&line, all);
+		ft_texture(line, all);
+		ft_map(line, all);
+		free(line);
 	}
 	close(fd);
 	if (all->sizeline == 0 || all->nblines == 0)
@@ -70,27 +70,19 @@ void	ft_parsing(char *filename, t_all *all)
 	ft_parsing_map(filename, all);
 }
 
-int		ft_cub(char *str, t_all *all)
+int		ft_start(char *str, t_all *all)
 {
 	int			i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 		i++;
-	while (str[i] != '.')
-	{
-		i--;
-		if (i == 0)
-		{
-			ft_error(all, 1, "Invalid Map Name\n");
-			return (0);
-		}
-	}
-	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b')
-		ft_parsing(str, all);
-	else
-		ft_error(all, 1, "Invalid Map Name\n");
-	return (0);
+	if (i > 4 && str[i - 1] == 'b' && str[i - 2] == 'u' && str[i - 3] == 'c'
+        && str[i - 4] == '.')
+        ft_parse(str, all); 
+    else
+        ft_error(all, 1, "Invalid Map Name\n");
+    return (0);
 }
 
 int		main(int ac, char **av)
@@ -103,7 +95,7 @@ int		main(int ac, char **av)
 	{
 		if (ac == 3)
 			all.save = 1;
-		ft_cub(av[1], &all);
+		ft_start(av[1], &all);
 	}
 	else
 		printf("%sERROR\nInvalid Arguments.\n", RED);
