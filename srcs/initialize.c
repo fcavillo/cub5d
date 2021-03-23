@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/23 16:01:48 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 17:26:50 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@ void	ft_init2(t_all *all)
 void	ft_init_dir(t_all *all)
 {
 	if (all->start_pos == 'N')
-		all->ray.dirx = -1;
-	if (all->start_pos == 'S')
-		all->ray.dirx = 1;
-	if (all->start_pos == 'E')
-		all->ray.diry = 1;
-	if (all->start_pos == 'W')
-		all->ray.diry = -1;
-	if (all->start_pos == 'N')
 		all->ray.plany = 0.66;
 	if (all->start_pos == 'S')
 		all->ray.plany = -0.66;
@@ -49,9 +41,17 @@ void	ft_init_dir(t_all *all)
 		all->ray.planx = 0.66;
 	if (all->start_pos == 'W')
 		all->ray.planx = -0.66;
+	if (all->start_pos == 'N')
+		all->ray.dirx = -1;
+	if (all->start_pos == 'S')
+		all->ray.dirx = 1;
+	if (all->start_pos == 'E')
+		all->ray.diry = 1;
+	if (all->start_pos == 'W')
+		all->ray.diry = -1;
 }
 
-void	ft_init_more3(t_all *all)
+void	ft_ray_init_3(t_all *all)
 {
 	if (all->ray.raydiry == 0)
 		all->ray.deltadistx = 0;

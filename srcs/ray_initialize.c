@@ -6,13 +6,13 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/23 16:40:31 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 17:27:08 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_initialisation2(t_all *all)
+void	ft_ray_init(t_all *all)
 {
 	if (!(all->s.zbuffer = (double *)malloc(sizeof(double) * all->resx)))
 		exit(0);
@@ -31,7 +31,7 @@ void	ft_initialisation2(t_all *all)
 	ft_init_dir(all);
 }
 
-void	ft_initialisation3(t_all *all)
+void	ft_ray_init_2(t_all *all)
 {
 	all->ray.hit = 0;
 	all->ray.perpwalldist = 0;
@@ -44,7 +44,7 @@ void	ft_initialisation3(t_all *all)
 	all->ray.mapy = (int)all->ray.posy;
 	all->ray.movespeed = 0.1;
 	all->ray.rotspeed = 0.033 * 1.8;
-	ft_init_more3(all);
+	ft_ray_init_3(all);
 }
 
 void	ft_init_texture(t_all *all)
@@ -65,7 +65,7 @@ void	ft_init_texture(t_all *all)
 						* all->ray.raydirx;
 	all->tex.wallx -= floor((all->tex.wallx));
 }
-
+// a bouger
 void	ft_init_sprite(t_all *all)
 {
 	int i;
@@ -89,7 +89,7 @@ void	ft_init_sprite(t_all *all)
 	if (!(all->s.dist = (double *)malloc(sizeof(double) * all->s.nbspr)))
 		ft_error(all, 1, "Failing to malloc Sprite distance*");
 	ft_init_sprite2(all, 0, 0, 0);
-	ft_mlx(all);
+	ft_ray(all);
 }
 
 void	ft_init_sprite2(t_all *all, int i, int j, int v)
@@ -102,8 +102,8 @@ void	ft_init_sprite2(t_all *all, int i, int j, int v)
 		{
 			if (all->map[i][j] == '2')
 			{
-				all->sxy[v].x = (double)i + 0.5;
-				all->sxy[v].y = (double)j + 0.5;
+				all->sxy[v].x = (double)i; // + 0.5;
+				all->sxy[v].y = (double)j; // + 0.5;
 				v++;
 			}
 		}

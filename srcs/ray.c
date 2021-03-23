@@ -6,13 +6,13 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 12:17:59 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 17:28:02 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_get_texture_adress(t_all *all)
+void	ft_set_texture_addr(t_all *all)
 {
 	all->texture[0].addr = (int *)mlx_get_data_addr(all->texture[0].img,
 			&all->texture[0].bits_per_pixel,
@@ -31,43 +31,43 @@ void	ft_get_texture_adress(t_all *all)
 			&all->texture[4].line_length, &all->texture[4].endian);
 }
 
-void	ft_get_texture(t_all *all)
+void	ft_set_texture(t_all *all)
 {
 	if (!(all->texture[0].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->no, &(all->texture[0].width),
 					&(all->texture[0].height))))
-		ft_error(all, 1, "Invalid SO Texture\n");
+		ft_error(all, 1, "Invalid NO Texture\n");
 	if (!(all->texture[1].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->so, &(all->texture[1].width),
 					&(all->texture[1].height))))
-		ft_error(all, 1, "Invalid NO Texture\n");
+		ft_error(all, 1, "Invalid SO Texture\n");
 	if (!(all->texture[2].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->we, &(all->texture[2].width),
 					&(all->texture[2].height))))
-		ft_error(all, 1, "Invalid EA Texture\n");
+		ft_error(all, 1, "Invalid WE Texture\n");
 	if (!(all->texture[3].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->ea, &(all->texture[3].width),
 					&(all->texture[3].height))))
-		ft_error(all, 1, "Invalid WE Texture\n");
+		ft_error(all, 1, "Invalid EA Texture\n");
 	if (!(all->texture[4].img = mlx_xpm_file_to_image(all->data.mlx_ptr,
 					all->sp, &(all->texture[4].width),
 					&(all->texture[4].height))))
-		ft_error(all, 1, "Invalid SO\n");
-	ft_get_texture_adress(all);
+		ft_error(all, 1, "Invalid SPRITE texture\n");
+	ft_set_texture_addr(all);
 }
 
-int		ft_raycasting(t_all *all)
+int		ft_raycast(t_all *all)
 {
 	all->ray.x = 0;
 	while (all->ray.x < all->resx)
 	{
-		ft_initialisation3(all);
+		ft_ray_init_2(all);
 		ft_stepsidedist(all);
 		ft_column_color(all);
 		all->s.zbuffer[all->ray.x] = all->ray.perpwalldist;
 		all->ray.x++;
 	}
-	//ft_sprite(all);
+	ft_sprite(all);
 	if (all->save == 1)
 		ft_save(all);
 	mlx_put_image_to_window(all->data.mlx_ptr, all->data.mlx_win,
@@ -79,28 +79,37 @@ int		ft_raycasting(t_all *all)
 	return (0);
 }
 
-int		ft_mlx(t_all *all)
+void     ft_set_window_size(t_all *all)
 {
-	ft_initialisation2(all);
+    if (all->resx > all->screenx)
+        all->resx = all->screenx;    
+    if (all->resy > all->screeny)
+        all->resy = all->screeny;    
+}
+
+int		ft_ray(t_all *all)
+{
+	ft_ray_init(all);
 	if (!(all->data.mlx_ptr = mlx_init()))
 		ft_error(all, 1, "Mlx initialization impossible\n");
 	mlx_get_screen_size(all->data.mlx_ptr, &all->screenx, &all->screeny);
-	all->resx = (all->resx > all->screenx) ? all->screenx : all->resx;
-	all->resy = (all->resy > all->screeny) ? all->screeny : all->resy;
-	ft_get_texture(all);
+	ft_set_window_size(all);
+//	all->resx = (all->resx > all->screenx) ? all->screenx : all->resx;
+//	all->resy = (all->resy > all->screeny) ? all->screeny : all->resy;
+	ft_set_texture(all);
 	all->data.img = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr = (int *)mlx_get_data_addr(all->data.img, &all->data.
 			bits_per_pixel, &all->data.line_length, &all->data.endian);
-	if (all->save == 1)
-		ft_raycasting(all);
+//	if (all->save == 1) //A FAIRE
+//		ft_raycasting(all);
 	all->data.mlx_win = mlx_new_window(all->data.mlx_ptr, all->resx,
-			all->resy, "Hello world!");
+			all->resy, "Cuba");
 	all->data.img2 = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr2 = (int *)mlx_get_data_addr(all->data.img2, &all->
 			data.bits_per_pixel, &all->data.line_length, &all->data.endian);
 	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_free_mlx, all);
 	mlx_hook(all->data.mlx_win, 2, 1L << 0, ft_press_key, all);
-	mlx_loop_hook(all->data.mlx_ptr, ft_raycasting, all);
+	mlx_loop_hook(all->data.mlx_ptr, ft_raycast, all);
 	mlx_hook(all->data.mlx_win, 3, 1L << 1, ft_release_key, all);
 	mlx_loop(all->data.mlx_ptr);
 	return (0);

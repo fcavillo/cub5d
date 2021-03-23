@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 15:09:32 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/19 13:27:03 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 17:00:34 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,6 @@ void    ft_set_textures(t_all *all)
 					&(all->texture[4].height))))
                     ft_error(all, "Invalid Sprite texture\n");
     ft_set_textures_addr(all);
-}
-
-void     ft_set_window_size(t_all *all)
-{
-    if (all->data.screenx > all->win.x)
-        all->win.x = all->data.screenx;    
-    if (all->data.screeny > all->win.y)
-        all->win.y = all->data.screeny;    
 }
 
 void    ft_save(t_all *all)
