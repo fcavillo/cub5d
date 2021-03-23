@@ -131,8 +131,8 @@ typedef struct		s_all
 	int				sizeline;
 	char			**map;
 	char			start_pos;
-	int				dx;
-	int				dy;
+	int				spawnx;
+	int				spawny;
 	int				indicateur;
 	int				indicateur2;
 	int				errored; //passed through errors ?
@@ -142,7 +142,7 @@ typedef struct		s_all
 	int				err;
 	int				spawn_nb;
 	int				emptyline;
-	int				insidemap;
+	int				is_in_map;
 	int				count;
 	int				count2;
 	int				sum;
@@ -157,23 +157,22 @@ typedef struct		s_all
 
 int					ft_start(char *str, t_all *all);
 void				ft_parse(char *filename, t_all *all);
-int					ft_parsing_map(char *filename, t_all *all);
+int					ft_map_parsing(char *filename, t_all *all);
 void				ft_imprime_map(t_all *all);
 int					ft_strlen2(char *str);
-int					ft_charinstr(char *str, char c);
+int					ft_str_has(char *str, char c);
 int					ft_murs_util(char *str);
-int					ft_start_pos(char c, t_all *all, int i, int j);
+int					ft_spawn_and_spr(char c, t_all *all, int i, int j);
 void				ft_color_resolution(char **str, t_all *all);
 int					ft_atoi2(const char *str, t_all *all);
 int					ft_atoi3(const char *str, t_all *all);
-void				ft_texture(char *str, t_all *all);
 int					ft_path_texture(char *str, char **texture,
 						t_all *all, int j);
 void				ft_init(t_all *all);
 int					ft_murs(t_all *all);
-int					ft_is_map(char *str, t_all *all);
+int					ft_line_is_map(char *str, t_all *all);
 void				ft_map(char *str, t_all *all);
-int					ft_copy_map(char *str, t_all *all);
+int					ft_map_copy(char *str, t_all *all);
 void				ft_init_sprite(t_all *all);
 int					ft_raycasting(t_all *all);
 int					ft_mlx(t_all *all);
@@ -211,8 +210,29 @@ void				ft_init_dir(t_all *all);
 void				ft_init_more3(t_all *all);
 void				ft_rotate_left(t_all *all, double olddirx);
 void				ft_atoi3_check(const char *str, t_all *all);
-int					ft_emptyline(char *str);
+int					ft_empty_line(char *str);
 int					ft_check_save(char *str);
 int					ft_nb_virgule(const char *str);
+int					ft_map_last(t_all *all);
+int     ft_skipspace(char *line, int *i);
+int     ft_colors(t_all *all, int *color, char *line, int *i);
+void     ft_res(t_all *all, char *line, int *i);
+int		ft_atoi(char *line, int *i);
+int     ft_texture(t_all *all, char **tex, char *line, int *i);
+int     ft_name_check(char *str, char *end);
+char				*ft_strdup(const char *s1);
+void	ft_parsing_error(t_all *all);
+int     check_map_content(t_all *all, int i, int j);
+ int    ft_check_above(t_all *all, int i, int j);
+  int    ft_check_below(t_all *all, int i, int j);
+  int    ft_check_left(t_all *all, int i, int j);
+  int    ft_check_right(t_all *all, int i, int j);
+
+
+
+
+
+
+
 
 #endif

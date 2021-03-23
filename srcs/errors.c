@@ -6,26 +6,75 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:37 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 12:17:47 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 16:40:59 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h" 
 
+int     ft_check_map_zero(t_all *all, int i, int j)
+{
+	if (all->wrongcharmap == 2)
+		ft_error(all, 1, "Invalid character in Map\n");
+	if (all->map[i][j] == '0')
+	{
+	   if (ft_check_above(all, i, j) || ft_check_below(all, i, j) 
+			|| ft_check_left(all, i, j) || ft_check_right(all, i, j))
+			ft_error(all, 1, "Map must be closed\n");
+	}
+	return (0);
+}
+
+int     ft_check_map(t_all *all)
+{
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	while (i < all->nblines)
+	{
+		while (all->map[i][j])
+		{
+			if (ft_check_map_zero(all, i, j) == -1)
+				return (-1);
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (0);
+}
+
 void	ft_verify_errors(t_all *all)
 {
-	if (ft_murs(all) == 1)
-		ft_error(all, 1, "Map should be surrounded by 1\n");
+	ft_check_map(all);
 	if (all->start_pos == 'x')
 		ft_error(all, 1, "No spawn point\n");
-	if (all->indicateur2 != 6)
-		ft_error(all, 1, "Wrong C or F color\n");
-	if (all->spawn_nb == 1)
+	if (all->spawn_nb > 1)
 		ft_error(all, 1, "Too many spawn points\n");
-	if (all->emptyline == 1)
+/*	if (all->emptyline == 1)
 		ft_error(all, 1, "Empty line inside the Map\n");
 	if (all->wrongcharmap == 2)
-		ft_error(all, 1, "Incorrect char in Map\n");
+		ft_error(all, 1, "Incorrect char in Map\n");*/
+}
+
+void	ft_parsing_error(t_all *all)
+{
+	if (all->err == 3)
+		ft_error(all, 1, "Incorrect line in .cub\n");
+	if (all->err == 4)
+		ft_error(all, 1, "Missing param before Map\n");		
+	if (all->err == 5)	
+        ft_error(all, 1, "Resolution specified twice\n");
+	if (all->err == 6)
+        ft_error(all, 1, "Invalid resolution\n");
+	if (all->err == 7)
+		ft_error(all, 1, "Invalid color\n");
+	if (all->err == 8)
+		ft_error(all, 1, "Color specified twice\n");
+	if (all->err == 2)
+		ft_error(all, 1, "Parsing error\n");
 }
 
 void	ft_error2(t_all *all)

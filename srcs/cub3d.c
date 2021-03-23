@@ -6,39 +6,68 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 12:26:46 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 16:04:24 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		ft_parsing_map(char *filename, t_all *all)
+//+ de int max
+
+int		ft_map_parsing(char *filename, t_all *all)
 {
 	int			fd;
-	int			ret;
-	char		*str;
+	int			gnl_ret;
+	char		*line;
 
-	ret = 1;
-	str = NULL;
+	gnl_ret = 1;
+	line = NULL;
 	fd = open(filename, O_RDONLY);
 	if (!(all->map = malloc(sizeof(char*) * all->nblines)))
 		return (0);
-	while (ret != 0)
+	while (gnl_ret != 0)
 	{
-		ret = get_next_line(fd, &str, all);
-		if (all->insidemap == 1 && ft_emptyline(str) == 0 &&
+		gnl_ret = get_next_line(fd, &line, all);
+		if (all->is_in_map == 1 && ft_empty_line(line) == 0 &&
 				all->count < all->nblines)
 			all->emptyline = 1;
-		if ((all->insidemap = ft_is_map(str, all)) == 1)
+		if ((all->is_in_map = ft_line_is_map(line, all)) == 1)
 		{
 			all->count++;
-			ft_copy_map(str, all);
+			ft_map_copy(line, all);
 		}
-		free(str);
+		free(line);
 	}
 	close(fd);
 	ft_init_sprite(all);
 	return (0);
+}
+
+void     ft_line(t_all *all, char *line)
+{
+    int     i;
+    
+    i = 0;
+    ft_skipspace(line, &i);
+    if (line[i] == 'R' && line[i + 1] == ' ')
+        ft_res(all, line, &i);
+    else if (line[i] == 'N' && line[i + 1] == 'O' /*&& line[i + 2] == ' '*/)
+        all->err = ft_texture(all, &all->no, line, &i);
+    else if (line[i] == 'S' && line[i + 1] == 'O' /*&& line[i + 2] == ' '*/)
+        all->err = ft_texture(all, &all->so, line, &i);
+    else if (line[i] == 'W' && line[i + 1] == 'E' /*&& line[i + 2] == ' '*/)
+        all->err = ft_texture(all, &all->we, line, &i);
+    else if (line[i] == 'E' && line[i + 1] == 'A' /*&& line[i + 2] == ' '*/)
+        all->err = ft_texture(all, &all->ea, line, &i);
+    else if (line[i] == 'S' && line[i + 1] != 'O')
+        all->err = ft_texture(all, &all->sp, line, &i);
+    else if (line[i] == 'F' /*&& line[i + 1] == ' '*/)
+        ft_colors(all, &all->f, line, &i);
+    else if (line[i] == 'C' /*&& line[i + 1] == ' '*/)
+        ft_colors(all, &all->c, line, &i);
+	else if (line[i] != '1' && line[i] != '0' && line[i] != '2'
+			&& line[i] > 32 && line[i] <= 126)
+		all->err = 3;
 }
 
 void	ft_parse(char *filename, t_all *all)
@@ -57,29 +86,30 @@ void	ft_parse(char *filename, t_all *all)
 	while (ret != 0 && all->err != 2)
 	{
 		ret = get_next_line(fd, &line, all);
-		ft_color_resolution(&line, all);
-		ft_texture(line, all);
-		ft_map(line, all);
+//		ft_color_resolution(&line, all);
+		ft_line(all, line);
+//		ft_texture(line, all);
+		ft_map(line, all);//mesure nb et size line
 		free(line);
 	}
 	close(fd);
-	if (all->err == 2)
-		ft_error(all, 1, "Parsing error\n");
+	if (all->err >= 2)
+		ft_parsing_error(all);
 	if (all->sizeline == 0 || all->nblines == 0)
 		ft_error(all, 1, "No Map\n");
-	ft_parsing_map(filename, all);
+	ft_map_parsing(filename, all);
 }
 
-int		ft_start(char *str, t_all *all)
+int		ft_start(char *line, t_all *all)
 {
 	int			i;
 
 	i = 0;
-	while (str[i])
+	while (line[i])
 		i++;
-	if (i > 4 && str[i - 1] == 'b' && str[i - 2] == 'u' && str[i - 3] == 'c'
-        && str[i - 4] == '.')
-        ft_parse(str, all); 
+	if (i > 4 && line[i - 1] == 'b' && line[i - 2] == 'u' && line[i - 3] == 'c'
+        && line[i - 4] == '.')
+        ft_parse(line, all); 
     else
         ft_error(all, 1, "Invalid Map Name\n");
     return (0);

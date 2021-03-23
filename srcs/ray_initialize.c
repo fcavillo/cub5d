@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 10:14:01 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 16:40:31 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_initialisation2(t_all *all)
 	all->data.right = 0;
 	all->data.rotate_right = 0;
 	all->data.rotate_left = 0;
-	all->ray.posx = (double)all->dx + 0.5;
-	all->ray.posy = (double)all->dy + 0.5;
+	all->ray.posx = (double)all->spawnx + 0.5;
+	all->ray.posy = (double)all->spawny + 0.5;
 	all->ray.dirx = 0;
 	all->ray.diry = 0;
 	all->ray.planx = 0;
@@ -72,15 +72,14 @@ void	ft_init_sprite(t_all *all)
 	int j;
 
 	i = -1;
-	all->s.nbspr = 0;
 	ft_verify_errors(all);
 	while (++i < all->nblines)
 	{
 		j = -1;
 		while (++j < all->sizeline)
 		{
-			if (all->map[i][j] == '2')
-				all->s.nbspr += 1;
+			if (all->map[i][j] == ' ')
+				all->map[i][j] = '1';
 		}
 	}
 	if (!(all->sxy = (t_spr_coo *)malloc(sizeof(t_spr_coo) * all->s.nbspr)))

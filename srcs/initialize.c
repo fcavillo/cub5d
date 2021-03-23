@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 12:14:35 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 16:01:48 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,11 @@ void	ft_init(t_all *all)
 	all->nblines = 0;
 	all->sizeline = 0;
 	all->map = NULL;
-	all->dx = 0;
-	all->dy = 0;
+	all->spawnx = 0;
+	all->spawny = 0;
 	all->spawn_nb = 0;
 	all->emptyline = 0;
-	all->insidemap = 0;
+	all->is_in_map = 0;
 	all->count = 0;
 	all->sum = 0;
 	all->wrongcharmap = 0;

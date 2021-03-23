@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 10:46:44 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/04 10:32:27 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 14:41:23 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		ft_empty_line(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != '\t' && str[i] != ' ' && str[i] != '\0' &&
-				str[i] != '\n' && str[i] != '\r' && str[i] != '\v'
+		if (str[i] != '\t' && str[i] != '\n' && str[i] != '\r' &&
+				str[i] != '\v' && str[i] != ' ' && str[i] != '\0'
 				&& str[i] != '\f')
 			return (0);
 		i++;

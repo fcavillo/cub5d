@@ -6,12 +6,12 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:00 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 11:06:17 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/23 15:08:49 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
+/*
 int		ft_atoi2(const char *str, t_all *all)
 {
 	int		sum;
@@ -93,8 +93,38 @@ int		ft_path_texture(char *str, char **texture, t_all *all, int j)
 	}
 	(*texture)[all->count2] = '\0';
 	return (0);
-}
+}*/
 
+int     ft_texture(t_all *all, char **tex, char *line, int *i)
+{
+    char *texture_file;
+    int j;
+    
+	if (ft_map_last(all) == -1)
+		ft_error(all, 1, "Missing param before Map\n");
+    if (*tex != NULL)
+        ft_error(all, 1, "Texture specified twice\n");
+    (*i) += 2;
+    ft_skipspace(line, i);
+    j = (*i);
+	if (line[*i] != '.' && line[*i + 1] != '/' && line[*i + 2] != '\0')
+		ft_error(all, 1, "Invalid texture name\n");
+    while(line[*i] != ' ' && line[*i] != '\0')
+        (*i)++;
+    if(!(texture_file = malloc(sizeof(char) * (*i - j +1))))
+        ft_error(all, 1 ,"Texture malloc fail\n");
+    *i = j;
+    j = 0;
+    while (line[*i] != ' ' && line[*i] != '\0')
+        texture_file[j++] = line[(*i)++];
+    texture_file[j] = '\0';
+    if (ft_name_check(texture_file, "xpm") == 0 || line[*i] != '\0')
+        ft_error(all, 1, "Invalid texture\n");
+    *tex = ft_strdup(texture_file);
+    free(texture_file);
+    return (0);
+}
+/*
 void	ft_texture(char *str, t_all *all)
 {
 	int			i;
@@ -113,17 +143,64 @@ void	ft_texture(char *str, t_all *all)
 		ft_path_texture(str, &all->sp, all, 1);
 	else if (str[0] != 'N' && str[0] != 'S' && str[0] != 'W' && str[0] != 'E'
 			&& str[0] != 'R' && str[0] != 'F' && str[0] != 'C'
-			&& str[0] > 65 && str[0] < 122)
+			&& str[0] > 32 && str[0] <= 126)
 		all->err = 2;
 	j++;
+}*/
+
+
+void	ft_res(t_all *all, char *line, int *i)
+{
+	all->i = 1; //whi
+	if (ft_map_last(all) == -1)
+		all->err = 4;
+	if (all->resx != 0 || all->resy != 0)
+		all->err = 5;
+	(*i)++;
+    all->resx = ft_atoi(line, i);
+    all->resy = ft_atoi(line, i);
+    if (all->resx > 2560)
+        all->resx = 2560;
+    if (all->resy > 1400)
+        all->resy = 1400;
+	if (all->resx <= 0 || all->resy <= 0 || line[*i] != '\0')
+		all->err = 6;
 }
 
+int     ft_colors(t_all *all, int *color, char *line, int *i)
+{
+    int r;
+    int g;
+    int b;
+    
+	if (ft_map_last(all) == -1)
+        all->err = 4; 
+    if (*color != -1)
+        all->err = 8; 
+    (*i)++;
+    r = ft_atoi(line, i);
+	ft_skipspace(line, i);
+    if (line[(*i)++] != ',')
+        all->err = 7; 
+    g = ft_atoi(line, i);
+	ft_skipspace(line, i);
+    if (line[(*i)++] != ',')
+        all->err = 7; 
+    b = ft_atoi(line, i);
+    ft_skipspace(line, i);
+    if (line[*i] != '\0' || r > 255 || g > 255 || b > 255 || r < 0 || g < 0 || b < 0)
+        all->err = 7; 
+    *color = r * 256 * 256 + g * 256 + b;
+    return (0);
+}
+
+/*
 void	ft_color_resolution(char **str, t_all *all)
 {
 	int			i;
 
 	i = 0;
-	all->i = 1;
+	all->i = 1; //whi
 	if (all->sizeline > 0 && (all->no == NULL || all->so == NULL ||
 				all->we == NULL || all->ea == NULL || all->sp == NULL))
 		all->err = 2;
@@ -144,4 +221,4 @@ void	ft_color_resolution(char **str, t_all *all)
 		all->f = ft_atoi3(*str, all);
 	else if (*str[i] == 'C')
 		all->c = ft_atoi3(*str, all);
-}
+}*/
