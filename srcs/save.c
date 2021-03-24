@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 11:49:44 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:33:05 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,3 @@ int		ft_check_save(char *str)
 	return (0);
 }
 
-int		ft_nb_virgule(const char *str)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	j = 0;
-	while (str[++i])
-	{
-		if (str[i] == ',')
-			j++;
-	}
-	return (j);
-}

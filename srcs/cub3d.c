@@ -6,13 +6,11 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 14:13:40 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:44:08 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-//+ de int max
 
 int		ft_map_parsing(char *filename, t_all *all)
 {
