@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 14:44:08 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:47:32 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_parse(char *filename, t_all *all)
 	{
 		ret = get_next_line(fd, &line, all);
 		ft_line(all, line);
-		ft_map(line, all);//mesure nb et size line
+		ft_map(line, all);
 		free(line);
 	}
 	close(fd);

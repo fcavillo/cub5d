@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:14:23 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 13:59:19 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:33:22 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ int		check_map_content(t_all *all, int i, int j)
 int		ft_check_above(t_all *all, int i, int j)
 {
 	while (i >= 0)
-{
+	{
+		if (all->map[i][j] == ' ')
+			return (1);
 		if (all->map[i][j] == '1')
 			return (0);
 		i--;
@@ -38,6 +40,8 @@ int		ft_check_below(t_all *all, int i, int j)
 {
 	while (i < all->nblines)
 	{
+		if (all->map[i][j] == ' ')
+			return (1);
 		if (all->map[i][j] == '1')
 			return (0);
 		i++;
@@ -49,6 +53,8 @@ int		ft_check_left(t_all *all, int i, int j)
 {
 	while (j >= 0)
 	{
+		if (all->map[i][j] == ' ')
+			return (1);
 		if (all->map[i][j] == '1')
 			return (0);
 		j--;
@@ -60,6 +66,8 @@ int		ft_check_right(t_all *all, int i, int j)
 {
 	while (j <= all->sizeline)
 	{
+		if (all->map[i][j] == ' ')
+			return (1);
 		if (all->map[i][j] == '1')
 			return (0);
 		j++;

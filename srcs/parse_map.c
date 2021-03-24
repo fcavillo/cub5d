@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:57 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 12:16:27 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:54:01 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ int		ft_check_map(t_all *all)
 	}
 	return (0);
 }
+
+/*
+** sets spawn and sprites
+** fills map lines void with ' '
+*/
 
 int		ft_map_copy(char *str, t_all *all)
 {
@@ -100,12 +105,16 @@ int		ft_line_is_map(char *str, t_all *all)
 	return (0);
 }
 
+/*
+** fills sizeline and nblines
+*/
+
 void	ft_map(char *str, t_all *all)
 {
 	int			i;
 
 	i = 0;
-	if (ft_line_is_map(str, all) == 1)//si ya un char hors map on exclut
+	if (ft_line_is_map(str, all) == 1)
 	{
 		if (all->so == NULL || all->no == NULL || all->we == NULL
 		|| all->f == -1 || all->c == -1 || all->ea == NULL

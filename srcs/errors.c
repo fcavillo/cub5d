@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:37 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 12:18:21 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:59:18 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	ft_verify_errors(t_all *all)
 		ft_error(all, 1, "No spawn point\n");
 	if (all->spawn_nb > 1)
 		ft_error(all, 1, "Too many spawn points\n");
-/*	if (all->emptyline == 1)
+	if (all->emptyline == 1)
 		ft_error(all, 1, "Empty line inside the Map\n");
 	if (all->wrongcharmap == 2)
-		ft_error(all, 1, "Incorrect char in Map\n");*/
+		ft_error(all, 1, "Incorrect char in Map\n");
 }
 
 void	ft_parsing_error(t_all *all)
