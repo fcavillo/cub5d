@@ -209,7 +209,6 @@ char				*ft_subbuff(char *buff, int start, int len);
 void				ft_init_dir(t_all *all);
 void				ft_ray_init_3(t_all *all);
 void				ft_rotate_left(t_all *all, double olddirx);
-void				ft_atoi3_check(const char *str, t_all *all);
 int					ft_empty_line(char *str);
 int					ft_check_save(char *str);
 int					ft_nb_virgule(const char *str);

@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/23 16:04:24 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:20:41 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int		ft_map_parsing(char *filename, t_all *all)
 {
-	int			fd;
-	int			gnl_ret;
-	char		*line;
+	int		fd;
+	int		gnl_ret;
+	char	*line;
 
 	gnl_ret = 1;
 	line = NULL;
@@ -43,28 +43,28 @@ int		ft_map_parsing(char *filename, t_all *all)
 	return (0);
 }
 
-void     ft_line(t_all *all, char *line)
+void	ft_line(t_all *all, char *line)
 {
-    int     i;
-    
-    i = 0;
-    ft_skipspace(line, &i);
-    if (line[i] == 'R' && line[i + 1] == ' ')
-        ft_res(all, line, &i);
-    else if (line[i] == 'N' && line[i + 1] == 'O' /*&& line[i + 2] == ' '*/)
-        all->err = ft_texture(all, &all->no, line, &i);
-    else if (line[i] == 'S' && line[i + 1] == 'O' /*&& line[i + 2] == ' '*/)
-        all->err = ft_texture(all, &all->so, line, &i);
-    else if (line[i] == 'W' && line[i + 1] == 'E' /*&& line[i + 2] == ' '*/)
-        all->err = ft_texture(all, &all->we, line, &i);
-    else if (line[i] == 'E' && line[i + 1] == 'A' /*&& line[i + 2] == ' '*/)
-        all->err = ft_texture(all, &all->ea, line, &i);
-    else if (line[i] == 'S' && line[i + 1] != 'O')
-        all->err = ft_texture(all, &all->sp, line, &i);
-    else if (line[i] == 'F' /*&& line[i + 1] == ' '*/)
-        ft_colors(all, &all->f, line, &i);
-    else if (line[i] == 'C' /*&& line[i + 1] == ' '*/)
-        ft_colors(all, &all->c, line, &i);
+	int		i;
+
+	i = 0;
+	ft_skipspace(line, &i);
+	if (line[i] == 'R' && line[i + 1] == ' ')
+		ft_res(all, line, &i);
+	else if (line[i] == 'N' && line[i + 1] == 'O' /*&& line[i + 2] == ' '*/)
+		all->err = ft_texture(all, &all->no, line, &i);
+	else if (line[i] == 'S' && line[i + 1] == 'O' /*&& line[i + 2] == ' '*/)
+		all->err = ft_texture(all, &all->so, line, &i);
+	else if (line[i] == 'W' && line[i + 1] == 'E' /*&& line[i + 2] == ' '*/)
+		all->err = ft_texture(all, &all->we, line, &i);
+	else if (line[i] == 'E' && line[i + 1] == 'A' /*&& line[i + 2] == ' '*/)
+		all->err = ft_texture(all, &all->ea, line, &i);
+	else if (line[i] == 'S' && line[i + 1] != 'O')
+		all->err = ft_texture(all, &all->sp, line, &i);
+	else if (line[i] == 'F' /*&& line[i + 1] == ' '*/)
+		ft_colors(all, &all->f, line, &i);
+	else if (line[i] == 'C' /*&& line[i + 1] == ' '*/)
+		ft_colors(all, &all->c, line, &i);
 	else if (line[i] != '1' && line[i] != '0' && line[i] != '2'
 			&& line[i] > 32 && line[i] <= 126)
 		all->err = 3;
@@ -72,9 +72,9 @@ void     ft_line(t_all *all, char *line)
 
 void	ft_parse(char *filename, t_all *all)
 {
-	int			fd;
-	int			ret;
-	char		*line;
+	int		fd;
+	int		ret;
+	char	*line;
 
 	line = NULL;
 	ret = 1;
@@ -86,9 +86,7 @@ void	ft_parse(char *filename, t_all *all)
 	while (ret != 0 && all->err != 2)
 	{
 		ret = get_next_line(fd, &line, all);
-//		ft_color_resolution(&line, all);
 		ft_line(all, line);
-//		ft_texture(line, all);
 		ft_map(line, all);//mesure nb et size line
 		free(line);
 	}
@@ -102,22 +100,22 @@ void	ft_parse(char *filename, t_all *all)
 
 int		ft_start(char *line, t_all *all)
 {
-	int			i;
+	int		i;
 
 	i = 0;
 	while (line[i])
 		i++;
 	if (i > 4 && line[i - 1] == 'b' && line[i - 2] == 'u' && line[i - 3] == 'c'
-        && line[i - 4] == '.')
-        ft_parse(line, all); 
-    else
-        ft_error(all, 1, "Invalid Map Name\n");
-    return (0);
+		&& line[i - 4] == '.')
+		ft_parse(line, all);
+	else
+		ft_error(all, 1, "Invalid Map Name\n");
+	return (0);
 }
 
 int		main(int ac, char **av)
 {
-	t_all all;
+	t_all	all;
 
 	all.save = 0;
 	ft_init(&all);

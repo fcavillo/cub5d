@@ -6,37 +6,46 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:57 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/23 16:25:38 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:16:27 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-/*
-int		ft_murs(t_all *all)
-{
-	int i;
 
-	i = 0;
-	while (i < all->nblines)
+int		ft_check_map_zero(t_all *all, int i, int j)
+{
+	if (all->wrongcharmap == 2)
+		ft_error(all, 1, "Invalid character in Map\n");
+	if (all->map[i][j] == '0')
 	{
-		if (all->map[i][0] != '1')
-			return (1);
-		i++;
+		if (ft_check_above(all, i, j) || ft_check_below(all, i, j)
+			|| ft_check_left(all, i, j) || ft_check_right(all, i, j))
+			ft_error(all, 1, "Map must be closed\n");
 	}
-	i = 0;
-	while (i < all->nblines)
-	{
-		if (all->map[i][all->sizeline - 1] != '1')
-			return (1);
-		i++;
-	}
-	if (ft_murs_util(all->map[0]) == 1)
-		return (1);
-	if (ft_murs_util(all->map[all->nblines - 1]) == 1)
-		return (1);
 	return (0);
 }
-*/
+
+int		ft_check_map(t_all *all)
+{
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	while (i < all->nblines)
+	{
+		while (all->map[i][j])
+		{
+			if (ft_check_map_zero(all, i, j) == -1)
+				return (-1);
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (0);
+}
+
 int		ft_map_copy(char *str, t_all *all)
 {
 	static int	i = 0;
@@ -50,8 +59,6 @@ int		ft_map_copy(char *str, t_all *all)
 	{
 		if (ft_spawn_and_spr(str[j], all, i, j) == 1)
 			all->map[i][j] = '0';
-//		else if (str[j] == ' ')
-//			all->map[i][j] = '1'; remplace par des '1'
 		else
 			all->map[i][j] = str[j];
 		j++;
@@ -82,7 +89,7 @@ int		ft_line_is_map(char *str, t_all *all)
 					&& str[i] != 'E' && str[i] != 'W' && str[i] != '\n'
 					&& str[i] != '\t')
 			{
-				if (all->is_in_map == 1) //check 
+				if (all->is_in_map == 1)//check
 					all->wrongcharmap = 2;
 				return (0);
 			}
@@ -96,41 +103,16 @@ int		ft_line_is_map(char *str, t_all *all)
 void	ft_map(char *str, t_all *all)
 {
 	int			i;
-//	static int	static_nblines = 0;
-//	static int	static_sizeline = 0;
 
 	i = 0;
-	if (ft_line_is_map(str, all) == 1) //si ya un char hors map on exclut 
+	if (ft_line_is_map(str, all) == 1)//si ya un char hors map on exclut
 	{
 		if (all->so == NULL || all->no == NULL || all->we == NULL
-		|| all->f == -1 || all->c == -1 || all->ea == NULL 
+		|| all->f == -1 || all->c == -1 || all->ea == NULL
 		|| all->sp == NULL)
 			all->err = 4;
 		if ((i = ft_strlen(str)) > all->sizeline)
 			all->sizeline = i;
 		all->nblines = all->nblines + 1;
 	}
-//	all->nblines = static_nblines;
-//	all->sizeline = static_sizeline;
 }
-/*
-void	ft_map(char *str, t_all *all)
-{
-	int			i;
-	static int	static_nblines = 0;
-	static int	static_sizeline = 0;
-
-	i = 0;
-	if (ft_line_is_map(str, all) == 1) //si ya un char hors map on exclut 
-	{
-		if (all->so == NULL || all->no == NULL || all->we == NULL
-		|| all->f == -1 || all->c == -1 || all->ea == NULL 
-		|| all->sp == NULL)
-			ft_error(all, 1, "Missing param before Map\n");
-		if ((i = ft_strlen(str)) > static_sizeline)
-			static_sizeline = i;
-		static_nblines = static_nblines + 1;
-	}
-	all->nblines = static_nblines;
-	all->sizeline = static_sizeline;
-}*/

@@ -24,7 +24,8 @@ SRCS = srcs/check_zeros.c \
 		srcs/ray.c \
 		srcs/save.c \
 		srcs/sprite.c \
-		srcs/tools.c 
+		srcs/tools.c \
+		srcs/tools2.c
 
 
 OBJ = $(SRCS:.c=.o)

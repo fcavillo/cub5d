@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/23 17:26:50 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 11:14:18 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,34 +69,6 @@ void	ft_ray_init_3(t_all *all)
 		all->ray.deltadisty = sqrt(1 + (all->ray.raydirx *
 			all->ray.raydirx) / (all->ray.raydiry *
 			all->ray.raydiry));
-}
-
-void	ft_atoi3_check(const char *str, t_all *all)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (str[i] != ',')
-		i++;
-	if (str[i] == ',')
-		j = 1;
-	i++;
-	while (str[i] == ' ')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-		i++;
-	while ((str[i] < '0' || str[i] > '9') && str[i])
-	{
-		if (str[i] == ',')
-			j++;
-		i++;
-	}
-	if (j != 2)
-		all->err = 2;
-	if (ft_nb_virgule(str) != 2)
-		all->err = 2;
 }
 
 void	ft_init(t_all *all)

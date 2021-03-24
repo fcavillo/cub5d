@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:28 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 09:11:29 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 11:09:08 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_dist_order2(t_all *all)
 	}
 }
 
-void	ft_dist_order(t_all *all)
+void	ft_dist_order(t_all *all)//sort sprites from far to close
 {
 	int		i;
 	int		j;
@@ -52,9 +52,9 @@ void	ft_dist_order(t_all *all)
 	}
 }
 
-void	ft_calculs(t_all *all, int i)
+void	ft_calcul(t_all *all, int i)
 {
-	all->s.spritex = all->sxy[all->s.order[i]].x - all->ray.posx;
+	all->s.spritex = all->sxy[all->s.order[i]].x - all->ray.posx; //translate sprite position to relative to camera
 	all->s.spritey = all->sxy[all->s.order[i]].y - all->ray.posy;
 	all->s.invdet = 1.0 / (all->ray.planx * all->ray.diry -
 			all->ray.dirx * all->ray.plany);
@@ -64,14 +64,14 @@ void	ft_calculs(t_all *all, int i)
 			all->s.spritex + all->ray.planx * all->s.spritey);
 	all->s.spritescreenx = (int)((all->resx / 2) * (1 + all->s.transformx
 				/ all->s.transformy));
-	all->s.spriteheight = abs((int)(all->resy / (all->s.transformy)));
+	all->s.spriteheight = abs((int)(all->resy / (all->s.transformy)));      //calculate height of the sprite on screen
 	all->s.drawstarty = -all->s.spriteheight / 2 + all->resy / 2;
 	if (all->s.drawstarty < 0)
 		all->s.drawstarty = 0;
 	all->s.drawendy = all->s.spriteheight / 2 + all->resy / 2;
 	if (all->s.drawendy >= all->resy)
 		all->s.drawendy = all->resy;
-	all->s.spritewidth = abs((int)(all->resy / (all->s.transformy)));
+	all->s.spritewidth = abs((int)(all->resy / (all->s.transformy)));      //calculate width of the sprite
 	all->s.drawstartx = -all->s.spritewidth / 2 + all->s.spritescreenx;
 	if (all->s.drawstartx < 0)
 		all->s.drawstartx = 0;
@@ -111,7 +111,7 @@ void	ft_sprite(t_all *all)
 	ft_dist_order(all);
 	while (++i < all->s.nbspr)
 	{
-		ft_calculs(all, i);
+		ft_calcul(all, i);
 		stripe = all->s.drawstartx;
 		while (stripe < all->s.drawendx)
 		{

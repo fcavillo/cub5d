@@ -6,45 +6,11 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:37 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/23 16:40:59 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:18:21 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h" 
-
-int     ft_check_map_zero(t_all *all, int i, int j)
-{
-	if (all->wrongcharmap == 2)
-		ft_error(all, 1, "Invalid character in Map\n");
-	if (all->map[i][j] == '0')
-	{
-	   if (ft_check_above(all, i, j) || ft_check_below(all, i, j) 
-			|| ft_check_left(all, i, j) || ft_check_right(all, i, j))
-			ft_error(all, 1, "Map must be closed\n");
-	}
-	return (0);
-}
-
-int     ft_check_map(t_all *all)
-{
-	int i;
-	int j;
-
-	j = 0;
-	i = 0;
-	while (i < all->nblines)
-	{
-		while (all->map[i][j])
-		{
-			if (ft_check_map_zero(all, i, j) == -1)
-				return (-1);
-			j++;
-		}
-		i++;
-		j = 0;
-	}
-	return (0);
-}
+#include "../includes/cub3d.h"
 
 void	ft_verify_errors(t_all *all)
 {
@@ -64,17 +30,21 @@ void	ft_parsing_error(t_all *all)
 	if (all->err == 3)
 		ft_error(all, 1, "Incorrect line in .cub\n");
 	if (all->err == 4)
-		ft_error(all, 1, "Missing param before Map\n");		
-	if (all->err == 5)	
-        ft_error(all, 1, "Resolution specified twice\n");
+		ft_error(all, 1, "Missing param before Map\n");
+	if (all->err == 5)
+		ft_error(all, 1, "Resolution specified twice\n");
 	if (all->err == 6)
-        ft_error(all, 1, "Invalid resolution\n");
+		ft_error(all, 1, "Invalid resolution\n");
 	if (all->err == 7)
 		ft_error(all, 1, "Invalid color\n");
 	if (all->err == 8)
 		ft_error(all, 1, "Color specified twice\n");
 	if (all->err == 2)
 		ft_error(all, 1, "Parsing error\n");
+	if (all->err == 9)
+		ft_error(all, 1, "Texture specified twice\n");
+	if (all->err == 10)
+		ft_error(all, 1, "Invalid texture name\n");
 }
 
 void	ft_error2(t_all *all)
@@ -98,7 +68,7 @@ void	ft_error(t_all *all, int i, char *str)
 
 	j = -1;
 	all->errored = 1;
-	if(i == 1)
+	if (i == 1)
 		printf("%sERROR\n", RED);
 	printf("%s\n", str);
 	if (all->no)

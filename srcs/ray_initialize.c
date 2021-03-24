@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 08:44:54 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 11:22:40 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,25 @@ void	ft_init_texture(t_all *all)
 						* all->ray.raydirx;
 	all->tex.wallx -= floor((all->tex.wallx));
 }
-// a bouger
+
+void	ft_init_sprite2(t_all *all, int i, int j, int v)
+{
+	i = i - 1;
+	while (++i < all->nblines)
+	{
+		j = -1;
+		while (++j < all->sizeline)
+		{
+			if (all->map[i][j] == '2')
+			{
+				all->sxy[v].x = (double)i + 0.5;
+				all->sxy[v].y = (double)j + 0.5;
+				v++;
+			}
+		}
+	}
+}
+
 void	ft_init_sprite(t_all *all)
 {
 	int i;
@@ -90,22 +108,4 @@ void	ft_init_sprite(t_all *all)
 		ft_error(all, 1, "Failing to malloc Sprite distance*");
 	ft_init_sprite2(all, 0, 0, 0);
 	ft_ray(all);
-}
-
-void	ft_init_sprite2(t_all *all, int i, int j, int v)
-{
-	i = i - 1;
-	while (++i < all->nblines)
-	{
-		j = -1;
-		while (++j < all->sizeline)
-		{
-			if (all->map[i][j] == '2')
-			{
-				all->sxy[v].x = (double)i; // + 0.5;
-				all->sxy[v].y = (double)j; // + 0.5;
-				v++;
-			}
-		}
-	}
 }

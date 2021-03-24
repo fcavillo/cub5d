@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:33 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 08:41:55 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 12:09:08 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,3 @@ int		ft_column_color(t_all *all)
 			all->ray.x] = all->f;
 	return (0);
 }
-
