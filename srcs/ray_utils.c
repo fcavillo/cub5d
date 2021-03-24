@@ -6,13 +6,13 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:12 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/22 09:11:13 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 08:39:48 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_stepsidedist(t_all *all)
+void	ft_stepsidedist(t_all *all) //calculate step and initiate sidedist
 {
 	if (all->ray.raydirx < 0)
 	{
@@ -41,7 +41,7 @@ void	ft_stepsidedist(t_all *all)
 	ft_incrementray(all);
 }
 
-void	ft_incrementray(t_all *all)
+void	ft_incrementray(t_all *all) //increments position one case at a time,  
 {
 	while (all->ray.hit == 0)
 	{

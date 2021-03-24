@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/23 17:28:02 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 08:48:25 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		ft_raycast(t_all *all)
 		all->s.zbuffer[all->ray.x] = all->ray.perpwalldist;
 		all->ray.x++;
 	}
-	ft_sprite(all);
+	//ft_sprite(all);
 	if (all->save == 1)
 		ft_save(all);
 	mlx_put_image_to_window(all->data.mlx_ptr, all->data.mlx_win,
@@ -94,8 +94,7 @@ int		ft_ray(t_all *all)
 		ft_error(all, 1, "Mlx initialization impossible\n");
 	mlx_get_screen_size(all->data.mlx_ptr, &all->screenx, &all->screeny);
 	ft_set_window_size(all);
-//	all->resx = (all->resx > all->screenx) ? all->screenx : all->resx;
-//	all->resy = (all->resy > all->screeny) ? all->screeny : all->resy;
+
 	ft_set_texture(all);
 	all->data.img = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr = (int *)mlx_get_data_addr(all->data.img, &all->data.
@@ -107,7 +106,7 @@ int		ft_ray(t_all *all)
 	all->data.img2 = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr2 = (int *)mlx_get_data_addr(all->data.img2, &all->
 			data.bits_per_pixel, &all->data.line_length, &all->data.endian);
-	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_free_mlx, all);
+//	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_free_mlx, all);
 	mlx_hook(all->data.mlx_win, 2, 1L << 0, ft_press_key, all);
 	mlx_loop_hook(all->data.mlx_ptr, ft_raycast, all);
 	mlx_hook(all->data.mlx_win, 3, 1L << 1, ft_release_key, all);
