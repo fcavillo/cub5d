@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:00 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 11:57:47 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:09:27 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,23 +67,23 @@ int		ft_colors(t_all *all, int *color, char *line, int *i)
 	int b;
 
 	if (ft_map_last(all) == -1)
-		all->err = 4;
+		return (4);
 	if (*color != -1)
-		all->err = 8;
+		return (8);
 	(*i)++;
 	r = ft_atoi(line, i);
 	ft_skipspace(line, i);
 	if (line[(*i)++] != ',')
-		all->err = 7;
+		return (7);
 	g = ft_atoi(line, i);
 	ft_skipspace(line, i);
 	if (line[(*i)++] != ',')
-		all->err = 7;
+		return (7);
 	b = ft_atoi(line, i);
 	ft_skipspace(line, i);
 	if (line[*i] != '\0' || r > 255 || g > 255 || b > 255
 				|| r < 0 || g < 0 || b < 0)
-		all->err = 7;
+		return (7);
 	*color = r * 256 * 256 + g * 256 + b;
 	return (0);
 }

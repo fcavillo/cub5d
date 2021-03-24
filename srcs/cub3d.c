@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 12:20:41 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/03/24 14:13:40 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,20 @@ void	ft_line(t_all *all, char *line)
 	ft_skipspace(line, &i);
 	if (line[i] == 'R' && line[i + 1] == ' ')
 		ft_res(all, line, &i);
-	else if (line[i] == 'N' && line[i + 1] == 'O' /*&& line[i + 2] == ' '*/)
+	else if (line[i] == 'N' && line[i + 1] == 'O')
 		all->err = ft_texture(all, &all->no, line, &i);
-	else if (line[i] == 'S' && line[i + 1] == 'O' /*&& line[i + 2] == ' '*/)
+	else if (line[i] == 'S' && line[i + 1] == 'O')
 		all->err = ft_texture(all, &all->so, line, &i);
-	else if (line[i] == 'W' && line[i + 1] == 'E' /*&& line[i + 2] == ' '*/)
+	else if (line[i] == 'W' && line[i + 1] == 'E')
 		all->err = ft_texture(all, &all->we, line, &i);
-	else if (line[i] == 'E' && line[i + 1] == 'A' /*&& line[i + 2] == ' '*/)
+	else if (line[i] == 'E' && line[i + 1] == 'A')
 		all->err = ft_texture(all, &all->ea, line, &i);
 	else if (line[i] == 'S' && line[i + 1] != 'O')
 		all->err = ft_texture(all, &all->sp, line, &i);
-	else if (line[i] == 'F' /*&& line[i + 1] == ' '*/)
-		ft_colors(all, &all->f, line, &i);
-	else if (line[i] == 'C' /*&& line[i + 1] == ' '*/)
-		ft_colors(all, &all->c, line, &i);
+	else if (line[i] == 'F')
+		all->err = ft_colors(all, &all->f, line, &i);
+	else if (line[i] == 'C')
+		all->err = ft_colors(all, &all->c, line, &i);
 	else if (line[i] != '1' && line[i] != '0' && line[i] != '2'
 			&& line[i] > 32 && line[i] <= 126)
 		all->err = 3;
@@ -83,7 +83,7 @@ void	ft_parse(char *filename, t_all *all)
 	if ((fd = open(filename, O_RDONLY)) == -1)
 		ft_error(all, 1, "Invalid .cub file\n");
 	all->err = 0;
-	while (ret != 0 && all->err != 2)
+	while (ret != 0 && all->err <= 2)
 	{
 		ret = get_next_line(fd, &line, all);
 		ft_line(all, line);

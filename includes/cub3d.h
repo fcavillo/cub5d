@@ -158,7 +158,6 @@ typedef struct		s_all
 int					ft_start(char *str, t_all *all);
 void				ft_parse(char *filename, t_all *all);
 int					ft_map_parsing(char *filename, t_all *all);
-void				ft_imprime_map(t_all *all);
 int					ft_strlen2(char *str);
 int					ft_str_has(char *str, char c);
 int					ft_murs_util(char *str);
@@ -226,6 +225,7 @@ int     check_map_content(t_all *all, int i, int j);
   int    ft_check_below(t_all *all, int i, int j);
   int    ft_check_left(t_all *all, int i, int j);
   int    ft_check_right(t_all *all, int i, int j);
+int		ft_check_map(t_all *all);
 
 
 
