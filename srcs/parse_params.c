@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:00 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/02 11:35:12 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/02 11:58:53 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ int		ft_texture(t_all *all, char **tex, char *line, int *i)
 	(*i) += 2;//passer les lettres
 	ft_skipspace(line, i);
 	j = (*i);
-	printf("-%c%c%c-\n", line[*i], line[*i + 1], line[*i + 2]);
-	if (line[*i] != '.' || line[(*i) + 1] != '/')
-		all->err = 10;
+//	if (line[*i] != '.' || line[(*i) + 1] != '/')
+//		all->err = 10;
 	while (line[*i] != ' ' && line[*i] != '\0')
 		(*i)++;
 	if (!(texture_file = malloc(sizeof(char) * (*i - j + 1))))
