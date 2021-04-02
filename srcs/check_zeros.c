@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:14:23 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 15:33:22 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/02 10:11:47 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		check_map_content(t_all *all, int i, int j)
 		|| all->map[i][j] == 'N' || all->map[i][j] == 'E'
 		|| all->map[i][j] == 'W' || all->map[i][j] == 'S'
 		|| all->map[i][j] == ' ')
-			return (0);
+		return (0);
 	else
 		return (-1);
 }

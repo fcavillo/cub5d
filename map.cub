@@ -2,7 +2,7 @@ C 2, 11   ,255
 NO      ./textures/greystone.xpm
 
 R 31683213213265465465465413219 6544
-WE ./textures/greystone.xpm
+WE  ./textures/greystone.xpm
 
 S ./textures/corgi.5.xpm
 EA ./textures/greystone.xpm
