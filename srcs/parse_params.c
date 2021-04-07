@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:00 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/02 11:58:53 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:30:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+//	if (line[*i] != '.' || line[(*i) + 1] != '/')
+//		all->err = 10;
 
 int		ft_texture(t_all *all, char **tex, char *line, int *i)
 {
@@ -24,8 +27,6 @@ int		ft_texture(t_all *all, char **tex, char *line, int *i)
 	(*i) += 2;//passer les lettres
 	ft_skipspace(line, i);
 	j = (*i);
-//	if (line[*i] != '.' || line[(*i) + 1] != '/')
-//		all->err = 10;
 	while (line[*i] != ' ' && line[*i] != '\0')
 		(*i)++;
 	if (!(texture_file = malloc(sizeof(char) * (*i - j + 1))))

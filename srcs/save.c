@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/02 10:12:06 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:40:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void	ft_save(t_all *all)
 	system("chmod 777 image.bmp");
 	ft_error(all, 0, "Quitting properly after saving bmp\n");
 }
+
+/*
+**ft_save checks whether the argument --save the 3rd arg;
+*/
 
 int		ft_check_save(char *str)
 {
