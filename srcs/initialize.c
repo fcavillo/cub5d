@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/07 15:49:58 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/09 16:17:16 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_init2(t_all *all)
 	all->texture[4].img = NULL;
 	all->data.mlx_win = NULL;
 	all->map = NULL;
+	all->s.nbspr = 0;
 	all->s.order = NULL;
 	all->s.dist = NULL;
 	all->s.zbuffer = NULL;
@@ -83,15 +84,15 @@ void	ft_init(t_all *all)
 	all->c = -1;
 	all->resx = 0;
 	all->resy = 0;
-	all->nblines = 0;
-	all->sizeline = 0;
+	all->line_nb = 0;
+	all->linesize = 0;
 	all->map = NULL;
 	all->spawnx = 0;
 	all->spawny = 0;
 	all->spawn_nb = 0;
 	all->emptyline = 0;
 	all->is_in_map = 0;
-	all->count = 0;
+	all->line_nb_temp = 0;
 	all->sum = 0;
 	all->wrongcharmap = 0;
 	ft_init2(all);

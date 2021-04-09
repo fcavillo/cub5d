@@ -1,11 +1,11 @@
 C 2, 11   ,255
-NO      ./textures/greystone.xpm
+NO      ./textures/eagle.xpm
 
 R 31683213213265465465465413219 6544
-WE  ./textures/greystone.xpm
+WE  ./textures/purplestone.xpm
 
 S ./textures/corgi.5.xpm
-EA ./textures/greystone.xpm
+EA ./textures/red.xpm
 SO./textures/greystone.xpm
 F                 25 ,25,25
 
@@ -35,6 +35,6 @@ F                 25 ,25,25
          101
       111101111
       100000001
-      1000E0001
+      1000W0001
       100000001
       111111111

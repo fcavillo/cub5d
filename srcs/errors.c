@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:37 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 14:59:18 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:00:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_verify_errors(t_all *all)
+void	ft_check_errors(t_all *all)
 {
 	ft_check_map(all);
 	if (all->start_pos == 'x')
@@ -83,7 +83,7 @@ void	ft_error(t_all *all, int i, char *str)
 		free(all->sp);
 	if (all->map)
 	{
-		while (++j < all->nblines)
+		while (++j < all->line_nb)
 			free(all->map[j]);
 	}
 	ft_error2(all);

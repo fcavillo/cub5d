@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:44 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/07 16:15:29 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/08 15:10:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,41 @@ int		ft_check(char *str)
 	return (-1);
 }
 
-int		ft_copy(char **line, char **buff)
+int		ft_copy(char **line, char **buffer)
 {
-	int		start;
-	char	*temp;
-	char	*line_temp;
+	int		i;
+	char	*tmp;
+	char	*line_tmp;
 
-	if ((start = ft_check(*buff)) >= 0)
+	if ((i = ft_check(*buffer)) >= 0)
 	{
-		temp = ft_substr(*buff, 0, start);
-		line_temp = *line;
-		*line = ft_strjoin(*line, temp);
-		free(temp);
-		free(line_temp);
-		*buff = ft_subbuff(*buff, start + 1, (ft_strlen(*buff) - start));
+		tmp = ft_substr(*buffer, 0, i);
+		line_tmp = *line;
+		*line = ft_strjoin(*line, tmp);
+		free(line_tmp);
+		free(tmp);
+		*buffer = ft_subbuff(*buffer, i + 1, (ft_strlen(*buffer) - i));
 		return (0);
 	}
 	else
 	{
-		temp = NULL;
+		tmp = NULL;
 		if (*line)
-			temp = *line;
-		*line = ft_strjoin(*line, *buff);
-		if (temp)
-			free(temp);
+			tmp = *line;
+		*line = ft_strjoin(*line, *buffer);
+		if (tmp)
+			free(tmp);
 		return (1);
 	}
 	return (-1);
 }
 
-int		ft_eof(int ret, char **buff, char **line)
+int		ft_eof(int ret, char **buffer, char **line)
 {
 	if (ret == -1)
 		return (-1);
-	free(*buff);
-	*buff = NULL;
+	free(*buffer);
+	*buffer = NULL;
 	if (*line == NULL)
 	{
 		*line = malloc(sizeof(char) * 1);
@@ -69,11 +69,11 @@ int		ft_eof(int ret, char **buff, char **line)
 	return (0);
 }
 
-int		ft_free_buff(char **buff, t_all *all)
+int		ft_free_buffer(char **buffer, t_all *all)
 {
-	if (all->err == 2 && *buff)
+	if (all->err >= 2 && *buffer)
 	{
-		free(*buff);
+		free(*buffer);
 		return (1);
 	}
 	return (0);
@@ -81,29 +81,29 @@ int		ft_free_buff(char **buff, t_all *all)
 
 int		get_next_line(int fd, char **line, t_all *all)
 {
-	static char	*buff = NULL;
+	static char	*buffer = NULL;
 	int			ret;
 
-	if (ft_free_buff(&buff, all) == 1)
+	ret = 1;
+	if (ft_free_buffer(&buffer, all) == 1)
 		return (0);
-	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
+	if (fd < 0 || !line)
 		return (-1);
 	*line = NULL;
-	ret = 1;
-	if (buff)
-		ret = ft_copy(line, &buff);
+	if (buffer)
+		ret = ft_copy(line, &buffer);
 	if (ret == 0)
 		return (1);
-	if (!buff)
-		if (!(buff = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+	if (!buffer)
+		if (!(buffer = malloc(sizeof(char) * BUFFER_SIZE + 1)))
 			return (-1);
-	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
+	while ((ret = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		buff[ret] = '\0';
-		if (!ft_copy(line, &buff))
+		buffer[ret] = '\0';
+		if (!ft_copy(line, &buffer))
 			return (1);
 	}
 	if (ret <= 0)
-		return (ft_eof(ret, &buff, line));
+		return (ft_eof(ret, &buffer, line));
 	return (1);
 }

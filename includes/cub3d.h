@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/07 10:02:07 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/09 15:32:50 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,9 @@ typedef struct		s_all
 	char			*we;
 	char			*ea;
 	char			*sp;
-	int				nblines;
-	int				sizeline;
+	int				line_nb;
+	int				line_nb_temp;
+	int				linesize;
 	char			**map;
 	char			start_pos;
 	int				spawnx;
@@ -154,7 +155,6 @@ typedef struct		s_all
 	int				spawn_nb;
 	int				emptyline;
 	int				is_in_map;
-	int				count;
 	int				count2;
 	int				sum;
 	int				wrongcharmap;
@@ -176,7 +176,7 @@ void				ft_init(t_all *all);
 int					ft_line_is_map(char *str, t_all *all);
 void				ft_map(char *str, t_all *all);
 int					ft_map_copy(char *str, t_all *all);
-void				ft_init_sprite(t_all *all);
+void				ft_init_spr(t_all *all);
 int					ft_raycast(t_all *all);
 int					ft_ray(t_all *all);
 int					ft_press_key(int key, t_all *all);
@@ -185,7 +185,6 @@ int					ft_column_color(t_all *all);
 void				ft_ray_init(t_all *all);
 void				ft_ray_init_2(t_all *all);
 void				ft_init_texture(t_all *all);
-void				ft_init_sprite2(t_all *all, int i, int j, int v);
 void				ft_stepsidedist(t_all *all);
 void				ft_incrementray(t_all *all);
 void				ft_drawstartend(t_all *all);
@@ -195,8 +194,7 @@ void				ft_left_right(t_all *all);
 void				ft_rotate_right_left(t_all *all);
 void				ft_error(t_all *all, int i, char *str);
 int					ft_free_mlx(t_all *all);
-void				ft_verify_errors(t_all *all);
-void				ft_header(t_all *all, int fd);
+void				ft_check_errors(t_all *all);
 void				ft_save(t_all *all);
 void				ft_sprite(t_all *all);
 void				ft_init2(t_all *all);

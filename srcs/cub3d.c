@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/07 16:13:31 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/08 15:59:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@ int		ft_map_parsing(char *filename, t_all *all)
 	char	*line;
 
 	gnl_ret = 1;
-	line = NULL;
 	fd = open(filename, O_RDONLY);
-	if (!(all->map = malloc(sizeof(char*) * all->nblines)))
+	if (!(all->map = malloc(sizeof(char*) * all->line_nb)))
 		return (0);
+	line = NULL;
 	while (gnl_ret != 0)
 	{
 		gnl_ret = get_next_line(fd, &line, all);
-		if (all->is_in_map == 1 && ft_empty_line(line) == 0 &&
-				all->count < all->nblines)
+		if (ft_empty_line(line) == 0 && all->is_in_map == 1 &&
+				all->line_nb_temp < all->line_nb)
 			all->emptyline = 1;
 		if ((all->is_in_map = ft_line_is_map(line, all)) == 1)
 		{
-			all->count++;
+			all->line_nb_temp++;
 			ft_map_copy(line, all);
 		}
 		free(line);
 	}
 	close(fd);
-	ft_init_sprite(all);
+	ft_init_spr(all);
 	return (0);
 }
 
@@ -91,7 +91,7 @@ void	ft_parse(char *filename, t_all *all)
 	close(fd);
 	if (all->err >= 2)
 		ft_parsing_error(all);
-	if (all->sizeline == 0 || all->nblines == 0)
+	if (all->linesize == 0 || all->line_nb == 0)
 		ft_error(all, 1, "No Map\n");
 	ft_map_parsing(filename, all);
 }

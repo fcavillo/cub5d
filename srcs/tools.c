@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:32 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 11:07:04 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:51:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		ft_atoi(char *line, int *i)
 
 int		ft_map_last(t_all *all)
 {
-	if (all->sizeline > 0 && (all->no == NULL || all->so == NULL ||
+	if (all->linesize > 0 && (all->no == NULL || all->so == NULL ||
 				all->we == NULL || all->ea == NULL || all->sp == NULL))
 		return (-1);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 11:23:12 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/09 15:20:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void	ft_set_texture_addr(t_all *all)
 			&all->texture[4].bits_per_pixel,
 			&all->texture[4].line_length, &all->texture[4].endian);
 }
+
+/*
+** sets each .xpm to the corresponding texture.img
+*/
 
 void	ft_set_texture(t_all *all)
 {
@@ -91,15 +95,15 @@ int		ft_ray(t_all *all)
 {
 	ft_ray_init(all);
 	if (!(all->data.mlx_ptr = mlx_init()))
-		ft_error(all, 1, "Mlx initialization impossible\n");
+		ft_error(all, 1, "Mlx initialization failed\n");
 	mlx_get_screen_size(all->data.mlx_ptr, &all->screenx, &all->screeny);
 	ft_set_window_size(all);
 	ft_set_texture(all);
 	all->data.img = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr = (int *)mlx_get_data_addr(all->data.img, &all->data.
 			bits_per_pixel, &all->data.line_length, &all->data.endian);
-//	if (all->save == 1) //A FAIRE
-//		ft_raycasting(all);
+	if (all->save == 1) //A FAIRE
+		ft_raycast(all);
 	all->data.mlx_win = mlx_new_window(all->data.mlx_ptr, all->resx,
 			all->resy, "Cuba");
 	all->data.img2 = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);

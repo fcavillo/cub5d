@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_initialize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 11:22:40 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/08 16:05:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void	ft_init_texture(t_all *all)
 	all->tex.wallx -= floor((all->tex.wallx));
 }
 
-void	ft_init_sprite2(t_all *all, int i, int j, int v)
+void	ft_fill_spr_coo(t_all *all, int i, int j, int v)
 {
 	i = i - 1;
-	while (++i < all->nblines)
+	while (++i < all->line_nb)
 	{
 		j = -1;
-		while (++j < all->sizeline)
+		while (++j < all->linesize)
 		{
 			if (all->map[i][j] == '2')
 			{
@@ -84,17 +84,23 @@ void	ft_init_sprite2(t_all *all, int i, int j, int v)
 	}
 }
 
-void	ft_init_sprite(t_all *all)
+/*
+** replaces ' ' with 1
+** mallocs sprites
+** fills coos
+*/
+
+void	ft_init_spr(t_all *all)
 {
 	int i;
 	int j;
 
 	i = -1;
-	ft_verify_errors(all);
-	while (++i < all->nblines)
+	ft_check_errors(all);
+	while (++i < all->line_nb)
 	{
 		j = -1;
-		while (++j < all->sizeline)
+		while (++j < all->linesize)
 		{
 			if (all->map[i][j] == ' ')
 				all->map[i][j] = '1';
@@ -106,6 +112,6 @@ void	ft_init_sprite(t_all *all)
 		ft_error(all, 1, "Failing to malloc Sprite orders");
 	if (!(all->s.dist = (double *)malloc(sizeof(double) * all->s.nbspr)))
 		ft_error(all, 1, "Failing to malloc Sprite distance*");
-	ft_init_sprite2(all, 0, 0, 0);
+	ft_fill_spr_coo(all, 0, 0, 0);
 	ft_ray(all);
 }

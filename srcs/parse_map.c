@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:57 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 14:54:01 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:56:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_check_map(t_all *all)
 
 	j = 0;
 	i = 0;
-	while (i < all->nblines)
+	while (i < all->line_nb)
 	{
 		while (all->map[i][j])
 		{
@@ -47,7 +47,8 @@ int		ft_check_map(t_all *all)
 }
 
 /*
-** sets spawn and sprites
+** sets spawn and sprites coo
+** fills map content
 ** fills map lines void with ' '
 */
 
@@ -58,7 +59,7 @@ int		ft_map_copy(char *str, t_all *all)
 
 	j = 0;
 	all->map[i] = NULL;
-	if (!(all->map[i] = malloc(sizeof(char) * all->sizeline + 1)))
+	if (!(all->map[i] = malloc(sizeof(char) * all->linesize + 1)))
 		return (0);
 	while (str[j])
 	{
@@ -68,11 +69,8 @@ int		ft_map_copy(char *str, t_all *all)
 			all->map[i][j] = str[j];
 		j++;
 	}
-	while (j <= (all->sizeline - 1))
-	{
-		all->map[i][j] = ' '; //cmplete avec des espaces
-		j++;
-	}
+	while (j <= (all->linesize - 1))
+		all->map[i][j++] = ' ';
 	all->map[i][j] = '\0';
 	i++;
 	return (0);
@@ -120,8 +118,8 @@ void	ft_map(char *str, t_all *all)
 		|| all->f == -1 || all->c == -1 || all->ea == NULL
 		|| all->sp == NULL)
 			all->err = 4;
-		if ((i = ft_strlen(str)) > all->sizeline)
-			all->sizeline = i;
-		all->nblines = all->nblines + 1;
+		if ((i = ft_strlen(str)) > all->linesize)
+			all->linesize = i;
+		all->line_nb = all->line_nb + 1;
 	}
 }

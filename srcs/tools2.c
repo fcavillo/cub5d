@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 10:47:37 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 11:07:18 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:46:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		ft_spawn_and_spr(char c, t_all *all, int i, int j)
 {
 	if (c == '2')
 		all->s.nbspr++;
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == 'E' || c == 'W' || c == 'N' || c == 'S')
 	{
 		all->spawn_nb++;
 		all->start_pos = c;

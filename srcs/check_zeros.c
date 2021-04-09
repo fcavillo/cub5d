@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_zeros.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:14:23 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/02 10:11:47 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:52:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_check_above(t_all *all, int i, int j)
 
 int		ft_check_below(t_all *all, int i, int j)
 {
-	while (i < all->nblines)
+	while (i < all->line_nb)
 	{
 		if (all->map[i][j] == ' ')
 			return (1);
@@ -64,7 +64,7 @@ int		ft_check_left(t_all *all, int i, int j)
 
 int		ft_check_right(t_all *all, int i, int j)
 {
-	while (j <= all->sizeline)
+	while (j <= all->linesize)
 	{
 		if (all->map[i][j] == ' ')
 			return (1);
