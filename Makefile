@@ -4,7 +4,7 @@ CC = clang
 MLX_DIR = minilibx-linux
 MLX = libmlx.a
 
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3
 
 HEADER = includes/cub3d.h
 

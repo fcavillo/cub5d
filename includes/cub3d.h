@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/09 15:32:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/09 16:56:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,26 @@
 # define BLU  "\x1B[34m"
 # define MAG  "\x1B[35m"
 # define BUFFER_SIZE	4096
+
+/*
+** for Linux azerty :
+** KEY_FORWARD 122
+** KEY_LEFT 113
+** for MLinux querty :
+** KEY_FORWARD 119
+** KEY_LEFT 97
+*/
+
 # define KEY_ESCAPE 65307
 # define KEY_ROTATE_LEFT 65361
 # define KEY_ROTATE_RIGHT 65363
-# define KEY_FORWARD 119
+# define KEY_FORWARD 122
 # define KEY_BACK 115
 # define KEY_RIGHT 100
-# define KEY_LEFT 97
+# define KEY_LEFT 113
+
+# define MOVSPEED 0.15
+# define ROTSPEED 0.15
 
 typedef struct		s_spr_coo
 {

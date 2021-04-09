@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/08 16:05:48 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/09 16:52:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	ft_ray_init_2(t_all *all)
 						all->ray.camerax;
 	all->ray.mapx = (int)all->ray.posx;
 	all->ray.mapy = (int)all->ray.posy;
-	all->ray.movespeed = 0.2; //0.1?
-	all->ray.rotspeed = 0.033 * 2.8; //1.8?
+	all->ray.movespeed = MOVSPEED;//0.2; //0.1?
+	all->ray.rotspeed = ROTSPEED;//0.033 * 2.8; //1.8?
 	ft_ray_init_3(all);
 }
 
