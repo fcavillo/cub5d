@@ -4,7 +4,7 @@ NO      ./textures/eagle.xpm
 R 31683213213265465465465413219 6544
 WE  ./textures/purplestone.xpm
 
-S ./textures/corgi.5.xpm
+S ./textures/telet.xpm
 EA ./textures/red.xpm
 SO./textures/greystone.xpm
 F                 25 ,25,25
@@ -33,8 +33,9 @@ F                 25 ,25,25
          101
          101
          101
-      111101111
-      100000001
-      1000E0001
-      100000001
-      111111111
+       1110111
+       1000001
+       100E001
+       1000001
+       1000001
+       1111111
