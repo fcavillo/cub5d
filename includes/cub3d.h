@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 11:39:10 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 12:45:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ typedef struct		s_data
 	void			*mlx_win;
 	void			*img;
 	int				*addr;
+	void			*img2;
+	int				*addr2;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
@@ -135,8 +137,6 @@ typedef struct		s_data
 	int				minimapechelle;
 	int				width;
 	int				height;
-	void			*img2;
-	int				*addr2;
 }					t_data;
 
 /*
@@ -165,7 +165,7 @@ typedef struct		s_all
 	char			start_pos;
 	int				spawnx;
 	int				spawny;
-	int				indicateur;
+//	int				indicateur;
 	int				indicateur2;
 	int				errored;
 	int				save;
@@ -176,6 +176,7 @@ typedef struct		s_all
 	int				count2;
 	int				sum;
 	int				wrongcharmap;
+	int				mlx_to_free;
 	t_data			texture[5];
 	t_data			data;
 	t_ray			ray;

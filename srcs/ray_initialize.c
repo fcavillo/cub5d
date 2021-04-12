@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 11:35:09 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 12:47:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_ray_init(t_all *all)
 	all->ray.plany = 0;
 	all->ray.posx = (double)all->spawnx + 0.5;
 	all->ray.posy = (double)all->spawny + 0.5;
+	all->mlx_to_free = 1;
 	ft_init_direction(all);
 }
 

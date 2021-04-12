@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 11:31:54 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 12:46:06 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_init2(t_all *all)
 {
 	all->start_pos = 'x';
-	all->indicateur2 = 0;
+//	all->indicateur2 = 0;
 	all->errored = 0;
 	all->data.img = NULL;
 	all->texture[0].img = NULL;
@@ -30,6 +30,7 @@ void	ft_init2(t_all *all)
 	all->s.dist = NULL;
 	all->s.zbuffer = NULL;
 	all->sxy = NULL;
+	all->mlx_to_free = 0;
 }
 
 /*

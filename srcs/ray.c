@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 11:50:39 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 12:47:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	ft_set_window_size(t_all *all)
 ** gets the image address
 ** creates window
 ** creates a 2nd image and address
+** handles the red cross
+** handles key presses
 */
 
 int		ft_ray(t_all *all)
@@ -109,14 +111,14 @@ int		ft_ray(t_all *all)
 	all->data.img = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr = (int *)mlx_get_data_addr(all->data.img, &all->data.
 			bits_per_pixel, &all->data.line_length, &all->data.endian);
-	if (all->save == 1) //A FAIRE
+	if (all->save == 1)
 		ft_raycast(all);
 	all->data.mlx_win = mlx_new_window(all->data.mlx_ptr, all->resx,
 			all->resy, "Cuba");
 	all->data.img2 = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
 	all->data.addr2 = (int *)mlx_get_data_addr(all->data.img2, &all->
 			data.bits_per_pixel, &all->data.line_length, &all->data.endian);
-	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_free_mlx, all); //croix
+	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_free_mlx, all);
 	mlx_hook(all->data.mlx_win, 2, 1L << 0, ft_press_key, all);
 	mlx_loop_hook(all->data.mlx_ptr, ft_raycast, all);
 	mlx_hook(all->data.mlx_win, 3, 1L << 1, ft_release_key, all);
