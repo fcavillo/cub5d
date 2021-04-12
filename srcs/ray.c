@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/09 15:20:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 11:50:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,13 @@ void	ft_set_window_size(t_all *all)
 	if (all->resy > all->screeny)
 		all->resy = all->screeny;
 }
+
+/*
+** creates the image
+** gets the image address
+** creates window
+** creates a 2nd image and address
+*/
 
 int		ft_ray(t_all *all)
 {

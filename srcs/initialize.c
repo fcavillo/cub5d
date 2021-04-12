@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/09 16:17:16 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 11:31:54 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,33 @@ void	ft_init2(t_all *all)
 	all->sxy = NULL;
 }
 
-void	ft_init_dir(t_all *all)
+/*
+** initialises the direction :
+** exemple : si on démarre N, le plan est droit vers en haut donc plany = 0.66
+*/
+
+void	ft_init_direction(t_all *all) // are x and y fucking inversed
 {
-	if (all->start_pos == 'N')
-		all->ray.plany = 0.66;
-	if (all->start_pos == 'S')
-		all->ray.plany = -0.66;
 	if (all->start_pos == 'E')
+	{
 		all->ray.planx = 0.66;
-	if (all->start_pos == 'W')
-		all->ray.planx = -0.66;
-	if (all->start_pos == 'N')
-		all->ray.dirx = -1;
-	if (all->start_pos == 'S')
-		all->ray.dirx = 1;
-	if (all->start_pos == 'E')
 		all->ray.diry = 1;
+	}
 	if (all->start_pos == 'W')
+	{
+		all->ray.planx = -0.66;
 		all->ray.diry = -1;
+	}
+	if (all->start_pos == 'N')
+	{
+		all->ray.plany = 0.66;
+		all->ray.dirx = -1;
+	}
+	if (all->start_pos == 'S')
+	{
+		all->ray.plany = -0.66;
+		all->ray.dirx = 1;
+	}
 }
 
 void	ft_ray_init_3(t_all *all)

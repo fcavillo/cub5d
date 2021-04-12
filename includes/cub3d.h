@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/09 16:56:34 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 11:39:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,17 @@ typedef struct		s_data
 	int				*addr2;
 }					t_data;
 
+/*
+** screenx and screeny are the results of the mlx_get_screen_size ft
+** resx and resy are the final window sizes
+*/
+
 typedef struct		s_all
 {
 	int				resx;
 	int				resy;
+	int				screenx;
+	int				screeny;
 	int				i;
 	int				f;
 	int				c;
@@ -162,8 +169,6 @@ typedef struct		s_all
 	int				indicateur2;
 	int				errored;
 	int				save;
-	int				screenx;
-	int				screeny;
 	int				err;
 	int				spawn_nb;
 	int				emptyline;
@@ -216,7 +221,7 @@ int					ft_strlen(char *str);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_subbuff(char *buff, int start, int len);
-void				ft_init_dir(t_all *all);
+void				ft_init_direction(t_all *all);
 void				ft_ray_init_3(t_all *all);
 void				ft_rotate_left(t_all *all, double olddirx);
 int					ft_empty_line(char *str);
