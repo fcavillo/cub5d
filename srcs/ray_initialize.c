@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 16:34:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 17:59:53 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ void	ft_ray_init_2(t_all *all)
 	all->ray.rotspeed = ROTSPEED;
 	ft_ray_init_3(all);
 }
+
+/*
+** sets the texture depending ont he raydir :
+** 0 = N
+** 1 = S
+** 2 = W
+** 3 = E
+*/
 
 void	ft_init_texture(t_all *all)
 {
