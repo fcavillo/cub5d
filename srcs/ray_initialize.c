@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:04 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 12:47:37 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 16:34:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ void	ft_ray_init_2(t_all *all)
 void	ft_init_texture(t_all *all)
 {
 	if (all->ray.side == 0 && all->ray.raydirx < 0)
-		all->tex.texdir = 0;
+		all->tex.texdirection = 0;
 	if (all->ray.side == 0 && all->ray.raydirx >= 0)
-		all->tex.texdir = 1;
+		all->tex.texdirection = 1;
 	if (all->ray.side == 1 && all->ray.raydiry < 0)
-		all->tex.texdir = 2;
+		all->tex.texdirection = 2;
 	if (all->ray.side == 1 && all->ray.raydiry >= 0)
-		all->tex.texdir = 3;
+		all->tex.texdirection = 3;
 	if (all->ray.side == 0)
 		all->tex.wallx = all->ray.posy + all->ray.perpwalldist \
 						* all->ray.raydiry;

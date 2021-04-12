@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 12:45:46 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/12 17:09:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,35 @@ typedef struct		s_sprite
 	double			*zbuffer;
 }					t_sprite;
 
+/*
+** texdirection gives the orientation of the texture
+** wallX : coordonnée du point touché, x ou y en fct de side
+** texX et Y : coo du point touché sur la texture
+*/
+
 typedef struct		s_texture
 {
-	int				texdir;
+	int				texdirection;
 	double			wallx;
 	int				texx;
 	int				texy;
 	double			step;
 	double			texpos;
 }					t_texture;
+
+/*
+** dirX and dirY are the direction vectors
+** raydirX and raydirY are the ray directions
+** cameraX is the x point on the screen : right =1, left =-1, center 0
+** sidedistX and Y : length of ray from current position to next x or y-side
+** deltaDistX and Y : length of ray from one x or y-side to next x or y-side
+** stepX and Y : what direction to step in x or y-direction (either +1 or -1)
+** sideDistX and sideDistY get incremented with deltaDistX with every jump in their direction
+** mapX and mapY get incremented with stepX and stepY respectively
+** perpwalldist : distance perpenducilar from wall hit point to camera plane (avoid fisheye)
+** lineHeight is the height of the vertical wall line
+** drawstart and drawend are lowest and highest pixels to fill
+*/
 
 typedef struct		s_ray
 {
@@ -134,7 +154,6 @@ typedef struct		s_data
 	int				right;
 	int				rotate_left;
 	int				rotate_right;
-	int				minimapechelle;
 	int				width;
 	int				height;
 }					t_data;
@@ -185,8 +204,6 @@ typedef struct		s_all
 	t_spr_coo		*sxy;
 }					t_all;
 
-int					ft_start(char *str, t_all *all);
-void				ft_parse(char *filename, t_all *all);
 int					ft_map_parsing(char *filename, t_all *all);
 int					ft_str_has(char *str, char c);
 int					ft_spawn_and_spr(char c, t_all *all, int i, int j);
@@ -196,7 +213,6 @@ int					ft_line_is_map(char *str, t_all *all);
 void				ft_map(char *str, t_all *all);
 int					ft_map_copy(char *str, t_all *all);
 void				ft_init_spr(t_all *all);
-int					ft_raycast(t_all *all);
 int					ft_ray(t_all *all);
 int					ft_press_key(int key, t_all *all);
 int					ft_release_key(int key, t_all *all);
@@ -204,9 +220,7 @@ int					ft_column_color(t_all *all);
 void				ft_ray_init(t_all *all);
 void				ft_ray_init_2(t_all *all);
 void				ft_init_texture(t_all *all);
-void				ft_stepsidedist(t_all *all);
-void				ft_incrementray(t_all *all);
-void				ft_drawstartend(t_all *all);
+void				ft_step_sidedist(t_all *all);
 void				ft_swap(t_all *all);
 void				ft_forward_back(t_all *all);
 void				ft_left_right(t_all *all);
