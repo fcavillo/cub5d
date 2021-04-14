@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:33 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 18:02:58 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/14 15:00:03 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** gets the texture orientation (0.1.2.3)
-** 
+** sets the texture depending on the point touched by the ray
 */
 
 void	ft_draw_texture(t_all *all, int x, int y)

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 17:36:29 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/14 15:09:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	ft_set_texture(t_all *all)
 
 /*
 ** ft_step gets all the infos : wall distance, wich pixels, etc
+** ft_column_color draws the textures on each column
+** stores the distance of each vertical stripe in zBuffer
 */
 
 int		ft_raycast(t_all *all)

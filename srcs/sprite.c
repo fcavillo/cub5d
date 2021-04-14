@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:28 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/03/24 11:09:08 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/14 15:42:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_calcul(t_all *all, int i)
 		all->s.drawendx = all->resx;
 }
 
-void	ft_draw_spr(t_all *all, int y, int texx, int stripe)
+void	ft_draw_spr(t_all *all, int y, int texx, int drawpix)
 {
 	int		d;
 	int		texy;
@@ -92,7 +92,7 @@ void	ft_draw_spr(t_all *all, int y, int texx, int stripe)
 		if (all->texture[4].addr[texy * all->texture[4].line_length / 4 +
 				texx] != -16777216)
 		{
-			all->data.addr[y * all->data.line_length / 4 + stripe] =
+			all->data.addr[y * all->data.line_length / 4 + drawpix] =
 				all->texture[4].addr[texy * all->texture[4].line_length /
 				4 + texx];
 		}
@@ -104,7 +104,7 @@ void	ft_sprite(t_all *all)
 {
 	int i;
 	int y;
-	int stripe;
+	int drawpix;
 	int texx;
 
 	i = -1;
@@ -112,19 +112,19 @@ void	ft_sprite(t_all *all)
 	while (++i < all->s.nbspr)
 	{
 		ft_calcul(all, i);
-		stripe = all->s.drawstartx;
-		while (stripe < all->s.drawendx)
+		drawpix = all->s.drawstartx;
+		while (drawpix < all->s.drawendx)
 		{
-			texx = (int)(256 * (stripe - (-all->s.spritewidth / 2 +
+			texx = (int)(256 * (drawpix - (-all->s.spritewidth / 2 +
 							all->s.spritescreenx)) * all->texture[4].width
 					/ all->s.spritewidth) / 256;
-			if (all->s.transformy > 0 && stripe >= 0 && stripe < all->resx
-					&& all->s.transformy < all->s.zbuffer[stripe])
+			if (all->s.transformy > 0 && drawpix >= 0 && drawpix < all->resx
+					&& all->s.transformy < all->s.zbuffer[drawpix])
 			{
 				y = all->s.drawstarty;
-				ft_draw_spr(all, y, texx, stripe);
+				ft_draw_spr(all, y, texx, drawpix);
 			}
-			stripe++;
+			drawpix++;
 		}
 	}
 }

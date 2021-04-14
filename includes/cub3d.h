@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 17:09:07 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/14 15:45:45 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ typedef struct		s_spr_coo
 	double			y;
 }					t_spr_coo;
 
+/*
+** zbuffer stores each stripe distance to the pos
+** 
+*/
+
 typedef struct		s_sprite
 {
 	int				nbspr;
@@ -78,8 +83,8 @@ typedef struct		s_sprite
 
 /*
 ** texdirection gives the orientation of the texture
-** wallX : coordonnée du point touché, x ou y en fct de side
-** texX et Y : coo du point touché sur la texture
+** wallX : touched point coordinate, x or y depending on side
+** texX et Y : touched point coo on the texture itself
 */
 
 typedef struct		s_texture
@@ -104,6 +109,7 @@ typedef struct		s_texture
 ** perpwalldist : distance perpenducilar from wall hit point to camera plane (avoid fisheye)
 ** lineHeight is the height of the vertical wall line
 ** drawstart and drawend are lowest and highest pixels to fill
+** x is used to parse each column during raycast
 */
 
 typedef struct		s_ray
