@@ -6,11 +6,15 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:28 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/14 15:42:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/15 17:16:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+/*
+** for each sprite, assign a distance from the sqr of x and y
+*/
 
 void	ft_dist_order2(t_all *all)
 {
@@ -26,7 +30,12 @@ void	ft_dist_order2(t_all *all)
 	}
 }
 
-void	ft_dist_order(t_all *all)//sort sprites from far to close
+/*
+** sort sprites from far to close
+** set order and distance accordingly
+*/
+
+void	ft_dist_order(t_all *all)
 {
 	int		i;
 	int		j;
@@ -52,9 +61,14 @@ void	ft_dist_order(t_all *all)//sort sprites from far to close
 	}
 }
 
+/*
+** sets spriteX and Y to the relative position of the sprite to player
+** sets inved, transformX and Y to 
+*/
+
 void	ft_calcul(t_all *all, int i)
 {
-	all->s.spritex = all->sxy[all->s.order[i]].x - all->ray.posx; //translate sprite position to relative to camera
+	all->s.spritex = all->sxy[all->s.order[i]].x - all->ray.posx;
 	all->s.spritey = all->sxy[all->s.order[i]].y - all->ray.posy;
 	all->s.invdet = 1.0 / (all->ray.planx * all->ray.diry -
 			all->ray.dirx * all->ray.plany);
@@ -99,6 +113,10 @@ void	ft_draw_spr(t_all *all, int y, int texx, int drawpix)
 		y++;
 	}
 }
+
+/*
+** dist_order sorts sprites from far to close
+*/
 
 void	ft_sprite(t_all *all)
 {

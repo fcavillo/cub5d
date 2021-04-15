@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/14 15:45:45 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/15 17:15:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ typedef struct		s_spr_coo
 
 /*
 ** zbuffer stores each stripe distance to the pos
-** 
+** order & dist set from further to closer
+** spriteX and spriteY are reletive positions sprite - player
+** invdet, transformX and Y are related to matrix multiplication
 */
 
 typedef struct		s_sprite
