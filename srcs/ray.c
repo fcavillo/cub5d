@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/14 15:09:27 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:07:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ void	ft_set_texture(t_all *all)
 ** ft_step gets all the infos : wall distance, wich pixels, etc
 ** ft_column_color draws the textures on each column
 ** stores the distance of each vertical stripe in zBuffer
+** draws sprites
+** (if save is on, goes to it)
+** puts the image through to the window
+** moves pos
+** swap between img and img2
 */
 
 int		ft_raycast(t_all *all)
@@ -82,10 +87,7 @@ int		ft_raycast(t_all *all)
 		ft_save(all);
 	mlx_put_image_to_window(all->data.mlx_ptr, all->data.mlx_win,
 			all->data.img, 0, 0);
-	ft_forward_back(all);
-	ft_left_right(all);
-	ft_rotate_right_left(all);
-	ft_swap(all);
+	ft_move(all);
 	return (0);
 }
 
@@ -104,6 +106,7 @@ void	ft_set_window_size(t_all *all)
 ** creates a 2nd image and address
 ** handles the red cross
 ** handles key presses
+** loop_hook sets raycast to continually restart during loop
 */
 
 int		ft_ray(t_all *all)
@@ -121,9 +124,6 @@ int		ft_ray(t_all *all)
 		ft_raycast(all);
 	all->data.mlx_win = mlx_new_window(all->data.mlx_ptr, all->resx,
 			all->resy, "Cuba");
-	all->data.img2 = mlx_new_image(all->data.mlx_ptr, all->resx, all->resy);
-	all->data.addr2 = (int *)mlx_get_data_addr(all->data.img2, &all->
-			data.bits_per_pixel, &all->data.line_length, &all->data.endian);
 	mlx_hook(all->data.mlx_win, 33, 1L << 17, ft_free_mlx, all);
 	mlx_hook(all->data.mlx_win, 2, 1L << 0, ft_press_key, all);
 	mlx_loop_hook(all->data.mlx_ptr, ft_raycast, all);

@@ -1,7 +1,7 @@
 C 2, 11   ,255
 NO      ./textures/eagle.xpm
 
-R 1000  1000
+R 100000000  1000000
 WE  ./textures/purplestone.xpm
 
 S ./textures/telet.xpm

@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:12 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 17:46:09 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 14:54:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,3 @@ void	ft_step_sidedist(t_all *all)
 	ft_increment_ray(all);
 }
 
-void	ft_swap(t_all *all)
-{
-	void *tmp;
-
-	tmp = all->data.img;
-	all->data.img = all->data.img2;
-	all->data.img2 = tmp;
-	tmp = all->data.addr;
-	all->data.addr = all->data.addr2;
-	all->data.addr2 = tmp;
-}

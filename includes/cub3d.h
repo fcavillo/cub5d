@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/15 17:15:38 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 14:58:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,7 @@ typedef struct		s_data
 	void			*mlx_win;
 	void			*img;
 	int				*addr;
-	void			*img2;
-	int				*addr2;
+
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
@@ -229,10 +228,7 @@ void				ft_ray_init(t_all *all);
 void				ft_ray_init_2(t_all *all);
 void				ft_init_texture(t_all *all);
 void				ft_step_sidedist(t_all *all);
-void				ft_swap(t_all *all);
-void				ft_forward_back(t_all *all);
-void				ft_left_right(t_all *all);
-void				ft_rotate_right_left(t_all *all);
+void				ft_move(t_all *all);
 void				ft_error(t_all *all, int i, char *str);
 int					ft_free_mlx(t_all *all);
 void				ft_check_errors(t_all *all);
@@ -246,7 +242,6 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_subbuff(char *buff, int start, int len);
 void				ft_init_direction(t_all *all);
 void				ft_ray_init_3(t_all *all);
-void				ft_rotate_left(t_all *all, double olddirx);
 int					ft_empty_line(char *str);
 int					ft_check_save(char *str);
 int					ft_map_last(t_all *all);

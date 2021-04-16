@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:37 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 12:48:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 14:57:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ int		ft_free_mlx(t_all *all)
 	{
 	if (all->data.img)
 		mlx_destroy_image(all->data.mlx_ptr, all->data.img);
-	if (all->data.img2)
-		mlx_destroy_image(all->data.mlx_ptr, all->data.img2);
 	if (all->texture[0].img)
 		mlx_destroy_image(all->data.mlx_ptr, all->texture[0].img);
 	if (all->texture[1].img)
