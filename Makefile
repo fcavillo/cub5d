@@ -33,7 +33,7 @@ CFLAGS+=-I $(MLX_DIR)
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(MLX_DIR)/$(MLX) -lm -lbsd -lX11 -lXext
-	@echo $(NAME) : created.
+	@echo $(NAME) was created.
 
 
 all : $(NAME)
