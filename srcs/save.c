@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 15:38:06 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:42:00 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	ft_bmp_information_header(t_all *all, int fd)
 
 /*
 ** writes the bmp line by line before putting it in a window
-** should the authorisation change ? - system("chmod 777 image.bmp"
 */
 
 void	ft_save(t_all *all)
@@ -89,6 +88,7 @@ void	ft_save(t_all *all)
 		}
 		y--;
 	}
+	system("chmod 777 image.bmp");
 	ft_error(all, 0, "Quitting properly after saving image.bmp\n");
 }
 
