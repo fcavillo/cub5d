@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 15:37:25 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/16 15:50:46 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ void	ft_line(t_all *all, char *line)
 	if (line[i] == 'R' && line[i + 1] == ' ')
 		ft_res(all, line, &i);
 	else if (line[i] == 'N' && line[i + 1] == 'O')
-		all->err = ft_texture(all, &all->no, line, &i);
+		ft_texture(all, &all->no, line, &i);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-		all->err = ft_texture(all, &all->so, line, &i);
+		ft_texture(all, &all->so, line, &i);
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-		all->err = ft_texture(all, &all->we, line, &i);
+		ft_texture(all, &all->we, line, &i);
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		all->err = ft_texture(all, &all->ea, line, &i);
+		ft_texture(all, &all->ea, line, &i);
 	else if (line[i] == 'S' && line[i + 1] != 'O')
-		all->err = ft_texture(all, &all->sp, line, &i);
+		ft_texture(all, &all->sp, line, &i);
 	else if (line[i] == 'F')
 		all->err = ft_colors(all, &all->f, line, &i);
 	else if (line[i] == 'C')

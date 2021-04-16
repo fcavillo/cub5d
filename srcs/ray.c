@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 15:37:35 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:22:50 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	ft_set_texture(t_all *all)
 ** (if save is on, goes to it)
 ** puts the image through to the window
 ** moves pos
-** swap between img and img2
 */
 
 int		ft_raycast(t_all *all)

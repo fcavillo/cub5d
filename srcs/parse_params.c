@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:00 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 15:38:38 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/16 16:19:06 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		ft_texture(t_all *all, char **tex, char *line, int *i)
 	int		j;
 
 	if (ft_map_last(all) == -1)
-		return (4);
+		all->err = 4;
 	if (*tex != NULL)
-		return (9);
+		all->err = 9;
 	(*i) += 2;
 	ft_skipspace(line, i);
 	j = (*i);
@@ -33,6 +33,7 @@ int		ft_texture(t_all *all, char **tex, char *line, int *i)
 	while (line[*i] != ' ' && line[*i] != '\0')
 		texture_file[j++] = line[(*i)++];
 	texture_file[j] = '\0';
+	ft_skipspace(line, i);
 	if (ft_name_check(texture_file, "xpm") == 0 || line[*i] != '\0')
 		all->err = 10;
 	*tex = ft_strdup(texture_file);
