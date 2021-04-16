@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:28 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/15 17:16:18 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 14:15:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	ft_dist_order(t_all *all)
 
 /*
 ** sets spriteX and Y to the relative position of the sprite to player
-** sets inved, transformX and Y to 
+** sets inved, transformX and Y
+** calculates height & width of sprite and position on screen
 */
 
 void	ft_calcul(t_all *all, int i)
@@ -116,6 +117,8 @@ void	ft_draw_spr(t_all *all, int y, int texx, int drawpix)
 
 /*
 ** dist_order sorts sprites from far to close
+** calcul sets the starting points for the sprite drawing
+** draws sprites from the furthest to the closest
 */
 
 void	ft_sprite(t_all *all)
