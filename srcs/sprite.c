@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:28 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 14:15:51 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:37:53 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ void	ft_calcul(t_all *all, int i)
 			all->s.spritex + all->ray.planx * all->s.spritey);
 	all->s.spritescreenx = (int)((all->resx / 2) * (1 + all->s.transformx
 				/ all->s.transformy));
-	all->s.spriteheight = abs((int)(all->resy / (all->s.transformy)));      //calculate height of the sprite on screen
+	all->s.spriteheight = abs((int)(all->resy / (all->s.transformy)));
 	all->s.drawstarty = -all->s.spriteheight / 2 + all->resy / 2;
 	if (all->s.drawstarty < 0)
 		all->s.drawstarty = 0;
 	all->s.drawendy = all->s.spriteheight / 2 + all->resy / 2;
 	if (all->s.drawendy >= all->resy)
 		all->s.drawendy = all->resy;
-	all->s.spritewidth = abs((int)(all->resy / (all->s.transformy)));      //calculate width of the sprite
+	all->s.spritewidth = abs((int)(all->resy / (all->s.transformy)));
 	all->s.drawstartx = -all->s.spritewidth / 2 + all->s.spritescreenx;
 	if (all->s.drawstartx < 0)
 		all->s.drawstartx = 0;

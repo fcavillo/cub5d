@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/08 15:59:26 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:37:25 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int		ft_map_parsing(char *filename, t_all *all)
 	while (gnl_ret != 0)
 	{
 		gnl_ret = get_next_line(fd, &line, all);
-		if (ft_empty_line(line) == 0 && all->is_in_map == 1 &&
+		if (ft_empty_line(line) == 0 && all->in_map == 1 &&
 				all->line_nb_temp < all->line_nb)
 			all->emptyline = 1;
-		if ((all->is_in_map = ft_line_is_map(line, all)) == 1)
+		if ((all->in_map = ft_line_is_map(line, all)) == 1)
 		{
 			all->line_nb_temp++;
 			ft_map_copy(line, all);
@@ -96,11 +96,10 @@ void	ft_parse(char *filename, t_all *all)
 	ft_map_parsing(filename, all);
 }
 
-
 int		main(int ac, char **av)
 {
 	t_all	all;
-	int i;
+	int		i;
 
 	i = 0;
 	ft_init(&all);
@@ -110,11 +109,11 @@ int		main(int ac, char **av)
 			all.save = 1;
 		while (av[1][i])
 			i++;
-		if (i > 4 && av[1][i - 1] == 'b' && av[1][i - 2] == 'u' && av[1][i - 3] == 'c'
-			&& av[1][i - 4] == '.')
+		if (i > 4 && av[1][i - 1] == 'b' && av[1][i - 2] == 'u'
+					&& av[1][i - 3] == 'c' && av[1][i - 4] == '.')
 			ft_parse(av[1], &all);
 		else
-			ft_error(&all, 1, "Invalid Map Name\n");	
+			ft_error(&all, 1, "Invalid Map Name\n");
 	}
 	else
 		ft_error(&all, 1, "Invalid Arguments\n");

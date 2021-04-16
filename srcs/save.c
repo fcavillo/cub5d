@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:24 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/09 16:05:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:38:06 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_bmp_header(t_all *all, int fd)
 void	ft_bmp_information_header(t_all *all, int fd)
 {
 	int	tmp;
-	
+
 	tmp = 40;
 	write(fd, &tmp, 4);
 	write(fd, &all->resx, 4);

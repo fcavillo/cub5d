@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:20 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 15:07:07 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:37:35 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		ft_raycast(t_all *all)
 	{
 		ft_ray_init_2(all);
 		ft_step_sidedist(all);
-		ft_column_color(all);
+		ft_draw_stripe(all);
 		all->s.zbuffer[all->ray.x] = all->ray.perpwalldist;
 		all->ray.x++;
 	}

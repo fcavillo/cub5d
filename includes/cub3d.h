@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 14:58:47 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:37:49 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct		s_spr_coo
 }					t_spr_coo;
 
 /*
-** zbuffer stores each stripe distance to the pos
+** zbuffer stores each wall stripe distance to the pos
 ** order & dist set from further to closer
 ** spriteX and spriteY are reletive positions sprite - player
 ** invdet, transformX and Y are related to matrix multiplication
@@ -75,11 +75,11 @@ typedef struct		s_sprite
 	double			transformy;
 	int				spritescreenx;
 	int				spriteheight;
+	int				spritewidth;
 	int				drawstartx;
 	int				drawstarty;
 	int				drawendy;
 	int				drawendx;
-	int				spritewidth;
 	double			*zbuffer;
 }					t_sprite;
 
@@ -106,9 +106,9 @@ typedef struct		s_texture
 ** sidedistX and Y : length of ray from current position to next x or y-side
 ** deltaDistX and Y : length of ray from one x or y-side to next x or y-side
 ** stepX and Y : what direction to step in x or y-direction (either +1 or -1)
-** sideDistX and sideDistY get incremented with deltaDistX with every jump in their direction
-** mapX and mapY get incremented with stepX and stepY respectively
-** perpwalldist : distance perpenducilar from wall hit point to camera plane (avoid fisheye)
+** sideDistX and Y get incr with deltaDistX with each jump in their direction
+** mapX and Y get incremented with stepX and stepY respectively
+** perpwalldist : distance perp from wall hit point to camera plane (no fisheye)
 ** lineHeight is the height of the vertical wall line
 ** drawstart and drawend are lowest and highest pixels to fill
 ** x is used to parse each column during raycast
@@ -151,7 +151,6 @@ typedef struct		s_data
 	void			*mlx_win;
 	void			*img;
 	int				*addr;
-
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
@@ -176,7 +175,6 @@ typedef struct		s_all
 	int				resy;
 	int				screenx;
 	int				screeny;
-	int				i;
 	int				f;
 	int				c;
 	char			*no;
@@ -191,16 +189,12 @@ typedef struct		s_all
 	char			start_pos;
 	int				spawnx;
 	int				spawny;
-//	int				indicateur;
-	int				indicateur2;
 	int				errored;
 	int				save;
 	int				err;
 	int				spawn_nb;
 	int				emptyline;
-	int				is_in_map;
-	int				count2;
-	int				sum;
+	int				in_map;
 	int				wrongcharmap;
 	int				mlx_to_free;
 	t_data			texture[5];
@@ -211,11 +205,10 @@ typedef struct		s_all
 	t_spr_coo		*sxy;
 }					t_all;
 
-int					ft_map_parsing(char *filename, t_all *all);
 int					ft_str_has(char *str, char c);
 int					ft_spawn_and_spr(char c, t_all *all, int i, int j);
-void				ft_color_resolution(char **str, t_all *all);
 void				ft_init(t_all *all);
+void				ft_init2(t_all *all);
 int					ft_line_is_map(char *str, t_all *all);
 void				ft_map(char *str, t_all *all);
 int					ft_map_copy(char *str, t_all *all);
@@ -223,9 +216,10 @@ void				ft_init_spr(t_all *all);
 int					ft_ray(t_all *all);
 int					ft_press_key(int key, t_all *all);
 int					ft_release_key(int key, t_all *all);
-int					ft_column_color(t_all *all);
+int					ft_draw_stripe(t_all *all);
 void				ft_ray_init(t_all *all);
 void				ft_ray_init_2(t_all *all);
+void				ft_ray_init_3(t_all *all);
 void				ft_init_texture(t_all *all);
 void				ft_step_sidedist(t_all *all);
 void				ft_move(t_all *all);
@@ -234,14 +228,12 @@ int					ft_free_mlx(t_all *all);
 void				ft_check_errors(t_all *all);
 void				ft_save(t_all *all);
 void				ft_sprite(t_all *all);
-void				ft_init2(t_all *all);
 int					get_next_line(int fd, char **line, t_all *all);
 int					ft_strlen(char *str);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_subbuff(char *buff, int start, int len);
 void				ft_init_direction(t_all *all);
-void				ft_ray_init_3(t_all *all);
 int					ft_empty_line(char *str);
 int					ft_check_save(char *str);
 int					ft_map_last(t_all *all);

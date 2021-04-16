@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:00 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/07 15:30:29 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:38:38 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-//	if (line[*i] != '.' || line[(*i) + 1] != '/')
-//		all->err = 10;
 
 int		ft_texture(t_all *all, char **tex, char *line, int *i)
 {
@@ -24,7 +21,7 @@ int		ft_texture(t_all *all, char **tex, char *line, int *i)
 		return (4);
 	if (*tex != NULL)
 		return (9);
-	(*i) += 2;//passer les lettres
+	(*i) += 2;
 	ft_skipspace(line, i);
 	j = (*i);
 	while (line[*i] != ' ' && line[*i] != '\0')
@@ -45,7 +42,6 @@ int		ft_texture(t_all *all, char **tex, char *line, int *i)
 
 void	ft_res(t_all *all, char *line, int *i)
 {
-	all->i = 1; //whi
 	if (ft_map_last(all) == -1)
 		all->err = 4;
 	if (all->resx != 0 || all->resy != 0)

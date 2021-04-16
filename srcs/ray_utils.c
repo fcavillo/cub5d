@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:11:12 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 14:54:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:38:03 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** if the wall hit was S or N, side = 1
-** perpwalldist (distance between the position plane and the wall point hit) 
+** perpwalldist (distance between the position plane and the wall point hit)
 ** lineheight / perpwalldist to get the illusion
 ** drawstart is -lineheight/2 for the upper half + resy/2 to add middlescreen
 ** drawend is the opposite
@@ -44,7 +44,7 @@ void	ft_drawstartend(t_all *all)
 ** adds delta and step to side dist and map on X side until Y is closer, etc
 */
 
-void	ft_increment_ray(t_all *all) //increments position one case at a time,  
+void	ft_increment_ray(t_all *all)
 {
 	while (all->ray.hit == 0)
 	{
@@ -106,4 +106,3 @@ void	ft_step_sidedist(t_all *all)
 	}
 	ft_increment_ray(all);
 }
-

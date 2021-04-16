@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:49 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/12 12:46:06 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:38:28 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_init2(t_all *all)
 {
 	all->start_pos = 'x';
-//	all->indicateur2 = 0;
 	all->errored = 0;
 	all->data.img = NULL;
 	all->texture[0].img = NULL;
@@ -33,12 +32,7 @@ void	ft_init2(t_all *all)
 	all->mlx_to_free = 0;
 }
 
-/*
-** initialises the direction :
-** exemple : si on démarre N, le plan est droit vers en haut donc plany = 0.66
-*/
-
-void	ft_init_direction(t_all *all) // are x and y fucking inversed
+void	ft_init_direction(t_all *all)
 {
 	if (all->start_pos == 'E')
 	{
@@ -101,9 +95,8 @@ void	ft_init(t_all *all)
 	all->spawny = 0;
 	all->spawn_nb = 0;
 	all->emptyline = 0;
-	all->is_in_map = 0;
+	all->in_map = 0;
 	all->line_nb_temp = 0;
-	all->sum = 0;
 	all->wrongcharmap = 0;
 	ft_init2(all);
 }

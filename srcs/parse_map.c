@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:57 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/08 15:56:55 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:38:11 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		ft_line_is_map(char *str, t_all *all)
 					&& str[i] != 'E' && str[i] != 'W' && str[i] != '\n'
 					&& str[i] != '\t')
 			{
-				if (all->is_in_map == 1)//check
+				if (all->in_map == 1)
 					all->wrongcharmap = 2;
 				return (0);
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 09:10:33 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/14 15:00:03 by user42           ###   ########.fr       */
+/*   Updated: 2021/04/16 15:37:56 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	ft_draw_texture(t_all *all, int x, int y)
 
 /*
 ** draws the color until drawstart
-** draws the texture column
+** draws the textured column
 ** draws the color until resy
 ** drawend could also be all->ray.drawend = all->resy - all->ray.drawstart;
 */
 
-int		ft_column_color(t_all *all)
+int		ft_draw_stripe(t_all *all)
 {
 	int j;
 	int i;
