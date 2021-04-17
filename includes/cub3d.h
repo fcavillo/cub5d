@@ -6,7 +6,7 @@
 /*   By: fcavillo <fcavillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/24 14:38:56 by fcavillo          #+#    #+#             */
-/*   Updated: 2021/04/16 15:37:49 by fcavillo         ###   ########.fr       */
+/*   Updated: 2021/04/17 11:21:14 by fcavillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,19 @@
 
 /*
 ** for Linux azerty :
-** KEY_FORWARD 122
-** KEY_LEFT 113
-** for MLinux querty :
-** KEY_FORWARD 119
-** KEY_LEFT 97
+** # define KEY_FORWARD 'z'
+** # define KEY_BACK 's'
+** # define KEY_RIGHT 'd'
+** # define KEY_LEFT 'q'
 */
 
 # define KEY_ESCAPE 65307
 # define KEY_ROTATE_LEFT 65361
 # define KEY_ROTATE_RIGHT 65363
-# define KEY_FORWARD 122
-# define KEY_BACK 115
-# define KEY_RIGHT 100
-# define KEY_LEFT 113
+# define KEY_FORWARD 'w'
+# define KEY_BACK 's'
+# define KEY_RIGHT 'd'
+# define KEY_LEFT 'a'
 
 # define MOVSPEED 0.15
 # define ROTSPEED 0.15

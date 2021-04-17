@@ -2,14 +2,13 @@ C 2, 11   ,255
 NO      ./textures/greystone.xpm
 
 R 100000000  1000000
-WE  ./textures/wood.xpm
 
 S ./textures/telet.xpm
 EA ./textures/red.xpm
 SO./textures/mossy.xpm
-F                 100 ,100  ,  100  
+F                50 ,50  ,  50  
 
-
+       WE  ./textures/wood.xpm
 
         111111111111111111111111111111111111
 111111111000000000000000011111
@@ -39,3 +38,5 @@ F                 100 ,100  ,  100
        100N001
        1000001
        1111111
+
+
